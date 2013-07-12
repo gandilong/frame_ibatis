@@ -1,0 +1,75 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.thang.tools.dao;
+
+/**
+ *
+ * @author Administrator
+ */
+public class BaseDao extends SqlMapClientDaoSupport{
+    
+    @Resource(name="sqlMapClient")
+    private SqlMapClient sqlMapClient;
+    
+    @PostConstruct
+    public void initSqlMapClient(){
+        super.setSqlMapClient(sqlMapClient);
+    }
+    
+    public DataValues queryForObject(String sqlStr,ActionValues values){
+        DataValues result=(DataValues)getSqlMapClientTemplate();
+        result.convertMaptoDataValues();
+        return result;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<DataValues> queryForList(String sqlStr,ActionValues values){
+        List<DataValues> resultList=null;
+        List<DataValues> list=getSqlMapClientTemplate().queryForList(sqlStr,values);
+        if(null!=list){
+            resultList=new ArrayList<DataValues>();
+            for(DataValues data:list){            
+                data.convertMaptoDataValues();
+                resultList.add(data);
+            }
+        }
+        return resultList;
+    }
+    
+    public Pages queryForPage(String sqlStr,ActionValues values,Pages page){
+        if(null==values){
+            values=new ActionValues();
+        }
+        long totalRows=0;
+        totalRows=queryCount(sqlStr,values);
+        page.setTotal(totalRows);
+        List<DataValues> result=null;
+        if(totalRows>0){
+            result=new ArrayList<DataValues>();
+            String sqlHeader="SELECT tt.* FROM (SELECT r.*,ROWNUM rm FROM(";
+            String sqlFooter=") r WHERE ROWNUM<="+page.getPageNow()*page.getPageSize()+" ) tt WHERE rm>"+(page.getPageNow()<=1?0:page.getPageNow()-1)*page.getPageSize();
+            
+            values.put("sqlHeader",sqlHeader);
+            values.put("sqlFooter",sqlFooter);
+            long startTime=System.currentTimeMillis();
+            result=queryForList(sqlStr,values);
+            System.out.println("查询耗时："+(System.currentTimeMillis()-startTime));
+            page.setResult(result);
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public long queryCount(String sqlStr,ActionValues values){
+        String sqlHeader="SELECT COUNT(*) resultCount FROM (\n";
+        String sqlFooter=" \n) rc";
+        values.put("sqlHeader",sqlHeader);
+        values.put("sqlFooter",sqlFooter);
+        long totalRows=0;
+        long startTime=System.currentTimeMillis();
+        Map<String,Object> dv=(Map<String,Object>)getSqlMapClientTemplate().queryForObject(sqlStr,values);
+        totalRows=Long.valueOf(String.valueOf(dv.get("RESULTCOUNT")==null?"0":dv.get("RESULTCOUNT")));
+    }
+    
+}
