@@ -4,9 +4,23 @@
  */
 package com.thang.tools.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.thang.tools.model.ActionValues;
+import com.thang.tools.model.DataValues;
+import com.thang.tools.model.Pages;
+
 /**
  *
- * @author Administrator
+ * @author Gandilong
  */
 public class BaseDao extends SqlMapClientDaoSupport{
     
@@ -19,7 +33,7 @@ public class BaseDao extends SqlMapClientDaoSupport{
     }
     
     public DataValues queryForObject(String sqlStr,ActionValues values){
-        DataValues result=(DataValues)getSqlMapClientTemplate();
+        DataValues result=(DataValues)getSqlMapClientTemplate().queryForObject(sqlStr, values);
         result.convertMaptoDataValues();
         return result;
     }
@@ -58,6 +72,7 @@ public class BaseDao extends SqlMapClientDaoSupport{
             System.out.println("查询耗时："+(System.currentTimeMillis()-startTime));
             page.setResult(result);
         }
+        return page;
     }
     
     @SuppressWarnings("unchecked")
@@ -67,9 +82,9 @@ public class BaseDao extends SqlMapClientDaoSupport{
         values.put("sqlHeader",sqlHeader);
         values.put("sqlFooter",sqlFooter);
         long totalRows=0;
-        long startTime=System.currentTimeMillis();
         Map<String,Object> dv=(Map<String,Object>)getSqlMapClientTemplate().queryForObject(sqlStr,values);
         totalRows=Long.valueOf(String.valueOf(dv.get("RESULTCOUNT")==null?"0":dv.get("RESULTCOUNT")));
+        return totalRows;
     }
     
 }

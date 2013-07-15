@@ -11,7 +11,6 @@ import java.util.Iterator;
  *
  * @author Administrator
  */
-@SuppressWarnings("unchecked")
 public class DataValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
@@ -46,10 +45,10 @@ public class DataValues extends HashMap<String,Object>{
     }
     
     private String upperFirstCase(String str){
-        if(null!=str||"".equals(str)){
+        if(null==str||"".equals(str)){
             return "";
         }
-        return str.substring(0, 1).toUpperCase()+str.substring(1);
+        return str.substring(0,1).toUpperCase()+str.substring(1);
     }
     
 }

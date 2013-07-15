@@ -4,6 +4,12 @@
  */
 package com.thang.tools.util;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  *
  * @author Administrator
@@ -25,15 +31,12 @@ public class JsonUtil {
         try{
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out=response.getWriter();
-            getMapperInstance(false.writeValue(out,obj);
+            getMapperInstance(false).writeValue(out,obj);
             if(null!=out){
                 out.close();
             }
         }catch(Exception e){
             e.printStackTrace();
-            if(null!=out){
-                out.close();
-            }
         }
     }
     
@@ -44,6 +47,7 @@ public class JsonUtil {
          }catch(Exception e){
              e.printStackTrace();
          }
+         return obj;
     }
     
     public static synchronized ObjectMapper getMapperInstance(boolean isNew){
