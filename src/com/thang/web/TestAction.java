@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thang.service.TestService;
+import com.thang.service.TestManager;
 import com.thang.tools.model.ActionValues;
 import com.thang.tools.model.Pages;
 
@@ -21,7 +21,7 @@ import com.thang.tools.model.Pages;
 @Controller
 public class TestAction {
     
-    private TestService testService;
+    private TestManager testService;
    
     @RequestMapping("/")
     public String index(){
@@ -57,7 +57,7 @@ public class TestAction {
     }
     
     @Autowired
-    public void setTestService(TestService testService) {
+    public void setTestService(TestManager testService) {
         this.testService = testService;
     }
     

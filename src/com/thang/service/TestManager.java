@@ -18,7 +18,7 @@ import com.thang.tools.model.Pages;
  * @author Gandilong
  */
 @Component
-public class TestService extends BaseDao{
+public class TestManager extends BaseDao{
     
     public DataValues get(ActionValues values){
         return queryForObject("test.query",values);

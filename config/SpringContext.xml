@@ -21,14 +21,14 @@
 	</context:component-scan>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverName}" />  
+        <property name="driverClassName" value="${jdbc.driverClassName}" />  
         <property name="url" value="${jdbc.url}" />  
         <property name="username" value="${jdbc.username}" />  
         <property name="password" value="${jdbc.password}" />  
     </bean>
     
      <bean id="dbe" class="com.thang.executor.DBExecutor">
-        <constructor-arg name="driverClassName"  value="${jdbc.driverName}"></constructor-arg>
+        <constructor-arg name="driverClassName"  value="${jdbc.driverClassName}"></constructor-arg>
         <constructor-arg name="url"  value="${jdbc.url}"></constructor-arg>
         <constructor-arg name="username"  value="${jdbc.username}"></constructor-arg>
         <constructor-arg name="password"  value="${jdbc.password}"></constructor-arg>
@@ -37,9 +37,40 @@
     
     
     <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="classpath:/sqlConfig.xml" />
+        <property name="configLocation" value="classpath:/ibatis.xml" />
         <property name="dataSource" ref="dataSource" />
     </bean>
+    
+    
+    
+    <!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
+	<bean id="shiroDbRealm" class="com.thang.tools.auth.DBRealm" depends-on="dbe">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+	</bean>
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/web/login" />
+		<property name="successUrl" value="/web/index" />
+		<property name="filterChainDefinitions">
+			<value>
+				/web/login = authc
+				/web/logout = logout
+				/tools/** = anon
+				/web/system/** = roles[admin]
+				/web/** = user
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
     
      <!--事务管理DataSourceTransactionManager-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
