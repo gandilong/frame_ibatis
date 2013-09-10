@@ -7,7 +7,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.thang.tools.model.ActionValues;
@@ -18,16 +19,14 @@ import com.thang.tools.model.Pages;
  *
  * @author Gandilong
  */
-public class BaseDao extends SqlMapClientDaoSupport{
+public class Dao extends SqlSessionDaoSupport {
     
-    @Resource(name="sqlMapClient")
-    private SqlMapClient sqlMapClient;
-    
-    @PostConstruct
-    public void initSqlMapClient(){
-        super.setSqlMapClient(sqlMapClient);
+    @Override
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+    	super.setSqlSessionFactory(sqlSessionFactory);
     }
-    
+	
+	/**
     public DataValues queryForObject(String sqlStr,ActionValues values){
         DataValues result=(DataValues)getSqlMapClientTemplate().queryForObject(sqlStr, values);
         result.formatKey();
@@ -81,6 +80,6 @@ public class BaseDao extends SqlMapClientDaoSupport{
         Map<String,Object> dv=(Map<String,Object>)getSqlMapClientTemplate().queryForObject(sqlStr,values);
         totalRows=Long.valueOf(String.valueOf(dv.get("RESULTCOUNT")==null?"0":dv.get("RESULTCOUNT")));
         return totalRows;
-    }
+    }**/
     
 }

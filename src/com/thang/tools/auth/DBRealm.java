@@ -18,7 +18,7 @@ import com.thang.service.system.AuthManager;
 @Component("dbRealm")
 public class DBRealm extends AuthorizingRealm{
 
-	private AuthManager auth;
+	private AuthManager authManager;
 
 	 
 
@@ -29,7 +29,7 @@ public class DBRealm extends AuthorizingRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		ShiroUser shiroUser = (ShiroUser) principal.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(auth.getRoleByUser(shiroUser.getId()));
+		info.addRoles(authManager.getRoleByUser(shiroUser.getId()));
 		return info;
 	}
 
@@ -39,7 +39,7 @@ public class DBRealm extends AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User user=auth.getUserByName(token.getUsername());
+		User user=authManager.getUserByName(token.getUsername());
 		token.setRememberMe(true);
 		if (null!=user) {
 			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUserName(), user.getLoginName()),user.getLoginPass(),getName());
@@ -48,8 +48,8 @@ public class DBRealm extends AuthorizingRealm{
 	}
 
 	@Autowired
-	public void setAuth(AuthManager auth) {
-		this.auth = auth;
+	public void setAuthManager(AuthManager auth) {
+		this.authManager = auth;
 	}
 	
 }

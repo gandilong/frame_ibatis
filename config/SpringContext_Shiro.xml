@@ -24,9 +24,7 @@
     
     <!--权限 定义开始-->
     <!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="com.thang.tools.auth.DBRealm" depends-on="dbe">
-		<property name="userService" ref="userService"/>
-	</bean>
+	<bean id="shiroDbRealm" class="com.thang.tools.auth.DBRealm" depends-on="dbe"></bean>
 	
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">

@@ -3,7 +3,7 @@
   type="WEB"
   name="frame_ibatis"
   id="myeclipse.1373433979765"
-  context-root="/Frame"
+  context-root="/frame"
   j2ee-spec="1.4"
   archive="frame_ibatis.war">
   <attributes>
