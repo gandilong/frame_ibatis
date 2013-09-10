@@ -7,6 +7,9 @@ package com.thang.tools.model;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+
 /**
  *
  * @author Administrator
@@ -15,7 +18,24 @@ public class DataValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
     
-    public void convertMaptoDataValues(){
+    
+    /**
+     * 用自己的属性和值生成一个实体对象实例，
+     * @param t
+     * @return
+     */
+    public <T>T covertToBean(Class<T> t){
+    	T obj=null;
+    	try{
+    	    obj=t.newInstance();
+    	    BeanUtils.copyProperties(obj, this);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	return obj;
+    }
+    
+    public void formatKey(){
         DataValues result=null;
         if(size()>0){
             result=new DataValues();

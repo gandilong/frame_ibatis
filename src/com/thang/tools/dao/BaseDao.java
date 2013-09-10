@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.thang.tools.dao;
 
 import java.util.ArrayList;
@@ -34,7 +30,7 @@ public class BaseDao extends SqlMapClientDaoSupport{
     
     public DataValues queryForObject(String sqlStr,ActionValues values){
         DataValues result=(DataValues)getSqlMapClientTemplate().queryForObject(sqlStr, values);
-        result.convertMaptoDataValues();
+        result.formatKey();
         return result;
     }
     
@@ -45,7 +41,7 @@ public class BaseDao extends SqlMapClientDaoSupport{
         if(null!=list){
             resultList=new ArrayList<DataValues>();
             for(DataValues data:list){            
-                data.convertMaptoDataValues();
+                data.formatKey();
                 resultList.add(data);
             }
         }

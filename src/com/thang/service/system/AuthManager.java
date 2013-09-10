@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thang.entity.system.Role;
+import com.thang.entity.system.User;
+import com.thang.entity.system.UserRole;
 import com.thang.executor.DBExecutor;
 import com.thang.model.Condition;
-import com.thang.pojo.Role;
-import com.thang.pojo.User;
-import com.thang.pojo.UserRole;
 
 public class AuthManager {
 

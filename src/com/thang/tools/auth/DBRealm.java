@@ -12,7 +12,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.thang.pojo.User;
+import com.thang.entity.system.User;
 import com.thang.service.system.AuthManager;
 
 @Component("dbRealm")
