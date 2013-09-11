@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Administrator
+ * @author gandilong
  */
 @Controller
 public class IndexAction {
     
     @RequestMapping("/index")
     public String index(){
-        return "index";
+        return "main";
     }
     
 }

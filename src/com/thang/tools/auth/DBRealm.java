@@ -14,11 +14,15 @@ import org.springframework.stereotype.Component;
 
 import com.thang.entity.system.User;
 import com.thang.service.system.AuthManager;
+import com.thang.service.system.UserManager;
 
 @Component("dbRealm")
 public class DBRealm extends AuthorizingRealm{
-
+	
+	@Autowired
 	private AuthManager authManager;
+	@Autowired
+	private UserManager userManager;
 
 	 
 
@@ -29,7 +33,8 @@ public class DBRealm extends AuthorizingRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		ShiroUser shiroUser = (ShiroUser) principal.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(authManager.getRoleByUser(shiroUser.getId()));
+		info.addRoles(authManager.getRoleNameByUser(shiroUser.getId()));
+		info.addStringPermissions(authManager.getResourceNameByUser(shiroUser.getId()));
 		return info;
 	}
 
@@ -39,17 +44,14 @@ public class DBRealm extends AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User user=authManager.getUserByName(token.getUsername());
-		token.setRememberMe(true);
+		User user=userManager.login(token.getUsername(),new String(token.getPassword()));
+		if(token.isRememberMe()){
+			token.setRememberMe(true);	
+		}
 		if (null!=user) {
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUserName(), user.getLoginName()),user.getLoginPass(),getName());
+			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUser_name(), user.getLogin_name()),user.getLogin_pass(),getName());
 		} 
 		return null;
 	}
 
-	@Autowired
-	public void setAuthManager(AuthManager auth) {
-		this.authManager = auth;
-	}
-	
 }

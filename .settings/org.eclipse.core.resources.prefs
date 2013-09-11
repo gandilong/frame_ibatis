@@ -1,6 +1,6 @@
-#Tue Jul 16 09:40:27 CST 2013
 eclipse.preferences.version=1
-encoding//WebRoot/WEB-INF/view/index.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/login.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/main.jsp=UTF-8
 encoding//WebRoot/WEB-INF/view/test/list.jsp=UTF-8
 encoding//WebRoot/include/layout.jsp=UTF-8
 encoding//WebRoot/include/taglibs.jsp=UTF-8

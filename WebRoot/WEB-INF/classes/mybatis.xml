@@ -33,6 +33,8 @@
     
     <mappers>
         <mapper resource="/com/thang/service/system/mybatis/test.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/user.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/auth.xml"></mapper>
     </mappers>
     
 </configuration>

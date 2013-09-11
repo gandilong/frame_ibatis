@@ -24,6 +24,27 @@ public class ActionValues extends HashMap<String,Object>{
         this.putAll(values);
     }
     
+    @SuppressWarnings("unchecked")
+	public ActionValues(HttpServletRequest request){
+		String name=null;
+		Enumeration<String> paramNames=request.getParameterNames();
+		Enumeration<String> attrNames=request.getAttributeNames();
+		
+		while(paramNames.hasMoreElements()){
+			name=paramNames.nextElement();
+			if(request.getParameterValues(name).length>1){
+				put(name, request.getParameterValues(name));
+			}else{
+				put(name, request.getParameter(name));	
+			}
+		}
+		
+		while(attrNames.hasMoreElements()){
+			name=attrNames.nextElement();
+			put(name,request.getAttribute(name));
+		}
+	}
+    
     public String getStr(String key){
         if(null!=get(key)){
             return String.valueOf(get(key));
