@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Administrator
+ * @author gandilong
  */
 public class ActionValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
     
-    public ActionValues(){}
+    public ActionValues(){super();}
     
     public ActionValues(Map<String,Object> values){
         this.putAll(values);

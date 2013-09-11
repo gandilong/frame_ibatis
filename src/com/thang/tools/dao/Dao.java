@@ -3,7 +3,6 @@ package com.thang.tools.dao;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -12,7 +11,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
  *
  * @author Gandilong
  */
-public abstract class Dao extends SqlSessionDaoSupport {
+public class Dao extends SqlSessionDaoSupport {
     
 	
 	@Override

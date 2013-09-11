@@ -10,47 +10,47 @@ import java.util.List;
  *
  * @author Administrator
  */
-public class Pages {
+public class Page {
     
-	private long total=0;//总记录数
-	private long pageNum=0;//总页数
-	private long pageSize=15;//每页条数
-	private long pageNow=1;//当前页码
+	private int total=0;//总记录数
+	private int pageNum=0;//总页数
+	private int pageSize=15;//每页条数
+	private int pageNow=1;//当前页码
 	
 	private String order="DESC";//ASC or DESC
 	private String orderBy;
 	
 	private List<DataValues> result;
 
-	public long getTotal() {
+	public int getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 
-	public long getPageNum() {
+	public int getPageNum() {
 		return pageNum;
 	}
 
-	public void setPageNum(long pageNum) {
+	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
 	}
 
-	public long getPageSize() {
+	public int getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(long pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
 
-	public long getPageNow() {
+	public int getPageNow() {
 		return pageNow;
 	}
 
-	public void setPageNow(long pageNow) {
+	public void setPageNow(int pageNow) {
 		this.pageNow = pageNow;
 	}
 

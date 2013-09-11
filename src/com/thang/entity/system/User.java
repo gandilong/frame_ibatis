@@ -1,8 +1,5 @@
 package com.thang.entity.system;
 
-import com.thang.model.mate.Table;
-
-@Table("sys_user_info")
 public class User {
 
 	private long id;

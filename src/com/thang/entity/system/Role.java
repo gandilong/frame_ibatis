@@ -1,8 +1,5 @@
 package com.thang.entity.system;
 
-import com.thang.model.mate.Table;
-
-@Table("sys_role_info")
 public class Role {
 
 	private long id;

@@ -12,7 +12,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
- * @author Administrator
+ * @author gandilong
  */
 public class DataValues extends HashMap<String,Object>{
     

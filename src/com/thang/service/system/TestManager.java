@@ -9,10 +9,10 @@ import com.thang.tools.model.DataValues;
 @Component
 public class TestManager extends Dao {
 
-	
 	public DataValues getTest(Integer id){
 		ActionValues values=new ActionValues();
 		values.put("id", id);
+		values.put("page", "on");
 		return getSqlSession().selectOne("system.test.query", values);
 	}
 	

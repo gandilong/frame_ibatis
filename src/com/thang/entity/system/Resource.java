@@ -1,8 +1,5 @@
 package com.thang.entity.system;
 
-import com.thang.model.mate.Table;
-
-@Table("sys_resource_info")
 public class Resource {
 
 	private long id;

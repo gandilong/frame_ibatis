@@ -14,5 +14,5 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href='<c:url value="/tools/layout/img/apple-touch-icon-72-precomposed.png"/>'/>
 <link rel="apple-touch-icon-precomposed" href='<c:url value="/tools/layout/img/apple-touch-icon-57-precomposed.png"/>'/>
 <link rel="shortcut icon" href='<c:url value='/tools/layout/img/favicon.png"/>'/>
-<script type="text/javascript" src='<c:url value="/tools/layout/js/jquery.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/tools/layout/js/jquery-1.10.2_min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/tools/layout/js/bootstrap.min.js"/>'></script>
