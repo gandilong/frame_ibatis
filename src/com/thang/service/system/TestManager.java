@@ -13,7 +13,7 @@ public class TestManager extends Dao {
 	public DataValues getTest(Integer id){
 		ActionValues values=new ActionValues();
 		values.put("id", id);
-		return getSqlSession().selectOne("system.test", values);
+		return getSqlSession().selectOne("system.test.query", values);
 	}
 	
 }

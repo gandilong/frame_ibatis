@@ -24,7 +24,7 @@
     </typeAliases>
 
     <mappers>
-        <mapper resource="classpath:com/thang/service/system/mybatis/test.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/test.xml"></mapper>
     </mappers>
     
 </configuration>

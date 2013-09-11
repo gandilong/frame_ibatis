@@ -1,30 +1,25 @@
 package com.thang.tools.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
-import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
-import com.thang.tools.model.Pages;
 
 /**
  *
  * @author Gandilong
  */
-public class Dao extends SqlSessionDaoSupport {
+public abstract class Dao extends SqlSessionDaoSupport {
     
-    @Override
-    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-    	super.setSqlSessionFactory(sqlSessionFactory);
-    }
+	
+	@Override
+	@Resource(name="sqlSession")
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		super.setSqlSessionTemplate(sqlSessionTemplate);
+	}
 	
 	/**
     public DataValues queryForObject(String sqlStr,ActionValues values){

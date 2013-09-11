@@ -41,7 +41,7 @@
 				/web/logout = logout
 				/tools/** = anon
 				/web/system/** = roles[admin]
-				/web/** = user
+				/web/** = anon
 			</value>
 		</property>
 	</bean>
