@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="system.test">
+<mapper namespace="system.auth">
        
        <select id="getRoleNameByUser" parameterType="long" resultType="string">
-            select name from sys_role_info where user=#{uid}
+            select name from sys_role_info where id in (
+                   select role from sys_user_role_info where user=#{uid}
+            )
        </select>
        
        <select id="getResourceNameByUser" parameterType="long" resultType="string">
-            select name from sys_resource_info where role in (
-                select id from sys_role_info where user=#{uid}
-            ) t
+            select name from sys_resource_info where id in (
+                select resource from sys_role_resource_info where role in(
+                    select id from sys_role_info where id in (
+                       select role from sys_user_role_info where user=#{uid}
+                    )
+                )
+            )
        </select>
        
 </mapper> 

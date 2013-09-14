@@ -1,8 +1,5 @@
 package com.thang.web;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thang.tools.auth.ShiroUser;
 import com.thang.tools.model.Action;
 
 @Controller
@@ -54,23 +50,16 @@ public class UserAction extends Action{
 				}
 		}
 		
-		model.addAttribute("user", ((ShiroUser)sub.getPrincipal()).getUserName());
-		return "main";
+		return "redirect:/web/main";
 	}
 	
 	@RequestMapping("logout")
-	public void logout(){
+	public String logout(){
 		Subject sub=SecurityUtils.getSubject();
 		if(sub.isAuthenticated()){
 			sub.logout();
 		}
-		try {
-			getRequest().getRequestDispatcher("/index.jsp").forward(getRequest(),getResponse());
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return "redirect:/";
 	}
 	
 	

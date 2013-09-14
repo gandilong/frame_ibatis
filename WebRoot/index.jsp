@@ -60,7 +60,7 @@
       <div class="jumbotron">
         <h1>经典Web框架!</h1>
         <p class="lead">该框架采用最新的企业级框架Spring,Mybatis和Apache的Shiro，它们的组合将为我们书写无限辉煌的历史！</p>
-        <a class="btn btn-large btn-success" href="javascript:void(0)">开始使用</a>
+        <a class="btn btn-large btn-success" href="web/main">开始使用</a>
       </div>
 
       <hr>

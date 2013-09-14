@@ -36,10 +36,12 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
     
+    <!-- 
     <bean id="sqlBatchSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory" />
         <constructor-arg index="1" value="BATCH" />
     </bean>
+     -->
     
      <!--事务管理        定义开始-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

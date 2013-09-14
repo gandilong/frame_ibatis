@@ -67,7 +67,10 @@ public class PaginationInterceptor implements Interceptor {
 	     // 只要参数对象里Page对象或 page=on字段就进行分页。 
 	     if (null!=paramObj) {
 	    	 boolean toPage=false;
-	    	 Object page=PropertyUtils.getProperty(paramObj, "page");
+	    	 Object page=null;
+	    	 if(paramObj instanceof ActionValues){
+	    	    page=PropertyUtils.getProperty(paramObj, "page");	 
+	    	 }
 	    	 if(null!=page&&(page instanceof String)&&"on".equals(String.valueOf(page).trim())){
 	    		 BeanUtils.setProperty(paramObj, "page", page=new Page());
 	    		 toPage=true;

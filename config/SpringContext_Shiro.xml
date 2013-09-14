@@ -41,6 +41,8 @@
 				/web/logout = logout
 				/tools/** = anon
 				/web/system/** = roles[admin]
+				/web/ =anon
+				/web/index=anon
 				/web/** = user
 			</value>
 		</property>
