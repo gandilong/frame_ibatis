@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("system")
 public class SystemAction {
 
-	@RequestMapping("/")
+	@RequestMapping
 	public String system(){
 		return "system/system";
 	}
