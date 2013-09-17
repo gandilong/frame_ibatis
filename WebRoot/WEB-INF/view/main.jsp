@@ -9,7 +9,7 @@
     </head> 
     
     <body class="easyui-layout">
-          <%--style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/white-top-bottom.gif') repeat-x;padding:10px" --%>
+          <%--style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px" --%>
          <div data-options="region:'north',border:false,minHeight:60,maxHeight:60">
                    <%@include file="../../include/header.jsp"%>    
          </div>

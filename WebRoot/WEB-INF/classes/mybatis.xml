@@ -25,6 +25,7 @@
     <typeAliases>
         <typeAlias alias="ActionValues" type="com.thang.tools.model.ActionValues"/>
         <typeAlias alias="DataValues" type="com.thang.tools.model.DataValues"/>
+        <typeAlias alias="User" type="com.thang.entity.system.User"/>
     </typeAliases>
     
     <plugins>

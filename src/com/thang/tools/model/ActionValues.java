@@ -32,6 +32,9 @@ public class ActionValues extends HashMap<String,Object>{
 		
 		while(paramNames.hasMoreElements()){
 			name=paramNames.nextElement();
+			if(name.startsWith("org.springframework")||name.equals("characterEncodingFilter.FILTERED")||name.equals("shiroFilter.FILTERED")||name.equals("roles.FILTERED")){//过滤spring参数
+				continue;
+			}
 			if(request.getParameterValues(name).length>1){
 				put(name, request.getParameterValues(name));
 			}else{
@@ -41,6 +44,9 @@ public class ActionValues extends HashMap<String,Object>{
 		
 		while(attrNames.hasMoreElements()){
 			name=attrNames.nextElement();
+			if(name.startsWith("org.springframework")||name.equals("characterEncodingFilter.FILTERED")||name.equals("shiroFilter.FILTERED")||name.equals("roles.FILTERED")){//过滤spring参数
+				continue;
+			}
 			put(name,request.getAttribute(name));
 		}
 	}
@@ -73,30 +79,18 @@ public class ActionValues extends HashMap<String,Object>{
         }
         return false;
     }
-    
-    @SuppressWarnings("unchecked")
-    public static ActionValues parseRequest(HttpServletRequest request){
-    	ActionValues values=new ActionValues();
-    	
-    	String name=null;
-    	Enumeration<String> paramNames=request.getParameterNames();
-    	while(paramNames.hasMoreElements()){
-    		name=paramNames.nextElement();
-    		if(name.contains("org.springframework")){
-    			continue;
-    		}
-    		values.put(name, request.getParameter(name));
+
+    public void generPage(){
+    	if(0==size()){
+    		put("fpage", "on");
+    	}else{
+    		Page p=new Page();
+    		p.setOrder(getStr("order"));
+    		p.setOrderBy(getStr("sort"));
+    		p.setPageSize(getInt("rows"));
+    		p.setPageNow(getInt("page"));
+    		put("fpage", p);
     	}
-    	
-    	Enumeration<String> attrNames=request.getAttributeNames();
-    	while(attrNames.hasMoreElements()){
-    		name=attrNames.nextElement();
-    		if(name.contains("org.springframework")){
-    			continue;
-    		}
-    		values.put(name, request.getAttribute(name));
-    	}
-    	
-    	return values;
     }
+    
 }

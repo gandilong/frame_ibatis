@@ -69,10 +69,10 @@ public class PaginationInterceptor implements Interceptor {
 	    	 boolean toPage=false;
 	    	 Object page=null;
 	    	 if(paramObj instanceof ActionValues){
-	    	    page=PropertyUtils.getProperty(paramObj, "page");	 
+	    	    page=PropertyUtils.getProperty(paramObj, "fpage");	 
 	    	 }
 	    	 if(null!=page&&(page instanceof String)&&"on".equals(String.valueOf(page).trim())){
-	    		 BeanUtils.setProperty(paramObj, "page", page=new Page());
+	    		 BeanUtils.setProperty(paramObj, "fpage", page=new Page());
 	    		 toPage=true;
 	    	 }else if(null!=page&&page instanceof Page){
 	    		 toPage=true;

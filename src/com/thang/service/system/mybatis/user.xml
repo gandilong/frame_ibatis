@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="system.user">
        
-       <select id="login" parameterType="ActionValues" resultType="com.thang.entity.system.User">
+       <select id="login" parameterType="ActionValues" resultType="User">
             select * from sys_user_info where login_name=#{login_name} and login_pass=#{login_pass}
+       </select>
+       
+       <select id="query" parameterType="ActionValues" resultType="User">
+            select * from sys_user_info
+            <trim prefix="where" prefixOverrides="and|or">
+                <if test="null!=id">
+                    id=${id}
+                </if>
+                <if test="null!=user_name">
+                    and user_name=#{user_name}
+                </if>
+                <if test="null!=login_name">
+                    and login_name=#{login_name}
+                </if>
+            </trim>
        </select>
        
 </mapper> 
