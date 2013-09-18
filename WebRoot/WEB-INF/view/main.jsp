@@ -10,7 +10,7 @@
     
     <body class="easyui-layout">
           <%--style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px" --%>
-         <div data-options="region:'north',border:false,minHeight:60,maxHeight:60">
+         <div data-options="region:'north',border:false,minHeight:60,maxHeight:60" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/headerbg.jpg') repeat-x;padding:10px">
                    <%@include file="../../include/header.jsp"%>    
          </div>
 	     <div data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'West'" style="width:200px;padding:10px;">west content</div>

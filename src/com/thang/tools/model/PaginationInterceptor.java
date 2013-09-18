@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,6 +13,7 @@ import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -92,6 +94,18 @@ public class PaginationInterceptor implements Interceptor {
 		             setPageParameter(sql, connection, mappedStatement, boundSql, (Page)page);  
 	    	 }
 	     }  
+	    
+	     //打印SQL及参数  
+	     System.out.println(statementHandler.getBoundSql().getSql());
+	     List<ParameterMapping> ps=statementHandler.getBoundSql().getParameterMappings();
+	     for(ParameterMapping p:ps){
+	    	 if((paramObj instanceof Integer)||(paramObj instanceof Long)||(paramObj instanceof String)||(paramObj instanceof Boolean)){
+	    		 System.out.print(p.getProperty()+":"+paramObj+"  ");	 
+	    	 }else{
+	    	     System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
+	    	 }
+	     }
+	     
 	     // 将执行权交给下一个拦截器  
 	     return invocation.proceed();  
 	}
