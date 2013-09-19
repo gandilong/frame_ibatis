@@ -1,28 +1,29 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'user.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
   
-  <body>
-    This is my JSP page. <br>
-  </body>
-</html>
+      <table id="roleGrid">
+		<thead>
+			<tr>
+				<th field="id" width="80">编号</th>
+				<th field="name" width="150" align="center">标记</th>
+				<th field="title" width="120" align="center">名称</th>
+			</tr>
+		</thead>
+	</table>
+     
+     <script type="text/javascript">
+		$(function(){
+			$('#roleGrid').datagrid({
+			    title:'用户列表',
+			    iconCls:'icon-save',
+			    fit:true,
+			    collapsible:false,
+			    sortName:'id',
+			    sortOrder:'desc',
+			    remoteSort:true,
+			    idField:'id',
+			    url:'system/auth/roleData',
+			    pagination:true,
+			    rownumbers:true
+			});
+		});
+      </script>

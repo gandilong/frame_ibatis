@@ -26,6 +26,8 @@
         <typeAlias alias="ActionValues" type="com.thang.tools.model.ActionValues"/>
         <typeAlias alias="DataValues" type="com.thang.tools.model.DataValues"/>
         <typeAlias alias="User" type="com.thang.entity.system.User"/>
+        <typeAlias alias="Role" type="com.thang.entity.system.Role"/>
+        <typeAlias alias="Resource" type="com.thang.entity.system.Resource"/>
     </typeAliases>
     
     <plugins>
@@ -33,8 +35,9 @@
     </plugins>
     
     <mappers>
-        <mapper resource="/com/thang/service/system/mybatis/test.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/user.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/role.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/resource.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/auth.xml"></mapper>
     </mappers>
     

@@ -105,6 +105,7 @@ public class PaginationInterceptor implements Interceptor {
 	    	     System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
 	    	 }
 	     }
+	     System.out.println("\n");
 	     
 	     // 将执行权交给下一个拦截器  
 	     return invocation.proceed();  

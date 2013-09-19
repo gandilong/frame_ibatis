@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.thang.entity.system.Resource;
+import com.thang.entity.system.Role;
 import com.thang.entity.system.User;
+import com.thang.service.system.ResourceManager;
+import com.thang.service.system.RoleManager;
 import com.thang.service.system.UserManager;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
@@ -17,6 +21,12 @@ public class SystemAction extends Action{
 
 	@Autowired
 	private UserManager userManager;
+	
+	@Autowired
+	private RoleManager roleManager;
+	
+	@Autowired
+	private ResourceManager resourceManager;
 	
 	/**
 	 * 系统管理的索引页面
@@ -53,6 +63,13 @@ public class SystemAction extends Action{
 		return "system/auth/role";
 	}
 	
+	@RequestMapping("auth/roleData")
+	public void roleData(){
+		ActionValues values=getValues();
+		List<Role> roles=roleManager.query(values);
+		printJSON(roles);
+	}
+	
 	/**
 	 * 系统管理 -->权限-->资源管理
 	 * @return
@@ -60,6 +77,13 @@ public class SystemAction extends Action{
 	@RequestMapping("auth/resource")
 	public String resource(){
 		return "system/auth/resource";
+	}
+	
+	@RequestMapping("auth/resourceData")
+	public void resourceData(){
+		ActionValues values=getValues();
+		List<Resource> resources=resourceManager.query(values);
+		printJSON(resources);
 	}
 	
 	/**

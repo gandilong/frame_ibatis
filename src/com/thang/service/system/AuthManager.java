@@ -3,6 +3,7 @@ package com.thang.service.system;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
 import com.thang.tools.dao.Dao;
 
 @Component
@@ -25,6 +26,10 @@ public class AuthManager extends Dao{
 	public List<String> getResourceNameByUser(long uid){
 		return getSqlSession().selectList("system.auth.getResourceNameByUser", uid);
 	}
+	
+	
+	
+	
 	
 	
 }
