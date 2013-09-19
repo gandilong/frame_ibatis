@@ -17,4 +17,32 @@
             </trim>
        </select>
        
+       <insert id="toInsert" parameterType="ActionValues">
+           insert into sys_resource_info(id,name,title) values(0,#{name},#{title})
+       </insert>
+       
+       <update id="toUpdate" parameterType="ActionValues">
+          <if test="null!=id">
+               update sys_resource_info
+               <set>
+                   <if test="null!=name">
+                        name=#{name}
+                   </if>
+                    <if test="null!=name&&null!=title">
+                        ,
+                    </if>
+                    <if test="null!=title">
+                        title=#{title}
+                    </if>
+               </set>
+               where id=#{id}
+          </if>
+       </update>
+       
+       <delete id="toDelete" parameterType="ActionValues">
+          <if test="null!=id">
+               delete from sys_resource_info where id=#{id}
+          </if>
+       </delete>
+       
 </mapper> 

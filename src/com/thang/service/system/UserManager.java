@@ -24,4 +24,17 @@ public class UserManager extends Dao{
 		return getSqlSession().selectList("system.user.query", values);
 	}
 	
+	public void toInsert(ActionValues values){
+		getSqlSession().insert("system.user.toInsert", values);
+	}
+	
+	public void toUpate(ActionValues values){
+		getSqlSession().update("system.user.toUpdate", values);
+	}
+	
+	public void toDelete(long id){
+		getSqlSession().update("system.user.toUpdate", id);
+	}
+	
+	
 }
