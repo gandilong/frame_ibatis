@@ -7,7 +7,8 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,14 +18,13 @@ import com.thang.service.system.AuthManager;
 import com.thang.service.system.UserManager;
 
 @Component("dbRealm")
-public class DBRealm extends AuthorizingRealm{
+public class DBRealm extends JdbcRealm{
 	
 	@Autowired
 	private AuthManager authManager;
 	@Autowired
 	private UserManager userManager;
 
-	 
 
 	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
@@ -49,9 +49,13 @@ public class DBRealm extends AuthorizingRealm{
 			token.setRememberMe(true);	
 		}
 		if (null!=user) {
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUser_name(), user.getLogin_name()),user.getLogin_pass(),getName());
+			SimpleAuthenticationInfo auth=new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUser_name(), user.getLogin_name()),user.getLogin_pass(),getName());
+			return auth;
 		} 
 		return null;
 	}
+	
+	
+	
 
 }

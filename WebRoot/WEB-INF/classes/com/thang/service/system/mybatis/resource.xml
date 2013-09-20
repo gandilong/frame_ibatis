@@ -26,11 +26,8 @@
                update sys_resource_info
                <set>
                    <if test="null!=name">
-                        name=#{name}
+                        name=#{name},
                    </if>
-                    <if test="null!=name&&null!=title">
-                        ,
-                    </if>
                     <if test="null!=title">
                         title=#{title}
                     </if>

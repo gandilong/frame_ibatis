@@ -30,22 +30,13 @@
                update sys_user_info
                <set>
                    <if test="null!=user_name">
-                        user_name=#{user_name}
+                        user_name=#{user_name},
                    </if>
-                    <if test="null!=user_name&&null!=login_name">
-                        ,
-                    </if>
                     <if test="null!=login_name">
-                        login_name=#{login_name}
-                    </if>
-                    <if test="null!=login_name&&null!=login_pass">
-                        ,
+                        login_name=#{login_name},
                     </if>
                     <if test="null!=login_pass">
-                        login_pass=#{login_pass}
-                    </if>
-                    <if test="null!=login_pass&&null!=create_time">
-                        ,
+                        login_pass=#{login_pass},
                     </if>
                     <if test="null!=create_time">
                         create_time=#{create_time}

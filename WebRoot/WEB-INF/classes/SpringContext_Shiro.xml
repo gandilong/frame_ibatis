@@ -24,17 +24,38 @@
     
     <!--权限 定义开始-->
     <!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="com.thang.tools.auth.DBRealm" depends-on="dbe"></bean>
+	<bean id="shiroDbRealm" class="com.thang.tools.auth.DBRealm"></bean>
 	
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="shiroDbRealm" />
+		<property name="cacheManager" ref="cacheManager" />
+        <property name="sessionMode" value="http" /><!-- http|native 
+        <property name="sessionManager" ref="sessionManager" /> -->
 	</bean>
+	
+	 <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+	     <!-- Set a net.sf.ehcache.CacheManager instance here if you already have 
+            one. If not, a new one will be creaed with a default config:
+	     <property name="cacheManager" ref="ehCacheManager" /> -->
+	      <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance 
+            to inject, but you want a specific Ehcache configuration to be used, specify 
+            that here. If you don't, a default will be used.: <property name="cacheManagerConfigFile" 
+            value="classpath:some/path/to/ehcache.xml"/> -->
+	 </bean>
+	
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="sessionDAO" />
+    </bean>
+
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="activeSessionsCacheName" value="shiro-activeSessionCache" /> 
+    </bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/web/user/login" />
-		<property name="successUrl" value="/web/index" />
+		<property name="successUrl" value="/web/main" />
 		<property name="filterChainDefinitions">
 			<value>
 				/web/login = authc
@@ -49,6 +70,10 @@
 	</bean>
 	
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	 <!-- Post processor that automatically invokes init() and destroy() methods 
+        for Spring-configured Shiro objects so you don't have to 1) specify an init-method 
+        and destroy-method attributes for every bean definition and 2) even know 
+        which Shiro objects require these methods to be called. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
  
 </beans>

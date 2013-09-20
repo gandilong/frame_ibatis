@@ -36,20 +36,25 @@ public class UserAction extends Action{
 			try{
 				   sub.login(token);
 				}catch(UnknownAccountException unkonw){
+					unkonw.printStackTrace();
 					model.addAttribute("error", "1");
-					return "login";
+					//return "login";
 				}catch(IncorrectCredentialsException ic){
+					ic.printStackTrace();
 					model.addAttribute("error", "1");//用户名或密码无效！
-					return "login";
+					//return "login";
 				}catch(LockedAccountException lae){
+					lae.printStackTrace();
 					model.addAttribute("error", "2");//账户己停用！
-					return "login";
+					//return "login";
 				}catch(AuthenticationException ae){
+					ae.printStackTrace();
 					model.addAttribute("error", "3");//认证失败！
-					return "login";
+					//return "login";
 				}
 		}
 		
+		System.out.println("===========");
 		return "redirect:/web/main";
 	}
 	
