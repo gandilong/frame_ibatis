@@ -7,7 +7,6 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,12 @@ public class DBRealm extends JdbcRealm{
 			return auth;
 		} 
 		return null;
+	}
+	
+	
+	@Override
+	public void clearCache(PrincipalCollection principals) {
+		super.clearCache(principals);
 	}
 	
 	

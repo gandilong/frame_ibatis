@@ -2,3 +2,19 @@
 springmvc
 mybatis
 ModelSQL(用于前台页面)
+
+
+命名规范：
+action类名称与entity类名称一一对应。
+action方法URL与模块相对应
+       {
+          system-->{
+              auth
+            },
+          application-->{
+          
+          },
+          client-->{
+          
+          }
+                 }

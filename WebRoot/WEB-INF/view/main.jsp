@@ -18,7 +18,7 @@
 	     <div data-options="region:'south',border:false,minHeight:50,maxHeight:50" style="height:50px;background:#A9FACD;padding:10px;">
 	         天航软件开发者:gandilong
 	     </div>
-	     <div data-options="region:'center',title:'Center',href:'index'"></div>
+	     <div data-options="region:'center',title:'信息展示',href:'index'"></div>
     </body>
     
     

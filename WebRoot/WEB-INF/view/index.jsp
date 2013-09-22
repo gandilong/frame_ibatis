@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top:10px">
       <div class="row-fluid">
         <div class="span12">
           <div class="hero-unit">

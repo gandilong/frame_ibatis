@@ -14,7 +14,7 @@
 		$(function(){
 			$('#resourceGrid').datagrid({
 			    title:'资源列表',
-			    iconCls:'icon-save',
+			    iconCls:'icon-leaf',
 			    fit:true,
 			    collapsible:false,
 			    singleSelect:true,

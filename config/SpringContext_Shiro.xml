@@ -54,12 +54,12 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/web/user/login" />
+		<property name="loginUrl" value="/web/system/login" />
 		<property name="successUrl" value="/web/main" />
 		<property name="filterChainDefinitions">
 			<value>
-				/web/login = authc
-				/web/logout = logout
+				/web/system/login = authc
+				/web/system/logout = logout
 				/tools/** = anon
 				/web/system/** = roles[admin]
 				/web/ =anon

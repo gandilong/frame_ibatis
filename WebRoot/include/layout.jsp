@@ -11,3 +11,4 @@
 <link rel="shortcut icon" href='<c:url value="/tools/layout/img/favicon.png"/>'/>
 <script type="text/javascript" src='<c:url value="/tools/layout/js/jquery-1.10.2_min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/tools/layout/js/bootstrap.min.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/tools/script/utils.js"/>'></script>

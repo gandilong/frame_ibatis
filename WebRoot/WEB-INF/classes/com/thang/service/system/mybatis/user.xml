@@ -3,7 +3,7 @@
 <mapper namespace="system.user">
        
        <select id="login" parameterType="ActionValues" resultType="User">
-            select * from sys_user_info where login_name=#{login_name} and login_pass=#{login_pass}
+            select * from sys_user_info where login_name=#{login_name} and login_pass=#{login_pass} and used='1';
        </select>
        
        <select id="query" parameterType="ActionValues" resultType="User">
@@ -17,6 +17,12 @@
                 </if>
                 <if test="null!=login_name">
                     and login_name=#{login_name}
+                </if>
+                <if test="null!=startTime">
+                    and create_time>=#{startTime}
+                </if>
+                <if test="null!=endTime">
+                    and create_time <![CDATA[ <= ]]>#{endTime}
                 </if>
             </trim>
        </select>

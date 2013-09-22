@@ -20,7 +20,7 @@ public class UserManager extends Dao{
 	}
 	
 	public List<User> query(ActionValues values){
-		values.generPage();
+		values.generPage();//把easyui里的分页排序参数 转到 ActionValues里
 		return getSqlSession().selectList("system.user.query", values);
 	}
 	

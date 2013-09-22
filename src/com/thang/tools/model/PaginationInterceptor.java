@@ -105,7 +105,7 @@ public class PaginationInterceptor implements Interceptor {
 	    	     System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
 	    	 }
 	     }
-	     System.out.println("\n");
+	     System.out.println();
 	     
 	     // 将执行权交给下一个拦截器  
 	     return invocation.proceed();  
@@ -132,6 +132,7 @@ public class PaginationInterceptor implements Interceptor {
         StringBuilder pageSql = new StringBuilder(100);  
         String beginrow = String.valueOf((page.getPageNow()- 1) * page.getPageSize());  
         pageSql.append(sql);  
+        pageSql.append(" order by "+page.getOrderBy()+" "+page.getOrder());
         pageSql.append(" limit " + beginrow + "," + page.getPageSize());  
         return pageSql;  
     }  
@@ -141,7 +142,8 @@ public class PaginationInterceptor implements Interceptor {
         String beginrow = String.valueOf((page.getPageNow() - 1) * page.getPageSize());  
         String endrow = String.valueOf(page.getPageNow() * page.getPageSize());  
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");  
-        pageSql.append(sql);  
+        pageSql.append(sql);
+        pageSql.append(" order by "+page.getOrderBy()+" "+page.getOrder());
         pageSql.append(" ) temp where rownum <= ").append(endrow);  
         pageSql.append(") where row_id > ").append(beginrow);  
         return pageSql;  

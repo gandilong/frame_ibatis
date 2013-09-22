@@ -18,6 +18,7 @@ public class RoleManager extends Dao{
 	 * @return
 	 */
 	public List<Role> query(ActionValues values){
+		values.generPage();//把easyui里的分页排序参数 转到 ActionValues里
 		return getSqlSession().selectList("system.role.query", values);
 	}
 	

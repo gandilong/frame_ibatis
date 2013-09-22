@@ -48,7 +48,7 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="web/user/login">登陆</a></li>
+          <li class="active"><a href="web/system/user/login">登陆</a></li>
           <li><a href="javascript:void(0)">框架介绍</a></li>
           <li><a href="javascript:void(0)">联系</a></li>
         </ul>

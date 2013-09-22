@@ -14,7 +14,7 @@
 		$(function(){
 			$('#roleGrid').datagrid({
 			    title:'角色列表',
-			    iconCls:'icon-save',
+			    iconCls:'icon-star-empty',
 			    fit:true,
 			    collapsible:false,
 			    singleSelect:true,

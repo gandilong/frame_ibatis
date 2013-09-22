@@ -5,25 +5,20 @@
     <head>
         <%@include file="../../../include/layout.jsp" %>
         <%@include file="../../../include/easyui.jsp" %>
-        <style type="text/css">
-          li{
-              margin:5px
-           }
-        </style>
         <script type="text/javascript" src="${ctx}/tools/script/system/system.js"></script>
     </head> 
     
-    <body class="easyui-layout">
-         <div data-options="region:'north',border:false,minHeight:60,maxHeight:60" style="overflow-y:hidden">
+    <body id="system" class="easyui-layout">
+         <div data-options="region:'north',border:false,minHeight:60,maxHeight:60" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/headerbg.jpg') repeat-x;padding:10px">
                    <%@include file="../../../include/header.jsp"%>    
          </div>
-	     <div id="west" data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'West'" style="width:200px;padding:0px;">
+	     <div id="west" data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'配置'" style="width:200px;padding:0px;">
 	         <div class="easyui-accordion"  data-options="fit:true">
 	                <div title="权限" data-options="iconCls:'icon-plugin'" style="overflow:auto;">
 	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
-	                        <li class="btn btn-block" id="userManager"  href="system/auth/user"  >用户管理<label class="icon-chevron-right"></label></li>
-	                        <li class="btn btn-block" id="roleManager"  href="system/auth/role">角色管理<label class="icon-chevron-right"></label></li>
-	                        <li class="btn btn-block" id="resourceManager" href="system/auth/resource">资源管理<label class="icon-chevron-right"></label></li>
+	                        <li class="btn btn-block" id="userManager"  href="system/auth/userList"  >用户管理<label class="icon-chevron-right"></label></li>
+	                        <li class="btn btn-block" id="roleManager"  href="system/auth/roleList">角色管理<label class="icon-chevron-right"></label></li>
+	                        <li class="btn btn-block" id="resourceManager" href="system/auth/resourceList">资源管理<label class="icon-chevron-right"></label></li>
 	                    </ul>
 	                </div>
 				    <div title="关于" data-options="iconCls:'icon-ok'" style="overflow:auto;">
@@ -39,7 +34,7 @@
 	     <div data-options="region:'south',border:false,minHeight:50,maxHeight:50" style="height:50px;background:#A9FACD;padding:10px;">
 	         天航软件开发者:gandilong
 	     </div>
-	     <div id="center" data-options="region:'center',title:'Center',href:'index'"></div>
+	     <div id="center" data-options="region:'center',title:'数据',href:'index',iconCls:'icon-th'"></div>
     </body>
     
     

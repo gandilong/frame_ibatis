@@ -6,7 +6,9 @@ public class User {
 	private String user_name;
 	private String login_name;
 	private String login_pass;
+	private char used;
 	private String create_time;
+	
 	
 	public long getId() {
 		return id;
@@ -32,6 +34,12 @@ public class User {
 	}
 	public void setLogin_pass(String login_pass) {
 		this.login_pass = login_pass;
+	}
+	public char getUsed() {
+		return used;
+	}
+	public void setUsed(char used) {
+		this.used = used;
 	}
 	public String getCreate_time() {
 		return create_time;
