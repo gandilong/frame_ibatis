@@ -2,15 +2,19 @@ package com.thang.service.system;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.thang.entity.system.User;
+import com.thang.executor.DBExecutor;
 import com.thang.tools.dao.Dao;
 import com.thang.tools.model.ActionValues;
 
 @Component
 public class UserManager extends Dao{
 
+	@Autowired
+	private DBExecutor dbe;
 	
 	public User login(String login_name,String login_pass){
 		ActionValues values=new ActionValues();

@@ -7,6 +7,8 @@ public class User {
 	private String login_name;
 	private String login_pass;
 	private char used;
+	private String email;
+	private String image;
 	private String create_time;
 	
 	
@@ -40,6 +42,18 @@ public class User {
 	}
 	public void setUsed(char used) {
 		this.used = used;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public String getCreate_time() {
 		return create_time;
