@@ -2,11 +2,9 @@
 <div class="container" style="margin:16px">
     <div class="row-fluid">
         <div class="span6 offset3">    
-           <form id="fm" class="form-horizontal" action="system/user/formSave">
+           <form id="fm" class="form-horizontal" action="system/user/formSave" method="post">
                <fieldset>
-                   <div id="legend" class="lead">
-                       <legend class="text-info">用户信息</legend>
-                   </div>
+                   <legend class="text-info">用户信息</legend>
 		           <div class="control-group">
 		               <label class="control-label" for="userName">用户名：</label>
 		               <div class="controls">
@@ -81,7 +79,15 @@
                email:{required:false,email:true}
            },
            submitHandler:function(form){
-               form.submit();
+               $.ajax({
+                   type: "POST",
+                   url: "system/user/formSave",
+                   data: $("#fm").serialize(),
+                   success: function(msg){
+                      $('#system').layout('panel','center').panel('refresh','system/user/list');
+                   }
+               });
+               
            }
        });
      });

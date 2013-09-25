@@ -2,12 +2,12 @@ package com.thang.service.system;
 
 import java.util.List;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
 import com.thang.tools.dao.Dao;
 import com.thang.tools.model.ActionValues;
 import com.thang.tools.model.DataValues;
+import com.thang.utils.lang.DateUtils;
 
 @Component
 public class UserManager extends Dao{
@@ -40,7 +40,7 @@ public class UserManager extends Dao{
 	 * @param values
 	 */
 	public void toInsert(ActionValues values){
-		values.put("loginPass",DigestUtils.md5Hex(values.getStr("loginPass")));
+		values.put("createTime", DateUtils.getSystime());
 		getSqlSession().insert("system.user.toInsert", values);
 	}
 	

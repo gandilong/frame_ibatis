@@ -61,10 +61,10 @@ public class UserAction extends Action{
 	 * 保存表单数据
 	 */
 	@RequestMapping("formSave")
-	public String formSave(){
+	public void formSave(){
 		ActionValues values=getValues();
 		userManager.toInsert(values);
-		return "system/user/list";
+		printJSON("0");
 	}
 	
 }
