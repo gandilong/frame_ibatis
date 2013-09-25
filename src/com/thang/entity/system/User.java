@@ -3,10 +3,11 @@ package com.thang.entity.system;
 public class User {
 
 	private long id;
-	private String user_name;
-	private String login_name;
-	private String login_pass;
-	private char used;
+	private String userName;
+	private String loginName;
+	private String loginNass;
+	
+	private int used;
 	private String email;
 	private String create_time;
 	
@@ -17,29 +18,28 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getLogin_name() {
-		return login_name;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setLogin_name(String login_name) {
-		this.login_name = login_name;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
-	public String getLogin_pass() {
-		return login_pass;
+	public String getLoginNass() {
+		return loginNass;
 	}
-	public void setLogin_pass(String login_pass) {
-		this.login_pass = login_pass;
+	public void setLoginNass(String loginNass) {
+		this.loginNass = loginNass;
 	}
-	public char getUsed() {
+	public int getUsed() {
 		return used;
 	}
-	public void setUsed(char used) {
+	public void setUsed(int used) {
 		this.used = used;
 	}
 	public String getEmail() {

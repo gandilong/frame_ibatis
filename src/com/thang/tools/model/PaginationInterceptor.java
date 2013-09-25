@@ -100,13 +100,14 @@ public class PaginationInterceptor implements Interceptor {
 	     List<ParameterMapping> ps=statementHandler.getBoundSql().getParameterMappings();
 	     for(ParameterMapping p:ps){
 	    	 if((paramObj instanceof Integer)||(paramObj instanceof Long)||(paramObj instanceof String)||(paramObj instanceof Boolean)){
-	    		 System.out.print(p.getProperty()+":"+paramObj+"  ");	 
+	    		 System.out.print(p.getProperty()+":"+paramObj);	 
 	    	 }else{
-	    		 //if("login_pass".equals(p.getProperty())){
-	    			// System.out.print(p.getProperty()+":*****");
-	    		 //}else{
-	    	         System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
-	    		 //}
+	    		 if("loginPass".equals(p.getProperty())){
+	    			 System.out.println(p.getProperty()+":******");
+	    		 }else{
+	    			 System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
+	    		 }
+	    	     
 	    	 }
 	     }
 	     System.out.println();
@@ -209,9 +210,9 @@ public class PaginationInterceptor implements Interceptor {
 
 	@Override
 	public Object plugin(Object target) {
-		if (target instanceof StatementHandler) {  
+		if(target instanceof StatementHandler){  
 	        return Plugin.wrap(target, this);  
-	    } else {  
+	    }else{  
 	        return target;  
 	    }  
 	}
@@ -223,5 +224,5 @@ public class PaginationInterceptor implements Interceptor {
         	dialect="mysql";
         }  
 	}
-
+	
 }

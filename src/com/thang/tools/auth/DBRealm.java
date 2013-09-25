@@ -12,9 +12,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.thang.entity.system.User;
 import com.thang.service.system.AuthManager;
 import com.thang.service.system.UserManager;
+import com.thang.tools.model.DataValues;
 
 @Component("dbRealm")
 public class DBRealm extends JdbcRealm{
@@ -43,12 +43,12 @@ public class DBRealm extends JdbcRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User user=userManager.login(token.getUsername(),new String(token.getPassword()));
+		DataValues user=userManager.login(token.getUsername(),new String(token.getPassword()));
 		if(token.isRememberMe()){
 			token.setRememberMe(true);	
 		}
 		if (null!=user) {
-			SimpleAuthenticationInfo auth=new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getUser_name(), user.getLogin_name()),user.getLogin_pass(),getName());
+			SimpleAuthenticationInfo auth=new SimpleAuthenticationInfo(new ShiroUser(user.getLong("id"),user.getStr("userName"), user.getStr("loginName")),user.getStr("loginPass"),getName());
 			return auth;
 		} 
 		return null;

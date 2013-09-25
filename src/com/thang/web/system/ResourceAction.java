@@ -12,7 +12,7 @@ import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
 
 @Controller
-@RequestMapping("system")
+@RequestMapping("system/resource")
 public class ResourceAction extends Action{
 
 	@Autowired
@@ -22,22 +22,22 @@ public class ResourceAction extends Action{
 	 * 系统管理 -->权限-->资源管理
 	 * @return
 	 */
-	@RequestMapping("auth/resourceList")
-	public String resourceList(){
-		return "system/auth/resourceList";
+	@RequestMapping("list")
+	public String list(){
+		return "system/resource/list";
 	}
 	
 	/**
 	 * 系统管理 -->权限-->资源管理
 	 * @return
 	 */
-	@RequestMapping("auth/resourceForm")
+	@RequestMapping("form")
 	public String resourceForm(){
-		return "system/auth/resourceForm";
+		return "system/resource/form";
 	}
 	
-	@RequestMapping("auth/resourceData")
-	public void resourceData(){
+	@RequestMapping("listData")
+	public void listData(){
 		ActionValues values=getValues();
 		List<Resource> resources=resourceManager.query(values);
 		printJSON(resources);

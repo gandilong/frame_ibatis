@@ -12,7 +12,7 @@ import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
 
 @Controller
-@RequestMapping("system")
+@RequestMapping("system/role")
 public class RoleAction extends Action{
 
 	@Autowired
@@ -22,22 +22,22 @@ public class RoleAction extends Action{
 	 * 系统管理 -->权限-->角色管理
 	 * @return
 	 */
-	@RequestMapping("auth/roleList")
-	public String roleList(){
-		return "system/auth/roleList";
+	@RequestMapping("list")
+	public String list(){
+		return "system/role/list";
 	}
 	
 	/**
 	 * 系统管理 -->权限-->角色管理
 	 * @return
 	 */
-	@RequestMapping("auth/roleForm")
-	public String roleForm(){
-		return "system/auth/roleForm";
+	@RequestMapping("form")
+	public String form(){
+		return "system/role/form";
 	}
 	
-	@RequestMapping("auth/roleData")
-	public void roleData(){
+	@RequestMapping("listData")
+	public void listData(){
 		ActionValues values=getValues();
 		List<Role> roles=roleManager.query(values);
 		printJSON(roles);

@@ -65,6 +65,13 @@ public class ActionValues extends HashMap<String,Object>{
     	return -1;
     }
     
+    public long getLong(String key){
+    	if(isNotEmpty(key)){
+    		return Long.parseLong(String.valueOf(get(key)));
+    	}
+    	return -1;
+    }
+    
     public boolean isNotEmpty(String key){
         Object obj=get(key);
         if(null!=obj&&!"".equals(String.valueOf(obj).trim())){

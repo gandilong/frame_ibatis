@@ -9,7 +9,7 @@
              <li><a href="system" class="btn btn-large "><label class="icon-cog"></label>系统管理</a></li>
          </shiro:hasRole>
          <li class="offset5"><label class="icon-user"></label><shiro:principal></shiro:principal></li>
-         <li><a href="logout" class="btn"><label class="icon-off"></label>退出</a></li>
+         <li><a href="system/user/logout" class="btn"><label class="icon-off"></label>退出</a></li>
      </ul>
    </div>
 </div>

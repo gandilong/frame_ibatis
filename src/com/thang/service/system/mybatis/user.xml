@@ -2,21 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="system.user">
        
-       <select id="login" parameterType="ActionValues" resultType="User">
-            select * from sys_user_info where login_name=#{login_name} and login_pass=#{login_pass} and used='1';
+       <select id="login" parameterType="ActionValues"  resultType="DataValues">
+            select * from sys_user_info where login_name=#{loginName} and login_pass=#{loginPass} and used=1;
        </select>
        
-       <select id="query" parameterType="ActionValues" resultType="User">
+       <select id="query" parameterType="ActionValues" resultType="DataValues">
             select * from sys_user_info
             <trim prefix="where" prefixOverrides="and|or">
                 <if test="null!=id">
                     id=${id}
                 </if>
-                <if test="null!=user_name">
-                    and user_name=#{user_name}
+                <if test="null!=userName">
+                    and user_name=#{userName}
                 </if>
-                <if test="null!=login_name">
-                    and login_name=#{login_name}
+                <if test="null!=loginName">
+                    and login_name=#{loginName}
+                </if>
+                <if test="null!=used">
+                    and used=#{used}
+                </if>
+                <if test="null!=email">
+                    and email=#{email}
                 </if>
                 <if test="null!=startTime">
                     and create_time>=#{startTime}
@@ -28,24 +34,21 @@
        </select>
        
        <insert id="toInsert" parameterType="ActionValues">
-           insert into sys_user_info(id,user_name,login_name,login_pass,create_time) values(0,#{user_name},#{login_name},#{login_pass},#{create_time})
+           insert into sys_user_info(id,user_name,login_name,login_pass,create_time) values(0,#{userName},#{loginName},#{loginPass},#{createTime})
        </insert>
        
        <update id="toUpdate" parameterType="ActionValues">
           <if test="null!=id">
                update sys_user_info
                <set>
-                   <if test="null!=user_name">
-                        user_name=#{user_name},
+                   <if test="null!=userName">
+                        user_name=#{userName},
                    </if>
-                    <if test="null!=login_name">
-                        login_name=#{login_name},
+                    <if test="null!=loginName">
+                        login_name=#{loginName},
                     </if>
-                    <if test="null!=login_pass">
-                        login_pass=#{login_pass},
-                    </if>
-                    <if test="null!=create_time">
-                        create_time=#{create_time}
+                    <if test="null!=loginPass">
+                        login_pass=#{loginPass},
                     </if>
                </set>
                where id=#{id}

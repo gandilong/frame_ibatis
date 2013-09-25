@@ -4,9 +4,9 @@
 		<thead>
 			<tr>
 				<th field="id" width="80" data-options="sortable:true">编号</th>
-				<th field="user_name" width="150" align="center">用户名</th>
-				<th field="login_name" width="120" align="center">账号</th>
-				<th field="create_time" width="180" align="center" data-options="sortable:true">创建时间</th>
+				<th field="userName" width="150" align="center">用户名</th>
+				<th field="loginName" width="120" align="center">账号</th>
+				<th field="createTime" width="180" align="center" data-options="sortable:true">创建时间</th>
 			</tr>
 		</thead>
 	</table>
