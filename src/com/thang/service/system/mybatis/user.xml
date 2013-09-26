@@ -13,7 +13,7 @@
                     id=${id}
                 </if>
                 <if test="null!=userName">
-                    and user_name=#{userName}
+                    and user_name like '%#{userName}%'
                 </if>
                 <if test="null!=loginName">
                     and login_name=#{loginName}
@@ -50,14 +50,29 @@
                     <if test="null!=loginPass">
                         login_pass=#{loginPass},
                     </if>
+                    <if test="null!=email">
+                        email=#{email},
+                    </if>
+                    <if test="null!=used">
+                        used=#{used}
+                    </if>
                </set>
                where id=#{id}
           </if>
        </update>
        
-       <delete id="toDelete" parameterType="ActionValues">
+       <delete id="toDelete" parameterType="long">
           <if test="null!=id">
                delete from sys_user_info where id=#{id}
+          </if>
+       </delete>
+       
+       <delete id="toDeletes" parameterType="ActionValues">
+          <if test="null!=ids">
+            delete from sys_user_info where id in
+            <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">  
+               #{id}  
+            </foreach>  
           </if>
        </delete>
        

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.thang.tools.util.JsonUtils;
@@ -16,10 +17,11 @@ public class Action {
 	private ActionValues values;
 	
 	@ModelAttribute
-	public void init(HttpServletRequest request,HttpServletResponse response){
+	public void init(HttpServletRequest request,HttpServletResponse response,Model model){
 		this.request=request;
 		this.response=response;
 		this.values=new ActionValues(request);
+		model.addAttribute("values", values);
 		response.setContentType("text/html;charset=UTF-8");
 	}
 	

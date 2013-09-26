@@ -4,6 +4,7 @@
 <html>
 <head>
   <%@include file="include/layout.jsp"%>
+  
       <style type="text/css">
       body {
         padding-top: 20px;
@@ -41,6 +42,7 @@
         margin-top: 28px;
       }
     </style>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
 </head>
 
 <body>
@@ -61,6 +63,7 @@
         <h1>经典Web框架!</h1>
         <p class="lead">该框架采用最新的企业级框架Spring,Mybatis和Apache的Shiro，它们的组合将为我们书写无限辉煌的历史！</p>
         <a class="btn btn-large btn-success" href="web/main">开始使用</a>
+        <button onclick="TogetherJS(this); return false;" class="btn">Start TogetherJS</button> 
       </div>
 
       <hr>

@@ -33,7 +33,7 @@ public class Dao extends SqlSessionDaoSupport {
 	 */
 	public DataValues get(String namespace,ActionValues values){
 		DataValues d=getSqlSession().selectOne(namespace, values);
-		d.formatKey();
+		if(null!=d)d.formatKey();
 		return d;
 	}
 	

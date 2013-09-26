@@ -45,6 +45,15 @@ public class UserManager extends Dao{
 	}
 	
 	/**
+	 * 得到一条用户记录
+	 * @param values
+	 * @return
+	 */
+	public DataValues get(ActionValues values){
+		return get("system.user.query", values);
+	}
+	
+	/**
 	 * 更新方法
 	 * @param values
 	 */
@@ -52,8 +61,12 @@ public class UserManager extends Dao{
 		getSqlSession().update("system.user.toUpdate", values);
 	}
 	
-	public void toDelete(long id){
-		getSqlSession().update("system.user.toUpdate", id);
+	public void toDelete(ActionValues values){
+		getSqlSession().delete("system.user.toDelete", values);
+	}
+	
+	public void toDeletes(ActionValues values){
+		getSqlSession().delete("system.user.toDeletes",values);
 	}
 	
 	

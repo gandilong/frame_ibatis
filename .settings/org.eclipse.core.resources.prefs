@@ -1,13 +1,11 @@
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/view/login.jsp=UTF-8
 encoding//WebRoot/WEB-INF/view/main.jsp=UTF-8
-encoding//WebRoot/WEB-INF/view/system/auth/resourceList.jsp=UTF-8
-encoding//WebRoot/WEB-INF/view/system/auth/roleList.jsp=UTF-8
-encoding//WebRoot/WEB-INF/view/system/auth/userList.jsp=UTF-8
 encoding//WebRoot/include/header.jsp=UTF-8
 encoding//WebRoot/include/layout.jsp=UTF-8
 encoding//WebRoot/include/taglibs.jsp=UTF-8
 encoding//WebRoot/index.jsp=UTF-8
+encoding//WebRoot/tools/validation/dist/jquery.validate.extends.js=UTF-8
 encoding//config/dbconfig.properties=UTF-8
 encoding/<project>=UTF-8
 encoding/readme=UTF-8

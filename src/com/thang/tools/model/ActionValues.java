@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.thang.tools.util.StrUtils;
+
 /**
  *
  * @author gandilong
@@ -93,7 +95,7 @@ public class ActionValues extends HashMap<String,Object>{
     	}else{
     		Page p=new Page();
     		p.setOrder(getStr("order"));
-    		p.setOrderBy(getStr("sort"));
+    		p.setOrderBy(StrUtils.addUnderline(getStr("sort")));
     		p.setPageSize(getInt("rows"));
     		p.setPageNow(getInt("page"));
     		put("fpage", p);
