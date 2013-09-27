@@ -43,6 +43,29 @@
       }
     </style>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    
+    
+    <script type="text/javascript">
+         $(function(){
+              TogetherJSConfig_on= {
+                     ready:function(){
+                         $('#together').text('结束');
+                     },
+                     close:function(){
+                         $('#together').text('开始');
+                     }
+               };
+               
+               TogetherJS.hub.on("visibilityChange", function (msg) {
+                   var elementFinder = TogetherJS.require("elementFinder");
+                   // If the element can't be found this will throw an exception:
+                   var location  = elementFinder.findElement(msg.element);
+                   //MyApp.changeVisibility(element, msg.isVisible);
+                   TogetherJS.send({type: "visibilityChange", isVisible: isVisible, element: location});
+               });
+         });
+    </script>
+    
 </head>
 
 <body>
@@ -63,18 +86,18 @@
         <h1>经典Web框架!</h1>
         <p class="lead">该框架采用最新的企业级框架Spring,Mybatis和Apache的Shiro，它们的组合将为我们书写无限辉煌的历史！</p>
         <a class="btn btn-large btn-success" href="web/main">开始使用</a>
-        <button onclick="TogetherJS(this); return false;" class="btn">Start TogetherJS</button> 
+         
       </div>
 
       <hr>
 
       <div class="row-fluid marketing">
         <div class="span6">
-          <h4>新闻</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h4>资讯</h4>
+          <p>来自国内主流信息网站的最新资讯</p>
 
-          <h4>娱乐</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+          <h4>通讯</h4>
+          <p>采用Mozilla公司研发的开源即时通讯框架TogetherJS。<button id="together" onclick="TogetherJS(this); return false;" class="btn" type="button">开始</button></p>
 
           <h4>科技</h4>
           <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>

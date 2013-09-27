@@ -31,8 +31,8 @@ public class ResourceManager extends Dao{
 		getSqlSession().update("system.resource.toUpdate", values);
 	}
 	
-	public void toDelete(long id){
-		getSqlSession().update("system.resource.toUpdate", id);
+	public void toDelete(ActionValues id){
+		getSqlSession().update("system.resource.toDelete", id);
 	}
 	
 }

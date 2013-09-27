@@ -35,6 +35,8 @@ $(function(){
 			    singleSelect:true,
 			    loadMsg:'数据加载中...',
 			    remoteSort:true,
+			    pageSize:30,
+			    pageList:[15,30,50],
 			    idField:'id',
 			    url:'system/user/listData',
 			    pagination:true,
@@ -95,6 +97,10 @@ $(function(){
 		//修改方法
 		function toUpdate(){
 		    var row=$('#grid').datagrid('getSelected');
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
 			$('#system').layout('panel','center').panel('refresh','system/user/form?id='+row.id);
 		}
 		

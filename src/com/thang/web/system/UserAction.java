@@ -37,9 +37,14 @@ public class UserAction extends Action{
 	@ResponseBody
 	@RequestMapping("exist")
 	public String exist(){
-		DataValues user=userManager.get(getValues());
-		if(null!=user){
-			return "false";
+		ActionValues values=getValues();
+		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
+			return "true";
+		}else{
+		   DataValues user=userManager.get(values);
+		   if(null!=user){
+			  return "false";
+		   }
 		}
 		return "true";
 	}
@@ -87,7 +92,7 @@ public class UserAction extends Action{
 		}else{
 		    userManager.toInsert(values);
 		}
-		printJSON("0");
+		print(0);
 	}
 	
 	/**
@@ -96,7 +101,7 @@ public class UserAction extends Action{
 	@RequestMapping("formDelete")
 	public void formDelete(){
 		userManager.toDelete(getValues());
-		printJSON("0");
+		print(0);
 	}
 	
 }

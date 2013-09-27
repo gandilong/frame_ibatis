@@ -28,6 +28,16 @@ public class RoleAction extends Action{
 	}
 	
 	/**
+	 * 查询角色数据
+	 */
+	@RequestMapping("listData")
+	public void listData(){
+		ActionValues values=getValues();
+		List<Role> roles=roleManager.query(values);
+		printJSON(roles);
+	}
+	
+	/**
 	 * 系统管理 -->权限-->角色管理
 	 * @return
 	 */
@@ -36,11 +46,32 @@ public class RoleAction extends Action{
 		return "system/role/form";
 	}
 	
-	@RequestMapping("listData")
-	public void listData(){
+	/**
+	 * 新增或修改数据
+	 */
+	@RequestMapping("formSave")
+	public void formSave(){
 		ActionValues values=getValues();
-		List<Role> roles=roleManager.query(values);
-		printJSON(roles);
+		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
+			roleManager.toUpate(values);
+		}else{
+		    roleManager.toInsert(values);
+		}
+		print(0);
+	}
+	
+	/**
+	 * 删除数据
+	 */
+	@RequestMapping("formDelete")
+	public void formDelete(){
+		ActionValues values=getValues();
+		if(values.isNotEmpty("id")){
+			roleManager.toDelete(values);	
+		}else{
+			print(1);
+		}
+		print(0);
 	}
 	
 }

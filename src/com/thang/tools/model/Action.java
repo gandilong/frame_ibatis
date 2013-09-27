@@ -26,6 +26,18 @@ public class Action {
 	}
 	
 	
+	protected void print(Object msg){
+		PrintWriter out=null;
+		try{
+			out=response.getWriter();
+			out.print(msg);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			out.close();
+		}
+	}
+	
 	protected void printJSON(Object obj){
 		PrintWriter out=null;
 		try{

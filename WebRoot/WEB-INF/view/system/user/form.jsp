@@ -6,7 +6,7 @@
            <form id="fm" class="form-horizontal" action="system/user/formSave" method="post">
                <fieldset>
                    <legend class="text-info">用户信息</legend>
-                   <input type="hidden" name="id" value="${values.id}">
+                   <input type="hidden" id="id" name="id" value="${values.id}">
 		           <div class="control-group">
 		               <label class="control-label" for="userName">用户名：</label>
 		               <div class="controls">
@@ -48,16 +48,13 @@
 		        </div>
 		        
 		        <div class="control-group">
-		            <label class="control-label">是否：</label>
+		            <label class="control-label">启用：</label>
 		            <div class="controls">
-		                <label class="checkbox">
-		                   <c:if test='${0 eq values.used or empty values.used}'>
-		                       <input value="1" type="checkbox" id="used" name="used" />
-		                   </c:if>
-		                   <c:if test='${1 eq values.used}'>
-		                       <input value="1" type="checkbox" id="used" name="used" checked="checked"/>
-		                   </c:if>
-		                                                     启用
+		                <label>
+		                       <select name="used">
+		                           <option value="0"  <c:if test='${0 eq values.used or empty values.used}'>selected="selected"</c:if> >否</option>
+		                           <option value="1" <c:if test='${1 eq values.used}'> selected="selected" </c:if>>是</option>
+		                       </select>
 		                </label>
 		            </div>
 		        </div>
@@ -79,11 +76,14 @@
        $("#fm").validate({
            rules:{
                userName:{required:true,minlength:2,maxlength:9},
-               loginName:{required:true,minlength:2,maxlength:12,remote:{
+               loginName:{required:true,minlength:2,maxlength:12,lettersonly:true,remote:{
                     url: "system/user/exist",     //后台处理程序
                     type: "post",               //数据发送方式
                     dataType: "json",           //接受数据格式   
-                    data: {                     //要传递的数据
+                    data: { //要传递的数据
+                        id:function(){
+                           return $('#id').val();
+                        },          
                         loginName: function() {
                                return $("#loginName").val();
                         }
@@ -95,6 +95,7 @@
            },
            messages:{
                loginName:{
+                   lettersonly:'只能输入小写字母！',
                    remote:'该账号己存在！'
                }
            },

@@ -16,9 +16,12 @@
 	         <div class="easyui-accordion"  data-options="fit:true">
 	                <div title="功能列表" data-options="iconCls:'icon-plugin'" style="overflow:auto;">
 	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
+	                        <li class="btn btn-block" id="userManager"  href="system/log/list"  >系统日志<label class="icon-chevron-right"></label></li>
 	                        <li class="btn btn-block" id="userManager"  href="system/user/list"  >用户管理<label class="icon-chevron-right"></label></li>
 	                        <li class="btn btn-block" id="roleManager"  href="system/role/list">角色管理<label class="icon-chevron-right"></label></li>
-	                        <li class="btn btn-block" id="resourceManager" href="system/resource/list">资源管理<label class="icon-chevron-right"></label></li>
+	                        <shiro:hasPermission name="system_resource">
+	                            <li class="btn btn-block" id="resourceManager" href="system/resource/list">资源管理<label class="icon-chevron-right"></label></li>
+	                        </shiro:hasPermission>
 	                    </ul>
 	                </div>
 				    <div title="关于" data-options="iconCls:'icon-ok'" style="overflow:auto;">

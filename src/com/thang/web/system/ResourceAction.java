@@ -43,4 +43,32 @@ public class ResourceAction extends Action{
 		printJSON(resources);
 	}
 	
+	/**
+	 * 新增或修改数据
+	 */
+	@RequestMapping("formSave")
+	public void formSave(){
+		ActionValues values=getValues();
+		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
+			resourceManager.toUpate(values);
+		}else{
+			resourceManager.toInsert(values);
+		}
+		print(0);
+	}
+	
+	/**
+	 * 删除数据
+	 */
+	@RequestMapping("formDelete")
+	public void formDelete(){
+		ActionValues values=getValues();
+		if(values.isNotEmpty("id")){
+			resourceManager.toDelete(values);	
+		}else{
+			print(1);
+		}
+		print(0);
+	}
+	
 }

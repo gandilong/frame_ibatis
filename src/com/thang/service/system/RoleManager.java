@@ -30,7 +30,7 @@ public class RoleManager extends Dao{
 		getSqlSession().update("system.role.toUpdate", values);
 	}
 	
-	public void toDelete(long id){
-		getSqlSession().update("system.role.toUpdate", id);
+	public void toDelete(ActionValues id){
+		getSqlSession().update("system.role.toDelete", id);
 	}
 }
