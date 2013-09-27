@@ -59,6 +59,13 @@ $(function(){
 			            toBack();
 			            return false;
 			        }
+			        var reg=/[a-z_]/gi;
+			        if(!reg.test(rowData.name)){
+			           layer.alert('标记必须为英文字母或下划线！',8,'提示');
+			           toBack();
+			           return false;
+			        }
+			        
 			        $.ajax({
                        type: "POST",
                        url: "system/role/formSave",
