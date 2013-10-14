@@ -2,43 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="system.slog">
        
-       <select id="query" parameterType="ActionValues" resultType="Role">
-            select * from sys_role_info
+       <select id="query" parameterType="ActionValues" resultType="DataValues">
+            select * from sys_slog_info
             <trim prefix="where" prefixOverrides="and|or">
                 <if test="null!=id">
                     id=${id}
                 </if>
-                <if test="null!=name">
-                    and name=#{name}
+                <if test="null!=operator">
+                    and operator like '%#{operator}%'
                 </if>
-                <if test="null!=title">
-                    and title=#{title}
+                <if test="null!=action">
+                    and action like '%#{action}%'
+                </if>
+                 <if test="null!=startTime">
+                    and time>=#{startTime}
+                </if>
+                <if test="null!=endTime">
+                    and time <![CDATA[ <= ]]>#{endTime}
                 </if>
             </trim>
        </select>
        
-       <insert id="toInsert" parameterType="ActionValues">
-           insert into sys_role_info(id,name,title) values(0,#{name},#{title})
-       </insert>
-       
-       <update id="toUpdate" parameterType="ActionValues">
-          <if test="null!=id">
-               update sys_role_info
-               <set>
-                   <if test="null!=name">
-                        name=#{name},
-                   </if>
-                    <if test="null!=title">
-                        title=#{title}
-                    </if>
-               </set>
-               where id=#{id}
-          </if>
-       </update>
+        <select id="total" parameterType="ActionValues" resultType="string">
+            select count(0) from sys_slog_info
+            <trim prefix="where" prefixOverrides="and|or">
+                <if test="null!=id">
+                    id=${id}
+                </if>
+                <if test="null!=operator">
+                    and operator like '%#{operator}%'
+                </if>
+                <if test="null!=action">
+                    and action like '%#{action}%'
+                </if>
+                 <if test="null!=startTime">
+                    and time>=#{startTime}
+                </if>
+                <if test="null!=endTime">
+                    and time <![CDATA[ <= ]]>#{endTime}
+                </if>
+            </trim>
+       </select>
        
        <delete id="toDelete" parameterType="ActionValues">
           <if test="null!=id">
-               delete from sys_role_info where id=#{id}
+               delete from sys_slog_info where id=#{id}
           </if>
        </delete>
        

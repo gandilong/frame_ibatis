@@ -3,6 +3,7 @@ package com.thang.web.system;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,20 @@ public class UserAction extends Action{
 	@RequestMapping(value="login",method=RequestMethod.GET)
 	public String login(){
 		return "login";
+	}
+	
+	/**
+	 * 跳转到登陆页面
+	 * @return
+	 */
+	@RequestMapping(value="login",method=RequestMethod.POST)
+	public String loginForm(){
+		
+		if(!SecurityUtils.getSubject().isAuthenticated()){
+			getValues().put("error", "3");
+			return "login";	
+		}
+		return "redirect:/main";
 	}
 	
 	/**

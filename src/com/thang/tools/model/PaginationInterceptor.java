@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -66,33 +65,28 @@ public class PaginationInterceptor implements Interceptor {
 	     
 	     MappedStatement mappedStatement = (MappedStatement)   
 	     metaStatementHandler.getValue("delegate.mappedStatement");  
-	     // 只要参数对象里Page对象或 page=on字段就进行分页。 
+	     // 只要参数对象里Page对象或 fpage=on字段就进行分页。 
 	     if (null!=paramObj) {
 	    	 boolean toPage=false;
 	    	 Object page=null;
+	    	 ActionValues values=null;
 	    	 if(paramObj instanceof ActionValues){
-	    	    page=PropertyUtils.getProperty(paramObj, "fpage");	 
-	    	 }
-	    	 if(null!=page&&(page instanceof String)&&"on".equals(String.valueOf(page).trim())){
-	    		 BeanUtils.setProperty(paramObj, "fpage", page=new Page());
-	    		 toPage=true;
-	    	 }else if(null!=page&&page instanceof Page){
-	    		 toPage=true;
-	    	 }
-	    	 
-	    	 if(toPage){
-	    		 BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");  
-		          
+	    		values=((ActionValues)paramObj);
+	    		if(values.isPage()){
+	    			BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");  
+			          
 		             String sql = boundSql.getSql();  
-		             String pageSql = buildPageSql(sql, (Page)page);  
+		             String pageSql = buildPageSql(sql,values);  
 		             metaStatementHandler.setValue("delegate.boundSql.sql", pageSql);  
 		             // 采用物理分页后，就不需要mybatis的内存分页了，所以重置下面的两个参数  
 		             metaStatementHandler.setValue("delegate.rowBounds.offset",RowBounds.NO_ROW_OFFSET);  
 		             metaStatementHandler.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);  
 		             Connection connection = (Connection) invocation.getArgs()[0];  
 		             // 重设分页参数里的总页数等  
-		             setPageParameter(sql, connection, mappedStatement, boundSql, (Page)page);  
+		             setPageParameter(sql, connection, mappedStatement, boundSql,values); 
+	    		}
 	    	 }
+	    	 
 	     }  
 	    
 	     //打印SQL及参数  
@@ -116,13 +110,13 @@ public class PaginationInterceptor implements Interceptor {
 	     return invocation.proceed();  
 	}
 	
-    private String buildPageSql(String sql, Page page) {  
-        if (page != null) {  
+    private String buildPageSql(String sql, ActionValues values) {  
+        if (values.isPage()) {  
             StringBuilder pageSql = new StringBuilder();  
             if ("mysql".equals(dialect)) {  
-                pageSql = buildPageSqlForMysql(sql, page);  
+                pageSql = buildPageSqlForMysql(sql, values);  
             } else if ("oracle".equals(dialect)) {  
-                pageSql = buildPageSqlForOracle(sql, page);  
+                pageSql = buildPageSqlForOracle(sql, values);  
             } else {  
                 return sql;  
             }  
@@ -133,22 +127,24 @@ public class PaginationInterceptor implements Interceptor {
     }  
     
     
-    public StringBuilder buildPageSqlForMysql(String sql, Page page) {  
+    public StringBuilder buildPageSqlForMysql(String sql, ActionValues values) {  
         StringBuilder pageSql = new StringBuilder(100);  
-        String beginrow = String.valueOf((page.getPageNow()- 1) * page.getPageSize());  
+        String beginrow = String.valueOf(((values.getInt("pageNow")==-1?1:values.getInt("pageNow"))-1)*values.getInt("pageSize")==-1?30:values.getInt("pageSize"));  
         pageSql.append(sql);  
-        pageSql.append(" order by "+page.getOrderBy()+" "+page.getOrder());
-        pageSql.append(" limit " + beginrow + "," + page.getPageSize());  
+        pageSql.append(" order by "+values.getStr("orderby")==null?"id":values.getStr("orderby")+" "+values.getStr("order")==null?"desc":values.getStr("order"));
+        pageSql.append(" limit " + beginrow + "," +(values.getInt("pageSize")==-1?30:values.getInt("pageSize") ));  
         return pageSql;  
     }  
     
-    public StringBuilder buildPageSqlForOracle(String sql, Page page) {  
+    public StringBuilder buildPageSqlForOracle(String sql, ActionValues values) {  
         StringBuilder pageSql = new StringBuilder(100);  
-        String beginrow = String.valueOf((page.getPageNow() - 1) * page.getPageSize());  
-        String endrow = String.valueOf(page.getPageNow() * page.getPageSize());  
+        int pageNow=values.getInt("pageNow")==-1?1:values.getInt("pageNow");
+        int pageSize=values.getInt("pageSize")==-1?30:values.getInt("pageSize");
+        String beginrow = String.valueOf((pageNow-1)*pageSize);  
+        String endrow = String.valueOf(pageNow*pageSize);  
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");  
         pageSql.append(sql);
-        pageSql.append(" order by "+page.getOrderBy()+" "+page.getOrder());
+        pageSql.append(" order by "+values.getStr("orderby")==null?"id":values.getStr("orderby")+" "+values.getStr("order")==null?"desc":values.getStr("order"));
         pageSql.append(" ) temp where rownum <= ").append(endrow);  
         pageSql.append(") where row_id > ").append(beginrow);  
         return pageSql;  
@@ -164,7 +160,7 @@ public class PaginationInterceptor implements Interceptor {
      * @param boundSql 
      * @param page 
      */  
-    private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,BoundSql boundSql, Page page) {  
+    private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,BoundSql boundSql, ActionValues values) {  
         // 记录总记录数  
         String countSql = "select count(0) from (" + sql + ") as total";  
         PreparedStatement countStmt = null;  
@@ -179,9 +175,9 @@ public class PaginationInterceptor implements Interceptor {
             if (rs.next()) {  
                 totalCount = rs.getInt(1);  
             }  
-            page.setTotal(totalCount);
-            int totalPage = totalCount / page.getPageSize() + ((totalCount % page.getPageSize() == 0) ? 0 : 1);  
-            page.setPageNum(totalPage);
+            values.put("total", totalCount);
+            int pageSize=values.getInt("pageSize")==-1?30:values.getInt("pageSize");
+            int totalPage = totalCount/pageSize+((totalCount%pageSize== 0)?0:1);  
         } catch (SQLException e) {  
             logger.error("Ignore this exception", e);  
         } finally {  

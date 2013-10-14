@@ -21,6 +21,7 @@
           <param-value>classpath*:/SpringMVC.xml</param-value>
         </init-param>
     </servlet>
+
     
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
@@ -40,11 +41,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-
-    <filter-mapping>
-        <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    
     <filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -53,6 +50,17 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
+	
+	<filter>
+        <filter-name>slogFilter</filter-name>
+        <filter-class>com.thang.tools.filter.SLogFilter</filter-class>
+    </filter>
+	
+	 <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/web/*</url-pattern>
@@ -60,6 +68,11 @@
         <dispatcher>FORWARD</dispatcher> 
         <dispatcher>INCLUDE</dispatcher> 
         <dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+	    <filter-name>slogFilter</filter-name>
+	    <url-pattern>/web/*</url-pattern>
 	</filter-mapping>
 	
 	<error-page>

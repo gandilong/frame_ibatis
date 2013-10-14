@@ -10,17 +10,17 @@
   <body>
     <div class="container">
        
-       <c:if test="${!empty error }">
+       <c:if test="${!empty values.error }">
          <div class="alert alert-block alert-error fade in">
             <button data-dismiss="alert" class="close" type="button">×</button>
             <h4 class="alert-heading">
-                  <c:if test='${"1" eq error }'>
+                  <c:if test='${"1" eq values.error }'>
                                                       用户名或密码错误！
                   </c:if> 
-                  <c:if test='${"2" eq error }'>
+                  <c:if test='${"2" eq values.error }'>
                                                       账户己停用！
                   </c:if> 
-                  <c:if test='${"3" eq error }'>
+                  <c:if test='${"3" eq values.error }'>
                                                      认证失败！
                   </c:if> 
             </h4>

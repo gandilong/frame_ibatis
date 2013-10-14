@@ -1,7 +1,9 @@
 package com.thang.entity.system;
 
+import com.thang.model.mate.Table;
 import com.thang.utils.lang.DateUtils;
 
+@Table("sys_slog_info")
 public class SLog {
 
 	private long id;

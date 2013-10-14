@@ -14,7 +14,7 @@ public class Page {
     
 	private int total=0;//总记录数
 	private int pageNum=0;//总页数
-	private int pageSize=15;//每页条数
+	private int pageSize=30;//每页条数
 	private int pageNow=1;//当前页码
 	
 	private String order="DESC";//ASC or DESC

@@ -15,7 +15,7 @@
          </div>
 	     <div data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'West'" style="width:200px;padding:10px;">west content</div>
 	     <div data-options="region:'east',split:true,minWidth:150,maxWidth:250,collapsed:true,title:'选项列表'" style="width:200px;padding:10px;">east region</div>
-	     <div data-options="region:'south',border:false,minHeight:50,maxHeight:50" style="height:50px;background:#A9FACD;padding:10px;">
+	     <div data-options="region:'south',border:false,minHeight:10,maxHeight:30" style="height:50px;background:#A9FACD;padding:10px;">
 	         天航软件开发者:gandilong
 	     </div>
 	     <div data-options="region:'center',title:'信息展示',href:'index'"></div>

@@ -16,7 +16,7 @@
 	         <div class="easyui-accordion"  data-options="fit:true">
 	                <div title="功能列表" data-options="iconCls:'icon-plugin'" style="overflow:auto;">
 	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
-	                        <li class="btn btn-block" id="userManager"  href="system/log/list"  >系统日志<label class="icon-chevron-right"></label></li>
+	                        <li class="btn btn-block" id="userManager"  href="system/slog/list"  >系统日志<label class="icon-chevron-right"></label></li>
 	                        <li class="btn btn-block" id="userManager"  href="system/user/list"  >用户管理<label class="icon-chevron-right"></label></li>
 	                        <li class="btn btn-block" id="roleManager"  href="system/role/list">角色管理<label class="icon-chevron-right"></label></li>
 	                        <shiro:hasPermission name="system_resource">
@@ -34,7 +34,7 @@
 				</div>
 	     </div>
 	     <div data-options="region:'east',split:true,minWidth:150,maxWidth:250,collapsed:true,title:'选项列表'" style="width:200px;padding:10px;">east region</div>
-	     <div data-options="region:'south',border:false,minHeight:50,maxHeight:50" style="height:50px;background:#A9FACD;padding:10px;">
+	     <div data-options="region:'south',border:false,minHeight:10,maxHeight:30" style="height:30px;background:#A9FACD;padding:5px;">
 	         天航软件开发者:gandilong
 	     </div>
 	     <div id="center" data-options="region:'center',title:'数据',href:'index',iconCls:'icon-th'" style="overflow:auto"></div>

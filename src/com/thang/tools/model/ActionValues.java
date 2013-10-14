@@ -10,7 +10,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.thang.tools.util.StrUtils;
+import org.springframework.beans.BeanUtils;
+
 
 /**
  *
@@ -20,15 +21,22 @@ public class ActionValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
     
-    public ActionValues(){super();}
+    private boolean page=true;
+    
+    public ActionValues(){
+    	super();
+    	put("fpage", "on");//开启分页功能
+    }
     
     public ActionValues(Map<String,Object> values){
         this.putAll(values);
+        put("fpage", "on");//开启分页功能
     }
     
     @SuppressWarnings("unchecked")
 	public ActionValues(HttpServletRequest request){
 		String name=null;
+		put("fpage", "on");//开启分页功能
 		Enumeration<String> paramNames=request.getParameterNames();
 		Enumeration<String> attrNames=request.getAttributeNames();
 		
@@ -89,17 +97,20 @@ public class ActionValues extends HashMap<String,Object>{
         return false;
     }
 
-    public void generPage(){
-    	if(0==size()){
-    		put("fpage", "on");
-    	}else{
-    		Page p=new Page();
-    		p.setOrder(getStr("order"));
-    		p.setOrderBy(StrUtils.addUnderline(getStr("sort")));
-    		p.setPageSize(getInt("rows"));
-    		p.setPageNow(getInt("page"));
-    		put("fpage", p);
-    	}
+    public boolean isPage(){
+    	return page;
     }
+
+    /**
+     * 打开分页功能
+     * @param fpage
+     */
+	public void openPage() {
+		page=true;
+	}
+	
+	public void offPage(){
+		page=false;
+	}
     
 }
