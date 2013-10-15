@@ -27,7 +27,6 @@ public class SLogAction extends Action{
 	public void listData(){
 		ActionValues values=getValues();
 		List<DataValues> slogs=slogManager.query(values);
-		values.put("total", values.getInt("total"));
 		values.put("rows", slogs);
 		printJSON(values);
 	}

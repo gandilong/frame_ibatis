@@ -10,9 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
-
-
 /**
  *
  * @author gandilong
@@ -100,6 +97,10 @@ public class ActionValues extends HashMap<String,Object>{
     public boolean isPage(){
     	return page;
     }
+    
+    public void setPage(boolean p){
+    	this.page=p;
+    }
 
     /**
      * 打开分页功能
@@ -112,5 +113,6 @@ public class ActionValues extends HashMap<String,Object>{
 	public void offPage(){
 		page=false;
 	}
+	
     
 }

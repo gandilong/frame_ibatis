@@ -69,8 +69,13 @@ public class Action {
     public HttpServletResponse getResponse() {
 		return response;
 	}
-	
+    
     public ActionValues getValues() {
+		return values;
+	}
+    
+    public ActionValues getValues(boolean page) {
+    	values.setPage(page);
 		return values;
 	}
 	

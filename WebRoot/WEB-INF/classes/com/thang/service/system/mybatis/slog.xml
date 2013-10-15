@@ -9,31 +9,10 @@
                     id=${id}
                 </if>
                 <if test="null!=operator">
-                    and operator like '%#{operator}%'
+                    and operator like '%${operator}%'
                 </if>
                 <if test="null!=action">
-                    and action like '%#{action}%'
-                </if>
-                 <if test="null!=startTime">
-                    and time>=#{startTime}
-                </if>
-                <if test="null!=endTime">
-                    and time <![CDATA[ <= ]]>#{endTime}
-                </if>
-            </trim>
-       </select>
-       
-        <select id="total" parameterType="ActionValues" resultType="string">
-            select count(0) from sys_slog_info
-            <trim prefix="where" prefixOverrides="and|or">
-                <if test="null!=id">
-                    id=${id}
-                </if>
-                <if test="null!=operator">
-                    and operator like '%#{operator}%'
-                </if>
-                <if test="null!=action">
-                    and action like '%#{action}%'
+                    and action like '%${action}%'
                 </if>
                  <if test="null!=startTime">
                     and time>=#{startTime}

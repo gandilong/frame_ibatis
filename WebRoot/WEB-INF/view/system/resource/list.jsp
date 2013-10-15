@@ -28,6 +28,7 @@ $(function(){
 			    remoteSort:true,
 			    pageSize:30,
 			    pageList:[15,30,50],
+			    queryParams:{pageNow:1,pageSize:30},
 			    idField:'id',
 			    url:'system/resource/listData',
 			    pagination:true,
@@ -76,7 +77,19 @@ $(function(){
 			
 			var p = $('#grid').datagrid('getPager');
 		    $(p).pagination({
-		          displayMsg:'显示 {from} 到 {to} 共 {total} 条'
+		          pageSize:30,
+		          beforePageText: '第',
+		          afterPageText: '页    共 {pages} 页',
+		          displayMsg:'显示 {from} 到 {to} 共 {total} 条',
+		          onSelectPage:function(pageNumber,pageSize){
+				      $('#grid').datagrid("reload",{pageNow:pageNumber,pageSize:pageSize});
+			      },
+			      onBeforeRefresh:function(pageNumber,pageSize){
+				      $('#grid').datagrid("reload",{pageNow:pageNumber,pageSize:pageSize});
+			      },
+			      onChangePageSize:function(pageSize){
+				      $('#grid').datagrid("reload",{pageNow:1,pageSize:pageSize});
+			      }      
 		    });
 		    
 		    

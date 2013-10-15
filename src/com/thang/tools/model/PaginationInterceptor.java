@@ -67,8 +67,6 @@ public class PaginationInterceptor implements Interceptor {
 	     metaStatementHandler.getValue("delegate.mappedStatement");  
 	     // 只要参数对象里Page对象或 fpage=on字段就进行分页。 
 	     if (null!=paramObj) {
-	    	 boolean toPage=false;
-	    	 Object page=null;
 	    	 ActionValues values=null;
 	    	 if(paramObj instanceof ActionValues){
 	    		values=((ActionValues)paramObj);
@@ -129,10 +127,15 @@ public class PaginationInterceptor implements Interceptor {
     
     public StringBuilder buildPageSqlForMysql(String sql, ActionValues values) {  
         StringBuilder pageSql = new StringBuilder(100);  
-        String beginrow = String.valueOf(((values.getInt("pageNow")==-1?1:values.getInt("pageNow"))-1)*values.getInt("pageSize")==-1?30:values.getInt("pageSize"));  
+        int pageNow=values.getInt("pageNow")==-1?1:values.getInt("pageNow");
+        int pageSize=values.getInt("pageSize")==-1?30:values.getInt("pageSize");
+        int fromRow=(pageNow==1?0:pageNow-1)*pageSize;
         pageSql.append(sql);  
-        pageSql.append(" order by "+values.getStr("orderby")==null?"id":values.getStr("orderby")+" "+values.getStr("order")==null?"desc":values.getStr("order"));
-        pageSql.append(" limit " + beginrow + "," +(values.getInt("pageSize")==-1?30:values.getInt("pageSize") ));  
+        pageSql.append(" order by ");
+        pageSql.append(values.getStr("orderby")==null?"id":values.getStr("orderby"));
+        pageSql.append("  ");
+        pageSql.append(values.getStr("order")==null?"desc":values.getStr("order"));
+        pageSql.append(" limit " + fromRow + "," +(values.getInt("pageSize")==-1?30:values.getInt("pageSize") ));  
         return pageSql;  
     }  
     
@@ -140,13 +143,13 @@ public class PaginationInterceptor implements Interceptor {
         StringBuilder pageSql = new StringBuilder(100);  
         int pageNow=values.getInt("pageNow")==-1?1:values.getInt("pageNow");
         int pageSize=values.getInt("pageSize")==-1?30:values.getInt("pageSize");
-        String beginrow = String.valueOf((pageNow-1)*pageSize);  
-        String endrow = String.valueOf(pageNow*pageSize);  
+        int fromRow=(pageNow==1?0:pageNow-1)*pageSize;
+        int endrow=pageNow*pageSize;  
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");  
         pageSql.append(sql);
         pageSql.append(" order by "+values.getStr("orderby")==null?"id":values.getStr("orderby")+" "+values.getStr("order")==null?"desc":values.getStr("order"));
         pageSql.append(" ) temp where rownum <= ").append(endrow);  
-        pageSql.append(") where row_id > ").append(beginrow);  
+        pageSql.append(") where row_id > ").append(fromRow);  
         return pageSql;  
     }  
 	
@@ -167,8 +170,7 @@ public class PaginationInterceptor implements Interceptor {
         ResultSet rs = null;  
         try {  
             countStmt = connection.prepareStatement(countSql);  
-            BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(), countSql,  
-                    boundSql.getParameterMappings(), boundSql.getParameterObject());  
+            BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(),countSql,boundSql.getParameterMappings(),boundSql.getParameterObject());  
             setParameters(countStmt, mappedStatement, countBS, boundSql.getParameterObject());  
             rs = countStmt.executeQuery();  
             int totalCount = 0;  
@@ -177,7 +179,9 @@ public class PaginationInterceptor implements Interceptor {
             }  
             values.put("total", totalCount);
             int pageSize=values.getInt("pageSize")==-1?30:values.getInt("pageSize");
-            int totalPage = totalCount/pageSize+((totalCount%pageSize== 0)?0:1);  
+            int totalPage = totalCount/pageSize+((totalCount%pageSize== 0)?0:1);
+            values.put("pageSize", pageSize);
+            values.put("pageNum", totalPage);
         } catch (SQLException e) {  
             logger.error("Ignore this exception", e);  
         } finally {  

@@ -51,7 +51,7 @@ public class RoleAction extends Action{
 	 */
 	@RequestMapping("formSave")
 	public void formSave(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(false);
 		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
 			roleManager.toUpate(values);
 		}else{
@@ -65,7 +65,7 @@ public class RoleAction extends Action{
 	 */
 	@RequestMapping("formDelete")
 	public void formDelete(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(false);
 		if(values.isNotEmpty("id")){
 			roleManager.toDelete(values);	
 		}else{

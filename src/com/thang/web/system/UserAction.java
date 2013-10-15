@@ -39,7 +39,7 @@ public class UserAction extends Action{
 	public String loginForm(){
 		
 		if(!SecurityUtils.getSubject().isAuthenticated()){
-			getValues().put("error", "3");
+			getValues(false).put("error", "3");
 			return "login";	
 		}
 		return "redirect:/main";
@@ -52,7 +52,7 @@ public class UserAction extends Action{
 	@ResponseBody
 	@RequestMapping("exist")
 	public String exist(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(false);
 		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
 			return "true";
 		}else{
@@ -79,7 +79,7 @@ public class UserAction extends Action{
 	 */
 	@RequestMapping("form")
 	public String form(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(false);
 		if(values.isNotEmpty("id")){
 			values.putAll(userManager.get(values));
 		}
@@ -91,7 +91,7 @@ public class UserAction extends Action{
 	 */
 	@RequestMapping("listData")
 	public void listData(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(true);
 		List<DataValues> users=userManager.query(values);
 		printJSON(users);
 	}
@@ -101,7 +101,7 @@ public class UserAction extends Action{
 	 */
 	@RequestMapping("formSave")
 	public void formSave(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(false);
 		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
 			userManager.toUpate(values);
 		}else{
@@ -115,7 +115,7 @@ public class UserAction extends Action{
 	 */
 	@RequestMapping("formDelete")
 	public void formDelete(){
-		userManager.toDelete(getValues());
+		userManager.toDelete(getValues(false));
 		print(0);
 	}
 	
