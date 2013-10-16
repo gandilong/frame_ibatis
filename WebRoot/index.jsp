@@ -42,6 +42,7 @@
         margin-top: 28px;
       }
     </style>
+    <%-- 
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
     
     
@@ -64,6 +65,40 @@
                    TogetherJS.send({type: "visibilityChange", isVisible: isVisible, element: location});
                });
          });
+    </script>
+    --%>
+    <script type="text/javascript">
+      $(function(){
+          $.ajax({
+             type: "POST",
+             url: "web/client/rss/",
+             data: "",
+             dataType:'json',
+             success: function(msg){
+             
+                var hlwData=msg.hlw;
+                var itjData=msg.itj;
+                var kjttData=msg.kjtt;
+                var sdydData=msg.sdyd;
+                
+                for(var i in hlwData){
+                    $('#hlw').append('<dt><span><a href="'+hlwData[i].link+'">'+hlwData[i].title+'</a></span><dt><dd><p>'+hlwData[i].description+'</p></dd></dt>');
+                }
+                
+                for(var i in itjData){
+                    $('#itj').append('<dt><span><a href="'+itjData[i].link+'">'+itjData[i].title+'</a></span><dt><dd><p>'+itjData[i].description+'</p></dd></dt>');
+                }
+                
+                for(var i in kjttData){
+                    $('#kjtt').append('<dt><span><a href="'+kjttData[i].link+'">'+kjttData[i].title+'</a></span><dt><dd><p>'+kjttData[i].description+'</p></dd></dt>');
+                }
+                
+                for(var i in sdydData){
+                    $('#sdyd').append('<dt><span><a href="'+sdydData[i].link+'">'+sdydData[i].title+'</a></span><dt><dd><p>'+sdydData[i].description+'</p></dd></dt>');
+                }
+             }
+          });
+      });
     </script>
     
 </head>
@@ -92,27 +127,23 @@
       <hr>
 
       <div class="row-fluid marketing">
-        <div class="span6">
-          <h4>资讯</h4>
-          <p>来自国内主流信息网站的最新资讯</p>
-
-          <h4>通讯</h4>
-          <p>采用Mozilla公司研发的开源即时通讯框架TogetherJS。<button id="together" onclick="TogetherJS(this); return false;" class="btn" type="button">开始</button></p>
-
-          <h4>科技</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="span6">
-          <h4>时尚</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
+        
+            <div class="span4">
+                <h2>互联网</h2>
+                <dl id="hlw"></dl>
+            </div>
+            <div class="span4">
+                <h2>IT界</h2>
+                <dl id="itj"></dl>
+            </div>
+            <div class="span4">
+                <h2>科技头条</h2>
+                <dl id="kjtt"></dl>
+            </div>
+            <div class="span4">
+                <h2>深度阅读</h2>
+                <dl id="sdyd"></dl>
+            </div>
       </div>
 
       <hr>
