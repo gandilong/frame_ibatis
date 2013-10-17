@@ -20,7 +20,7 @@ import com.thang.utils.lang.DateUtils;
 public class RssAction extends Action{
 
 	
-	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/")
 	public void index(){
 		
