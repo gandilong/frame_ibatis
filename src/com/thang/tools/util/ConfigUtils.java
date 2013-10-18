@@ -12,7 +12,7 @@ public class ConfigUtils {
     private static File configFile = null; 
     private static long fileLastModified = 0L; 
     
-    private static String configFileName = "config/sysconfig.properties";
+    private static String configFileName = "system.properties";
     
     private static void init() { 
         URL url = ConfigUtils.class.getClassLoader().getResource(configFileName); 

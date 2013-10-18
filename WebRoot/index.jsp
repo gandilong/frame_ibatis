@@ -76,26 +76,22 @@
              dataType:'json',
              success: function(msg){
              
-                var hlwData=msg.hlw;
-                var itjData=msg.itj;
-                var kjttData=msg.kjtt;
-                var sdydData=msg.sdyd;
+                var hlwData=msg.rss_newsgn;
+                var itjData=msg.rss_newssports;
+                var kjttData=msg.rss_mobilepk;
                 
                 for(var i in hlwData){
-                    $('#hlw').append('<dt><span><a href="'+hlwData[i].link+'">'+hlwData[i].title+'</a></span><dt><dd><p>'+hlwData[i].description+'</p></dd></dt>');
+                    $('#hlw').append('<dt><span><a href="'+hlwData[i].link+'" target="_blank">'+hlwData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+hlwData[i].description+'</p></dd></dt>');
                 }
                 
                 for(var i in itjData){
-                    $('#itj').append('<dt><span><a href="'+itjData[i].link+'">'+itjData[i].title+'</a></span><dt><dd><p>'+itjData[i].description+'</p></dd></dt>');
+                    $('#itj').append('<dt><span><a href="'+itjData[i].link+'" target="_blank">'+itjData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+itjData[i].description+'</p></dd></dt>');
                 }
                 
                 for(var i in kjttData){
-                    $('#kjtt').append('<dt><span><a href="'+kjttData[i].link+'">'+kjttData[i].title+'</a></span><dt><dd><p>'+kjttData[i].description+'</p></dd></dt>');
+                    $('#kjtt').append('<dt><span><a href="'+kjttData[i].link+'" target="_blank">'+kjttData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+kjttData[i].description+'</p></dd></dt>');
                 }
                 
-                for(var i in sdydData){
-                    $('#sdyd').append('<dt><span><a href="'+sdydData[i].link+'">'+sdydData[i].title+'</a></span><dt><dd><p>'+sdydData[i].description+'</p></dd></dt>');
-                }
              }
           });
       });
@@ -129,20 +125,16 @@
       <div class="row-fluid marketing">
         
             <div class="span4">
-                <h2>互联网</h2>
+                <h2>国内新闻</h2>
                 <dl id="hlw"></dl>
             </div>
             <div class="span4">
-                <h2>IT界</h2>
+                <h2>体育频道</h2>
                 <dl id="itj"></dl>
             </div>
             <div class="span4">
-                <h2>科技头条</h2>
+                <h2>手机行情</h2>
                 <dl id="kjtt"></dl>
-            </div>
-            <div class="span4">
-                <h2>深度阅读</h2>
-                <dl id="sdyd"></dl>
             </div>
       </div>
 
