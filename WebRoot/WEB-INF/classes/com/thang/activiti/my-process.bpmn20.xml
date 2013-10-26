@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+	         xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
+	         expressionLanguage="http://www.w3.org/1999/XPath" xmlns:activiti="http://activiti.org/bpmn" targetNamespace="thang">
+
+	<process id="my-process">
+
+		<startEvent id="start" />
+		<sequenceFlow id="flow1" sourceRef="start" targetRef="someTask" />
+		
+		<userTask id="someTask" name="Activiti is awesome!" />
+		<sequenceFlow id="flow2" sourceRef="someTask" targetRef="end" />
+
+		<endEvent id="end" />
+
+	</process>
+	
+	<process id="hello">
+	
+	    <startEvent id="start_hello"></startEvent>
+	    
+	    <sequenceFlow id="flow_a" sourceRef="start_hello" targetRef="print"></sequenceFlow>
+	    
+	    <serviceTask id="print" activiti:expression="#{printer.printMessage()}" ></serviceTask>
+	    
+	    <sequenceFlow id="flow_b" targetRef="end_hello" sourceRef="print" ></sequenceFlow>
+	    
+	    <endEvent id="end_hello"></endEvent>
+	
+	</process>
+
+</definitions>

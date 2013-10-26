@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties>
+        <property name="dialect" value="oracle"></property>
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    
+    <typeAliases>
+        <typeAlias alias="ActionValues" type="com.thang.tools.model.ActionValues"/>
+        <typeAlias alias="DataValues" type="com.thang.tools.model.DataValues"/>
+        <typeAlias alias="User" type="com.thang.entity.system.User"/>
+        <typeAlias alias="Role" type="com.thang.entity.system.Role"/>
+        <typeAlias alias="SLog" type="com.thang.entity.system.SLog"/>
+        <typeAlias alias="Resource" type="com.thang.entity.system.Resource"/>
+    </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.thang.tools.model.PaginationInterceptor"></plugin>
+    </plugins>
+    
+    <mappers>
+        <mapper resource="/com/thang/service/system/mybatis/user.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/role.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/resource.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/auth.xml"></mapper>
+        <mapper resource="/com/thang/service/system/mybatis/slog.xml"></mapper>
+    </mappers>
+    
+</configuration>

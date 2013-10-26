@@ -1,4 +1,4 @@
-frame_ibatis
+mframe
 ============
 
-servlet2.4+springMVC+ibatis+ModelSQL+Activiti5.13
+servlet3.0+springMVC+mybatis+ModelSQL+Activiti5.13

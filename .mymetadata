@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="frame_ibatis"
+  name="mframe"
   id="myeclipse.1373433979765"
-  context-root="/frame"
+  context-root="/mframe"
   j2ee-spec="1.4"
-  archive="frame_ibatis.war">
+  archive="mframe.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
