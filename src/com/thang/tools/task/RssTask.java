@@ -1,8 +1,6 @@
 package com.thang.tools.task;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.net.URL;
 
 import org.apache.commons.io.input.XmlStreamReader;
