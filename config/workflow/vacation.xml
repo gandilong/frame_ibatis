@@ -6,11 +6,9 @@
   
   
   <process id="vacation" name="vacationprocess">
-      <startEvent id="start"/>
+      <startEvent id="startNode"/>
       
-      <sequenceFlow id="start_create" sourceRef="start" targetRef=""/>
-      
-      <userTask id="createVacation" name="createVacation">
+      <userTask id="createNode" name="create_vacation">
           <documentation>
               Write a vacation apply
           </documentation> 
@@ -20,10 +18,8 @@
               </resourceAssignmentExpression> 
           </potentialOwner> 
       </userTask>
-      
-      <sequenceFlow id='create_verify' sourceRef="create" targetRef='verify' /> 
  
-      <userTask id="verify" name="verifyVacation" > 
+      <userTask id="verifyNode" name="verify_vacation" > 
           <documentation> 
               Verify monthly financial report composed by the accountancy department. 
               This financial report is going to be sent to all the company shareholders. 
@@ -35,9 +31,15 @@
           </potentialOwner> 
       </userTask> 
  
-      <sequenceFlow id='verify_end' sourceRef='verify' targetRef='end' /> 
- 
-      <endEvent id="end" /> 
+      <endEvent id="endNode" /> 
+      
+      
+      
+      
+      <sequenceFlow id="start_create_flow" sourceRef="startNode" targetRef="createNode"/>
+      <sequenceFlow id='create_verify_flow' sourceRef="createNode" targetRef='verifyNode' />
+      <sequenceFlow id='verify_end_flow' sourceRef='verifyNode' targetRef='endNode' /> 
+      
       
   </process>
 

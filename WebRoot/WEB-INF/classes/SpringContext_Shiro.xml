@@ -45,7 +45,7 @@
 				/web/system/** = roles[admin]
 				/web/client/** =anon
 				/web/index=anon
-				/web/thang/** = user
+				/web/** = user
 			</value>
 		</property>
 	</bean>
