@@ -32,4 +32,13 @@ public class RoleManager extends Dao{
 	public void toDelete(ActionValues id){
 		getSqlSession().update("system.role.toDelete", id);
 	}
+	
+	/**
+	 * 角色的字符串集合
+	 * @param id
+	 * @return
+	 */
+	public List<String> getRoleNameByUser(long uid){
+		return getSqlSession().selectList("system.role.getRoleNameByUser",uid);
+	}
 }

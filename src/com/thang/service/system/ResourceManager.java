@@ -34,4 +34,14 @@ public class ResourceManager extends Dao{
 		getSqlSession().update("system.resource.toDelete", id);
 	}
 	
+
+	/**
+	 * 资源的字符串集合
+	 * @param id
+	 * @return
+	 */
+	public List<String> getResourceNameByUser(long uid){
+		return getSqlSession().selectList("system.resource.getResourceNameByUser", uid);
+	}
+	
 }

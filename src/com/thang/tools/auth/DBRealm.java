@@ -12,7 +12,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.thang.service.system.AuthManager;
+import com.thang.service.system.ResourceManager;
+import com.thang.service.system.RoleManager;
 import com.thang.service.system.UserManager;
 import com.thang.tools.model.DataValues;
 
@@ -20,7 +21,9 @@ import com.thang.tools.model.DataValues;
 public class DBRealm extends JdbcRealm{
 	
 	@Autowired
-	private AuthManager authManager;
+	private ResourceManager resourceManager;
+	@Autowired
+	private RoleManager roleManager;
 	@Autowired
 	private UserManager userManager;
 
@@ -32,8 +35,8 @@ public class DBRealm extends JdbcRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		ShiroUser shiroUser = (ShiroUser) principal.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(authManager.getRoleNameByUser(shiroUser.getId()));
-		info.addStringPermissions(authManager.getResourceNameByUser(shiroUser.getId()));
+		info.addRoles(roleManager.getRoleNameByUser(shiroUser.getId()));
+		info.addStringPermissions(resourceManager.getResourceNameByUser(shiroUser.getId()));
 		return info;
 	}
 
