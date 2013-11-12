@@ -37,7 +37,7 @@ public class MyProcessTest {
 		
 		runtimeService.startProcessInstanceByKey("my-process");
 		
-		TaskService taskService=activitiRule.getTaskService();
+		taskService=activitiRule.getTaskService();
 		Task task=taskService.createTaskQuery().singleResult();
 		assertEquals("Activiti is awesome!",task.getName());
 		
