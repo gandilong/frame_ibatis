@@ -17,6 +17,12 @@
             </trim>
        </select>
        
+       <select id="getRoleNameByUser" parameterType="long" resultType="string">
+            select name from sys_role_info where id in (
+                   select role from sys_user_role_info where user=#{uid}
+            )
+       </select>
+       
        <insert id="toInsert" parameterType="ActionValues">
            insert into sys_role_info(id,name,title) values(0,#{name},#{title})
        </insert>

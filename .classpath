@@ -4,23 +4,7 @@
 	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_45"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-converter-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-layout-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-model-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-camel-5.13.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-cdi.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-common-rest-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-cxf-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-diagram-rest-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-engine-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-explorer-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-json-converter-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-modeler-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-mule-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-osgi-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-rest-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-simple-workflow-5.13.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-spring-5.13.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-dbutils-1.5.jar"/>
@@ -88,6 +72,23 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-2.2.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-jobs-2.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-converter-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-layout-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-bpmn-model-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-camel-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-common-rest-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-cxf-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-diagram-rest-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-engine-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-explorer-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-json-converter-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-ldap-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-modeler-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-mule-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-osgi-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-rest-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-simple-workflow-5.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activiti-spring-5.14.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>

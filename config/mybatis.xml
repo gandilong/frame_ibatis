@@ -39,7 +39,6 @@
         <mapper resource="/com/thang/service/system/mybatis/user.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/role.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/resource.xml"></mapper>
-        <mapper resource="/com/thang/service/system/mybatis/auth.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/slog.xml"></mapper>
     </mappers>
     

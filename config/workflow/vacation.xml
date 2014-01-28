@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL 
+                    http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  
+  
+  <process id="vacation" name="vacationprocess">
+      <startEvent id="startNode"/>
+      
+      <userTask id="createNode" name="create_vacation">
+          <documentation>
+              Write a vacation apply
+          </documentation> 
+          <potentialOwner> 
+              <resourceAssignmentExpression> 
+                <formalExpression>accountancy</formalExpression> 
+              </resourceAssignmentExpression> 
+          </potentialOwner> 
+      </userTask>
+ 
+      <userTask id="verifyNode" name="verify_vacation" > 
+          <documentation> 
+              Verify monthly financial report composed by the accountancy department. 
+              This financial report is going to be sent to all the company shareholders. 
+          </documentation> 
+          <potentialOwner> 
+             <resourceAssignmentExpression> 
+               <formalExpression>management</formalExpression> 
+             </resourceAssignmentExpression> 
+          </potentialOwner> 
+      </userTask> 
+ 
+      <endEvent id="endNode" /> 
+      
+      
+      
+      
+      <sequenceFlow id="start_create_flow" sourceRef="startNode" targetRef="createNode"/>
+      <sequenceFlow id='create_verify_flow' sourceRef="createNode" targetRef='verifyNode' />
+      <sequenceFlow id='verify_end_flow' sourceRef='verifyNode' targetRef='endNode' /> 
+      
+      
+  </process>
+
+</definitions>

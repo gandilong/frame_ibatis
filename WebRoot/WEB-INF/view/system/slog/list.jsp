@@ -18,7 +18,7 @@ $(function(){
 		    //初始化数据列表
 		$('#grid').datagrid({
 			    title:'日志列表',
-			    iconCls:'icon-user',
+			    iconCls:'icon-camera',
 			    fit:true,
 			    striped:true,
 			    sortName:'id',

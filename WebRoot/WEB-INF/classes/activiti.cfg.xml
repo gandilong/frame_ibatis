@@ -12,10 +12,17 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
 	   default-lazy-init="true">
 
+<<<<<<< HEAD
 <!-- 
    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/activiti?autoReconnect=true" />
+=======
+
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/frame?autoReconnect=true" />
+>>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
         <property name="username" value="root" />
         <property name="password" value="su" />
   </bean>
@@ -30,8 +37,13 @@
         <property name="databaseSchemaUpdate" value="true" />
         <property name="jobExecutorActivate" value="false" />
   </bean>
+<<<<<<< HEAD
   -->
   
+=======
+  
+  <!-- 
+>>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
   <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
     <property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />
     <property name="jdbcDriver" value="org.h2.Driver" />
@@ -39,7 +51,11 @@
     <property name="jdbcPassword" value="" />
     <property name="databaseSchemaUpdate" value="true" />
   </bean>
+<<<<<<< HEAD
   
+=======
+  -->
+>>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
   
   <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
      <property name="processEngineConfiguration" ref="processEngineConfiguration" />

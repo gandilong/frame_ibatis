@@ -16,11 +16,9 @@
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
          <property name="dataSource" ref="dataSource" />
          <property name="transactionManager" ref="txManager" />
-         <!-- 设置数据库schema的更新方式 --> 
-          <property name="databaseSchemaUpdate" value="true" />
           <!-- 是否启动jobExecutor -->
          <property name="jobExecutorActivate" value="false" />
-         <property name="databaseType" value="mssql"></property>
+         <property name="databaseType" value="mysql"></property>
          <property name="deploymentResources" value="classpath*:/workflow/*bpmn20.xml"></property>
          
          <!--  
