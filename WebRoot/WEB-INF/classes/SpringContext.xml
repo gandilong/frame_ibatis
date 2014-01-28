@@ -62,10 +62,7 @@
         <tx:attributes>
             <tx:method name="select*" read-only="true" propagation="REQUIRED" />
             <tx:method name="query*" read-only="true" propagation="REQUIRED" />
-<<<<<<< HEAD
-=======
             <tx:method name="list*" read-only="true" propagation="REQUIRED" />
->>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
             <tx:method name="find*" read-only="true" propagation="REQUIRED" />
             <tx:method name="get*" read-only="true" propagation="REQUIRED" />
             <tx:method name="insert*" propagation="REQUIRED" isolation="REPEATABLE_READ" rollback-for="Exception" />
@@ -77,10 +74,6 @@
 	<!--事务管理        定义结束-->
 	
 	<import resource="SpringContext_Shiro.xml"/>
-<<<<<<< HEAD
-	<!--  <import resource="SpringContext_Acti.xml"/>-->
-=======
 	<import resource="SpringContext_Activ.xml"/>
->>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
 	
 </beans>

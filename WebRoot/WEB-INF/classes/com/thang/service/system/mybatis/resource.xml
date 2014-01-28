@@ -17,8 +17,6 @@
             </trim>
        </select>
        
-<<<<<<< HEAD
-=======
        <select id="getResourceNameByUser" parameterType="long" resultType="string">
             select name from sys_resource_info where id in (
                 select resource from sys_role_resource_info where role in(
@@ -29,7 +27,6 @@
             )
        </select>
        
->>>>>>> 0bff9e7c77a63956edf1f8ab0a75e5ec4a6eb392
        <insert id="toInsert" parameterType="ActionValues">
            insert into sys_resource_info(id,name,title) values(0,#{name},#{title})
        </insert>
