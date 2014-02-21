@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.thang.service.system.SLogManager;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
+import com.thang.tools.model.ResultValues;
 
 @Controller
 @RequestMapping("system/slog")
@@ -26,7 +26,7 @@ public class SLogAction extends Action{
 	@RequestMapping("listData")
 	public void listData(){
 		ActionValues values=getValues();
-		List<DataValues> slogs=slogManager.query(values);
+		List<ResultValues> slogs=slogManager.query(values);
 		values.put("rows", slogs);
 		printJSON(values);
 	}

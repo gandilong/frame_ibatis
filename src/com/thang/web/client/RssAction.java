@@ -15,8 +15,13 @@ import com.thang.entity.client.Info;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
 import com.thang.tools.util.ConfigUtils;
-import com.thang.utils.lang.DateUtils;
+import com.thang.tools.util.DateUtils;
 
+/**
+ * 订阅网络新闻
+ * @author gandilong
+ *
+ */
 @Controller
 @RequestMapping("client/rss")
 public class RssAction extends Action{

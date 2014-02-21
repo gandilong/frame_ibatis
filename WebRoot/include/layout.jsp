@@ -1,7 +1,3 @@
-  <meta charset="utf-8">
-  <title>myframe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="gandilong">
 <link href='<c:url value="/tools/layout/css/bootstrap.min.css"/>' rel="stylesheet"/>
 <link href='<c:url value="/tools/layout/css/bootstrap-responsive.min.css"/>' rel="stylesheet"/>
 

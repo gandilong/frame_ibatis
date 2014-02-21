@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.WebApplicationInitializer;
 
-import com.thang.tools.task.Task;
 
 public class StartUp implements WebApplicationInitializer{
 
@@ -14,7 +13,7 @@ public class StartUp implements WebApplicationInitializer{
 		System.out.println("======================================");
 		System.out.println("=========      启动系统...      =======");
 		System.out.println("======================================");
-		new Task();
+		//new Task();
 	}
 
 }

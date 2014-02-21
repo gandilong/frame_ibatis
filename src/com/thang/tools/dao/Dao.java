@@ -9,11 +9,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
-
+import com.thang.tools.model.ResultValues;
 
 /**
- *
+ * 底层采用Mybatis
  * @author Gandilong
  */
 public class Dao extends SqlSessionDaoSupport {
@@ -31,18 +30,20 @@ public class Dao extends SqlSessionDaoSupport {
 	 * @param values
 	 * @return
 	 */
-	public DataValues get(String namespace,ActionValues values){
-		DataValues d=getSqlSession().selectOne(namespace, values);
-		if(null!=d)d.formatKey();
+	public ResultValues get(String namespace,ActionValues values){
+		ResultValues d=getSqlSession().selectOne(namespace, values);
+		if(null!=d){
+			d.formatKey();
+		}
 		return d;
 	}
 	
-	public List<DataValues> list(String namespace,ActionValues values){
-		List<DataValues> list=getSqlSession().selectList("system.user.query", values);
-		for(DataValues d:list){
+	public List<ResultValues> list(String namespace,ActionValues values){
+		List<ResultValues> list=getSqlSession().selectList(namespace, values);
+		for(ResultValues d:list){
 			d.formatKey();
 		}
 		return list;
 	}
-
+	
 }

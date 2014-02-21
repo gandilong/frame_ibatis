@@ -1,10 +1,16 @@
 package com.thang.entity.client;
 
+import com.thang.tools.mate.Column;
+import com.thang.tools.mate.Table;
+
+
+@Table("t_info")
 public class Info {
 
 	private String title;
 	private String link;
 	private String author;
+	@Column("desc")
 	private String description;
 	private String date;
 	

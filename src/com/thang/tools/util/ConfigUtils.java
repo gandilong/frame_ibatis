@@ -1,55 +1,59 @@
 package com.thang.tools.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 
 public class ConfigUtils {
 	
     private static Properties props = null;    
-    private static File configFile = null; 
-    private static long fileLastModified = 0L; 
+    private static String dir="config";
     
-    private static String configFileName = "system.properties";
+    static{
+    	/**
+    	 * 得到config文件夹下所有property文件
+    	 */
+    	props = new Properties();
+    	File config_dir=new File(dir);
+    	if(config_dir.isDirectory()){
+    		File[] fs=config_dir.listFiles(new FileFilter(){
+				@Override
+				public boolean accept(File f) {
+					if(f.exists()&&f.isFile()&&f.getName().endsWith(".properties")){
+						return true;
+					}
+					return false;
+				}
+    			
+    		});
+    		
+    		
+    		/**
+    		 * 加载数据到props里
+    		 */
+    		try{
+    			FileInputStream fis=null;
+    		    for(File f:fs){
+    		    	fis=new FileInputStream(f);
+    			    props.load(fis);
+    			    fis.close();
+        	    }
+    		}catch(IOException e){
+				 e.printStackTrace();
+			}
+        	
+    	}
+    }
     
-    private static void init() { 
-        URL url = ConfigUtils.class.getClassLoader().getResource(configFileName); 
-        configFile = new File(url.getFile()); 
-        fileLastModified = configFile.lastModified();      
-        props = new Properties(); 
-        load(); 
-    } 
-    
-    private static void load() { 
-        try { 
-            props.load(new FileInputStream(configFile)); 
-            fileLastModified = configFile.lastModified(); 
-        } catch (IOException e) {            
-            throw new RuntimeException(e); 
-        } 
-    } 
 
     public static String getConfig(String key) { 
-        if ((configFile == null) || (props == null)) init(); 
-        if (configFile.lastModified() > fileLastModified) load(); 
         return props.getProperty(key); 
     } 
     
-    public static String getConfig(String configFileName,String key){
-        URL url = ConfigUtils.class.getClassLoader().getResource(configFileName); 
-        File config = new File(url.getFile()); 
-        Properties properties = new Properties();
-        try{
-            properties.load(new FileInputStream(config)); 
-        }catch (IOException e) {            
-            e.printStackTrace();
-        } 
-        return properties.getProperty(key); 
-    }
     
     public static void main(String[] args){
-        System.out.println(getConfig("region.code")); 
+        getConfig("region.code"); 
     }
 }

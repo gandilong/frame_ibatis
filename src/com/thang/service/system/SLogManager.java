@@ -2,15 +2,15 @@ package com.thang.service.system;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.thang.entity.system.SLog;
-import com.thang.tools.dao.Dao;
+import com.thang.tools.dao.BaseDao;
 import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
+import com.thang.tools.model.ResultValues;
 
-@Component
-public class SLogManager extends Dao{
+@Service
+public class SLogManager extends BaseDao{
 
 	
 	public void toDelete(SLog log){
@@ -21,7 +21,7 @@ public class SLogManager extends Dao{
 		return getSqlSession().selectOne("system.slog.total", values);
 	}
 	
-	public List<DataValues> query(ActionValues values){
+	public List<ResultValues> query(ActionValues values){
 		return getSqlSession().selectList("system.slog.query", values);
 	}
 	

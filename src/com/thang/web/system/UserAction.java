@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.thang.service.system.UserManager;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
+import com.thang.tools.model.ResultValues;
 
 @Controller
 @RequestMapping("system/user")
@@ -56,7 +56,7 @@ public class UserAction extends Action{
 		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
 			return "true";
 		}else{
-		   DataValues user=userManager.get(values);
+		   ResultValues user=userManager.get(values);
 		   if(null!=user){
 			  return "false";
 		   }
@@ -92,7 +92,7 @@ public class UserAction extends Action{
 	@RequestMapping("listData")
 	public void listData(){
 		ActionValues values=getValues(true);
-		List<DataValues> users=userManager.query(values);
+		List<ResultValues> users=userManager.query(values);
 		printJSON(users);
 	}
 	

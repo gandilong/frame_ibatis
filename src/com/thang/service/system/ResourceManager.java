@@ -2,17 +2,15 @@ package com.thang.service.system;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.thang.entity.system.Resource;
-import com.thang.tools.dao.Dao;
+import com.thang.tools.dao.BaseDao;
 import com.thang.tools.model.ActionValues;
 
-@Component
-public class ResourceManager extends Dao{
+@Service
+public class ResourceManager extends BaseDao{
 
-	
-	
 	/**
 	 * 资源查询
 	 * @param values

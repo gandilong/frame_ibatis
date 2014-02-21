@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../../../../include/taglibs.jsp" %>
-<div class="container" style="margin:16px">
+<div>
     <div class="row-fluid">
         <div class="span6 offset3">    
            <form id="fm" class="form-horizontal" action="system/user/formSave" method="post">
@@ -58,10 +58,11 @@
 		                </label>
 		            </div>
 		        </div>
-		        <div class="control-group">
-		            <label class="control-label"></label>
+		        <div class="control-group offset3">
 		            <div class="controls">
 		                <button type="submit" class="btn btn-primary">保存</button>
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <button class="btn" onclick="window.hisory.back(1);">返回</button>
 		            </div>
 		        </div>
 		    </fieldset>

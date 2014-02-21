@@ -2,13 +2,13 @@ package com.thang.Test_Tools;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.thang.tools.model.DataValues;
+import com.thang.tools.model.ResultValues;
 
 public class DataValuesTest {
 
 	
 	public static void main(String[] args) {
-		DataValues d=new DataValues();
+		ResultValues d=new ResultValues();
 		d.put("id", "123");
 		d.put("name", "admin");
 		d.put("title", "管理员");

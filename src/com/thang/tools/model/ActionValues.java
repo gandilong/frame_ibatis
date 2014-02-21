@@ -10,6 +10,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.thang.tools.util.ModelUtils;
+
 /**
  *
  * @author gandilong
@@ -22,18 +26,26 @@ public class ActionValues extends HashMap<String,Object>{
     
     public ActionValues(){
     	super();
-    	put("fpage", "on");//开启分页功能
+    }
+    
+    public ActionValues(Object obj){
+        String[] fieldNames=ModelUtils.getFields(obj.getClass());
+        try{
+            for(String fieldName:fieldNames){
+        	    this.put(fieldName,BeanUtils.getProperty(obj, fieldName)==null?"":BeanUtils.getProperty(obj, fieldName));
+            }
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
     }
     
     public ActionValues(Map<String,Object> values){
         this.putAll(values);
-        put("fpage", "on");//开启分页功能
     }
     
     @SuppressWarnings("unchecked")
 	public ActionValues(HttpServletRequest request){
 		String name=null;
-		put("fpage", "on");//开启分页功能
 		Enumeration<String> paramNames=request.getParameterNames();
 		Enumeration<String> attrNames=request.getAttributeNames();
 		
@@ -57,6 +69,19 @@ public class ActionValues extends HashMap<String,Object>{
 			put(name,request.getAttribute(name));
 		}
 	}
+    
+    public void addValues(Object obj){
+    	 String[] fieldNames=ModelUtils.getFields(obj.getClass());
+         try{
+             for(String fieldName:fieldNames){
+            	 if(null!=BeanUtils.getProperty(obj, fieldName)&&!"".equals(BeanUtils.getProperty(obj, fieldName).trim())){
+            		 this.put(fieldName,BeanUtils.getProperty(obj, fieldName));
+            	 }
+             }
+         }catch(Exception e){
+         	e.printStackTrace();
+         }
+    }
     
     public String getStr(String key){
         if(null!=get(key)){
@@ -97,19 +122,17 @@ public class ActionValues extends HashMap<String,Object>{
     public boolean isPage(){
     	return page;
     }
-    
-    public void setPage(boolean p){
-    	this.page=p;
-    }
 
     /**
-     * 打开分页功能
-     * @param fpage
+     * 打开分页功能，默认打开
      */
 	public void openPage() {
 		page=true;
 	}
 	
+	/**
+     * 关闭分页功能，默认打开
+     */
 	public void offPage(){
 		page=false;
 	}

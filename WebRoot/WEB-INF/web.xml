@@ -50,12 +50,12 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
+	<!--  
 	<filter>
         <filter-name>slogFilter</filter-name>
         <filter-class>com.thang.tools.filter.SLogFilter</filter-class>
     </filter>
-	
+	-->
 	 <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -69,12 +69,12 @@
         <dispatcher>INCLUDE</dispatcher> 
         <dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-	
+	<!--
 	<filter-mapping>
 	    <filter-name>slogFilter</filter-name>
 	    <url-pattern>/web/*</url-pattern>
 	</filter-mapping>
-	
+	-->
 	<error-page>
 	    <error-code>404</error-code>
 	    <location>/common/404.jsp</location>

@@ -20,7 +20,7 @@ public class Page {
 	private String order="DESC";//ASC or DESC
 	private String orderBy;
 	
-	private List<DataValues> result;
+	private List<ResultValues> result;
 
 	public int getTotal() {
 		return total;
@@ -70,11 +70,11 @@ public class Page {
 		this.orderBy = orderBy;
 	}
 
-	public List<DataValues> getResult() {
+	public List<ResultValues> getResult() {
 		return result;
 	}
 
-	public void setResult(List<DataValues> result) {
+	public void setResult(List<ResultValues> result) {
 		this.result = result;
 	}
 	

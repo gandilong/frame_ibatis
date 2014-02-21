@@ -2,14 +2,14 @@ package com.thang.service.system;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.thang.entity.system.Role;
-import com.thang.tools.dao.Dao;
+import com.thang.tools.dao.BaseDao;
 import com.thang.tools.model.ActionValues;
 
-@Component
-public class RoleManager extends Dao{
+@Service
+public class RoleManager extends BaseDao{
 
 	
 	/**

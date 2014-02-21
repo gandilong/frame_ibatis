@@ -4,7 +4,6 @@
 <html>
 <head>
   <%@include file="include/layout.jsp"%>
-  
       <style type="text/css">
       body {
         padding-top: 20px;
@@ -42,61 +41,8 @@
         margin-top: 28px;
       }
     </style>
-    <%-- 
-    <script src="https://togetherjs.com/togetherjs-min.js"></script>
     
-    
-    <script type="text/javascript">
-         $(function(){
-              TogetherJSConfig_on= {
-                     ready:function(){
-                         $('#together').text('结束');
-                     },
-                     close:function(){
-                         $('#together').text('开始');
-                     }
-               };
-               
-               TogetherJS.hub.on("visibilityChange", function (msg) {
-                   var elementFinder = TogetherJS.require("elementFinder");
-                   // If the element can't be found this will throw an exception:
-                   var location  = elementFinder.findElement(msg.element);
-                   //MyApp.changeVisibility(element, msg.isVisible);
-                   TogetherJS.send({type: "visibilityChange", isVisible: isVisible, element: location});
-               });
-         });
-    </script>
-    --%>
-    <script type="text/javascript">
-      $(function(){
-          $.ajax({
-             type: "POST",
-             url: "web/client/rss/",
-             data: "",
-             dataType:'json',
-             success: function(msg){
-             
-                var hlwData=msg.rss_newsgn;
-                var itjData=msg.rss_newssports;
-                var kjttData=msg.rss_mobilepk;
-                
-                for(var i in hlwData){
-                    $('#hlw').append('<dt><span><a href="'+hlwData[i].link+'" target="_blank">'+hlwData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+hlwData[i].description+'</p></dd></dt>');
-                }
-                
-                for(var i in itjData){
-                    $('#itj').append('<dt><span><a href="'+itjData[i].link+'" target="_blank">'+itjData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+itjData[i].description+'</p></dd></dt>');
-                }
-                
-                for(var i in kjttData){
-                    $('#kjtt').append('<dt><span><a href="'+kjttData[i].link+'" target="_blank">'+kjttData[i].title+'</a></span><dt><dd><p style="font-size:12px">'+kjttData[i].description+'</p></dd></dt>');
-                }
-                
-             }
-          });
-      });
-    </script>
-    
+   
 </head>
 
 <body>
@@ -118,24 +64,6 @@
         <p class="lead">该框架采用最新的企业级框架Spring,Mybatis和Apache的Shiro，它们的组合将为我们书写无限辉煌的历史！</p>
         <a class="btn btn-large btn-success" href="web/main">开始使用</a>
          
-      </div>
-
-      <hr>
-
-      <div class="row-fluid marketing">
-        
-            <div class="span4">
-                <h2>国内新闻</h2>
-                <dl id="hlw"></dl>
-            </div>
-            <div class="span4">
-                <h2>体育频道</h2>
-                <dl id="itj"></dl>
-            </div>
-            <div class="span4">
-                <h2>手机行情</h2>
-                <dl id="kjtt"></dl>
-            </div>
       </div>
 
       <hr>

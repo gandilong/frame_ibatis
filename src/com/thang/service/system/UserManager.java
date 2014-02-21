@@ -2,15 +2,18 @@ package com.thang.service.system;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.thang.tools.dao.Dao;
+import com.thang.tools.dao.BaseDao;
 import com.thang.tools.model.ActionValues;
-import com.thang.tools.model.DataValues;
-import com.thang.utils.lang.DateUtils;
+import com.thang.tools.model.ResultValues;
+import com.thang.tools.util.DateUtils;
 
-@Component
-public class UserManager extends Dao{
+@Service
+@Transactional(rollbackFor=Exception.class)
+public class UserManager extends BaseDao{
 
 	/**
 	 * 登陆查询方法
@@ -18,7 +21,8 @@ public class UserManager extends Dao{
 	 * @param login_pass
 	 * @return
 	 */
-	public DataValues login(String login_name,String login_pass){
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
+	public ResultValues login(String login_name,String login_pass){
 		ActionValues values=new ActionValues();
 		values.put("loginName", login_name);
 		values.put("loginPass", login_pass);
@@ -31,7 +35,7 @@ public class UserManager extends Dao{
 	 * @param values
 	 * @return
 	 */
-	public List<DataValues> query(ActionValues values){
+	public List<ResultValues> query(ActionValues values){
 		return list("system.user.query", values);
 	}
 	
@@ -39,6 +43,7 @@ public class UserManager extends Dao{
 	 * 保存方法
 	 * @param values
 	 */
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public void toInsert(ActionValues values){
 		values.put("createTime", DateUtils.getSystime());
 		getSqlSession().insert("system.user.toInsert", values);
@@ -49,7 +54,7 @@ public class UserManager extends Dao{
 	 * @param values
 	 * @return
 	 */
-	public DataValues get(ActionValues values){
+	public ResultValues get(ActionValues values){
 		return get("system.user.query", values);
 	}
 	
@@ -57,14 +62,17 @@ public class UserManager extends Dao{
 	 * 更新方法
 	 * @param values
 	 */
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public void toUpate(ActionValues values){
 		getSqlSession().update("system.user.toUpdate", values);
 	}
 	
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public void toDelete(ActionValues values){
 		getSqlSession().delete("system.user.toDelete", values);
 	}
 	
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public void toDeletes(ActionValues values){
 		getSqlSession().delete("system.user.toDeletes",values);
 	}

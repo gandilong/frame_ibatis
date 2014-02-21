@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.thang.service.system.ResourceManager;
 import com.thang.service.system.RoleManager;
 import com.thang.service.system.UserManager;
-import com.thang.tools.model.DataValues;
+import com.thang.tools.model.ResultValues;
 
 @Component("dbRealm")
 public class DBRealm extends JdbcRealm{
@@ -46,7 +46,12 @@ public class DBRealm extends JdbcRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		DataValues user=userManager.login(token.getUsername(),new String(token.getPassword()));
+		ResultValues user=null;
+		try{
+		    user=userManager.login(token.getUsername(),token.getPassword()==null?"":new String(token.getPassword()));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		if(token.isRememberMe()){
 			token.setRememberMe(true);	
 		}

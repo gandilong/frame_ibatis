@@ -1,7 +1,8 @@
 package com.thang.entity.system;
 
-import com.thang.model.mate.Table;
-import com.thang.utils.lang.DateUtils;
+import com.thang.tools.mate.Table;
+import com.thang.tools.util.DateUtils;
+
 
 @Table("sys_slog_info")
 public class SLog {

@@ -17,7 +17,7 @@ import com.thang.tools.util.StrUtils;
  *
  * @author gandilong
  */
-public class DataValues extends HashMap<String,Object>{
+public class ResultValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
     
@@ -78,9 +78,9 @@ public class DataValues extends HashMap<String,Object>{
      * 把所有Key去掉下划线
      */
     public void formatKey(){
-        DataValues result=null;
+        ResultValues result=null;
         if(size()>0){
-            result=new DataValues();
+            result=new ResultValues();
             Iterator<String> it=keySet().iterator();
             String key=null;
             while(it.hasNext()){

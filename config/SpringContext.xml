@@ -17,8 +17,6 @@
 	<context:component-scan base-package="com.thang">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-
-    
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}" />  
@@ -26,29 +24,6 @@
         <property name="username" value="${jdbc.username}" />  
         <property name="password" value="${jdbc.password}" />  
     </bean>
-    
-    <!-- 数据库助手 -->
-     <bean id="dbe" class="com.thang.executor.DBExecutor">
-        <constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
-        <constructor-arg name="database"  value="mysql"></constructor-arg>
-     </bean>
-    
-    
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-       <property name="dataSource" ref="dataSource" />
-       <property name="configLocation" value="classpath:/mybatis.xml" />
-    </bean>
-    
-     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-    </bean>
-    
-    <!-- 
-    <bean id="sqlBatchSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-        <constructor-arg index="1" value="BATCH" />
-    </bean>
-     -->
     
      <!--事务管理        定义开始-->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -72,8 +47,8 @@
         </tx:attributes>
     </tx:advice>
 	<!--事务管理        定义结束-->
-	
+	<import resource="SpringContext_DB.xml"/>
 	<import resource="SpringContext_Shiro.xml"/>
-	<import resource="SpringContext_Activ.xml"/>
+	
 	
 </beans>

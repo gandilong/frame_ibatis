@@ -2,16 +2,50 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc      
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     
+     <!-- 默认的注解映射的支持 ,它会自动注册DefaultAnnotationHandlerMapping 与AnnotationMethodHandlerAdapter   
+        <mvc:annotation-driven />  
+       -->  
+    
+    <!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd   
+    <mvc:resources mapping="/test/**" location="/test/" />-->
+    
+    <!-- 自动扫描注解的Controller --> 
     <context:component-scan base-package="com.thang.web">
          <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+     
+     
+    <!-- 处理在类级别上的@RequestMapping注解-->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >  
+        <property name="interceptors">  
+           <!-- 多个拦截器,顺序执行  -->
+           <list>
+               <ref bean="webInterceptor"/>
+               <ref bean="logInterceptor"/>  
+           </list>  
+        </property>  
+    </bean>  
+    
+    <bean id="webInterceptor" class="com.thang.tools.interceptor.WebInterceptor"/>  
+    <bean id="logInterceptor" class="com.thang.tools.interceptor.LogInterceptor"/>  
+     
+      <!--   
+              将指定路径的请求直接转到对应的view上，而不需要特定的controller来处理请求 .  
+              注意：此处的映射路径是/hello,请求时http://localhost:8080/SpringMVC/index  
+              不能在index.xxx,而不使用此种方式的映射可以加的,因为web.xml配置的是‘/’            
+      
+    <mvc:view-controller path="/index" view-name="index" />  
+       --> 
      
     <!-- ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -19,12 +53,20 @@
         <property name="prefix" value="/WEB-INF/view/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- 设置上传文件的最大尺寸为1MB -->  
+        <property name="maxUploadSize">  
+            <value>1048576</value>  
+        </property>  
+    </bean>  
 
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
          <property name="exceptionMappings">     
              <props>     
                  <prop key="java.lang.Exception">error/error</prop>     
-                 <prop key="java.lang.Throwable">error/error</prop>     
+                 <prop key="java.lang.Throwable">error/error</prop> 
+                 <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>    
              </props>     
          </property>     
          <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->     
