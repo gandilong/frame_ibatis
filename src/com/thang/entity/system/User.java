@@ -2,7 +2,7 @@ package com.thang.entity.system;
 
 public class User {
 
-	private long id;
+	private int id;
 	private String userName;
 	private String loginName;
 	private String loginNass;
@@ -12,10 +12,10 @@ public class User {
 	private String create_time;
 	
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getUserName() {

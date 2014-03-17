@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -47,7 +48,7 @@ public class RssAction extends Action{
 				List<SyndEntry> entries=sfInput.build(reader).getEntries().subList(0, 3);
 				List<Info> infos=new ArrayList<Info>();
 				for(SyndEntry e:entries){
-					infos.add(new Info(e.getTitle(),e.getLink(),e.getAuthor(),e.getDescription().getValue(),DateUtils.formatDate(e.getPublishedDate()==null?new Date():e.getPublishedDate(),DateUtils.YYYY_MM_DD_HH_mm_ss)));
+					infos.add(new Info(e.getTitle(),e.getLink(),e.getAuthor(),e.getDescription().getValue(),new DateTime(e.getPublishedDate()==null?new Date():e.getPublishedDate()).toString(DateUtils.YYYY_MM_DD)));
 				}
 				values.put(f.getName().substring(0, f.getName().indexOf(".")),infos);
 			}

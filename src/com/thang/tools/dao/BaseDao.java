@@ -28,7 +28,7 @@ import com.thang.tools.util.SQLGener;
  * @author gandilong
  *
  */
-public class BaseDao extends Dao{
+public class BaseDao extends MDao{
 
 	private static JdbcTemplate jdbcTemplate;
 	

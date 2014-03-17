@@ -3,14 +3,14 @@ package com.thang.entity.system;
 
 public class RoleResource {
 
-	private long id;
+	private int id;
 	private String role;
 	private String resource;
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getRole() {

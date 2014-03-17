@@ -1,5 +1,6 @@
 package com.thang.tools.auth;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -48,7 +49,8 @@ public class DBRealm extends JdbcRealm{
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		ResultValues user=null;
 		try{
-		    user=userManager.login(token.getUsername(),token.getPassword()==null?"":new String(token.getPassword()));
+			token.setPassword(DigestUtils.md5Hex(token.getPassword()==null?"":String.valueOf(token.getPassword())).toCharArray());
+		    user=userManager.login(token.getUsername(),String.valueOf(token.getPassword()));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
