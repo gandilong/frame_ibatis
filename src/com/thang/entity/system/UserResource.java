@@ -1,28 +1,33 @@
 package com.thang.entity.system;
 
+/**
+ * 用户资源
+ * @author gandilong
+ *
+ */
 public class UserResource {
 
 	private int id;
-	private String user;
-	private String resource;
+	private int user;
+	private int resource;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUser() {
+	public int getUser() {
 		return user;
 	}
-	public void setUser(String user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
-	public String getResource() {
+	public int getResource() {
 		return resource;
 	}
-	public void setResource(String resource) {
+	public void setResource(int resource) {
 		this.resource = resource;
 	}
-	
 	
 }

@@ -1,10 +1,12 @@
 package com.thang.entity.system;
 
-import com.thang.tools.mate.Table;
 import com.thang.tools.util.DateUtils;
 
-
-@Table("sys_slog_info")
+/**
+ * 系统日志
+ * @author gandilong
+ *
+ */
 public class SLog {
 
 	private long id;

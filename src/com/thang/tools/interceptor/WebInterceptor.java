@@ -16,22 +16,23 @@ public class WebInterceptor implements HandlerInterceptor{
 	private long startTime=0;
 	
 	@Override
-	public void afterCompletion(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, Exception arg3)
+	public void afterCompletion(HttpServletRequest request,
+			HttpServletResponse response, Object obj, Exception exce)
 			throws Exception {
-		System.out.println("\n执行时间消耗:"+(System.currentTimeMillis()-startTime)+" 毫秒");
+		System.out.println("\n请求路径："+request.getRequestURI());
+		System.out.println("执行时间消耗:"+(System.currentTimeMillis()-startTime)+" 毫秒");
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2, ModelAndView arg3) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response,
+			Object obj, ModelAndView modelView) throws Exception {
 		
 		
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+			Object obj) throws Exception {
 		startTime=System.currentTimeMillis();
 		return true;
 	}

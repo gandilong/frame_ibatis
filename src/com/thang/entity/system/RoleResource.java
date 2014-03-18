@@ -4,8 +4,8 @@ package com.thang.entity.system;
 public class RoleResource {
 
 	private int id;
-	private String role;
-	private String resource;
+	private int role;
+	private int resource;
 	
 	public int getId() {
 		return id;
@@ -13,16 +13,16 @@ public class RoleResource {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
-	public String getResource() {
+	public int getResource() {
 		return resource;
 	}
-	public void setResource(String resource) {
+	public void setResource(int resource) {
 		this.resource = resource;
 	}
 	

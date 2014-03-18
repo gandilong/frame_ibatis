@@ -34,7 +34,7 @@
        </select>
        
        <insert id="toInsert" parameterType="ActionValues">
-           insert into sys_user_info(id,user_name,login_name,login_pass,create_time,email) values(0,#{userName},#{loginName},#{loginPass},#{createTime},#{email})
+           insert into sys_user_info(id,user_name,login_name,login_pass,create_time,email,used) values(0,#{userName},#{loginName},#{loginPass},#{createTime},#{email},#{used})
        </insert>
        
        <update id="toUpdate" parameterType="ActionValues">

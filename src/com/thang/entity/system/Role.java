@@ -1,10 +1,15 @@
 package com.thang.entity.system;
 
+/**
+ * 
+ * @author gandilong
+ *
+ */
 public class Role {
 
 	private int id;
-	private String name;
-	private String title;
+	private String name;//英文名称
+	private String title;//中文名称
 	
 	public int getId() {
 		return id;

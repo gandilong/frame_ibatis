@@ -2,7 +2,7 @@ package com.thang.entity.system;
 
 /**
  * 地区类
- * @author gandiint
+ * @author gandilong
  *
  */
 public class Area {
@@ -10,6 +10,7 @@ public class Area {
 	private int id;
 	private String code;
 	private String title;
+	
 	public int getId() {
 		return id;
 	}

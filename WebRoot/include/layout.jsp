@@ -10,8 +10,9 @@
 
 <script type="text/javascript" src='<c:url value="/tools/layout/js/jquery-1.10.2_min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/tools/layout/js/bootstrap.min.js"/>'></script>
-
+<%-- 
 <script type="text/javascript" src='<c:url value="/tools/validation/lib/jquery.js"/>'></script>
+--%>
 <script type="text/javascript" src='<c:url value="/tools/validation/dist/jquery.validate.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/tools/validation/dist/additional-methods.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/tools/validation/localization/messages_zh.js"/>'></script>

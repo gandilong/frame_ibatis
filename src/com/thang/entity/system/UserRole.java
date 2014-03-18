@@ -1,10 +1,16 @@
 package com.thang.entity.system;
 
+/**
+ * 
+ * @author gandilong
+ * 用户角色类
+ *
+ */
 public class UserRole {
 
 	private int id;
-	private String user;
-	private String role;
+	private int user;//用户ID
+	private int role;//角色ID
 	
 	
 	public int getId() {
@@ -13,17 +19,16 @@ public class UserRole {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUser() {
+	public int getUser() {
 		return user;
 	}
-	public void setUser(String user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
-	
 }
