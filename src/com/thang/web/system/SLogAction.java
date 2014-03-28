@@ -31,4 +31,9 @@ public class SLogAction extends Action{
 		printJSON(values);
 	}
 	
+	@RequestMapping("clear")
+	public void clear(){
+		slogManager.delete("delete from sys_slog_info", null);
+	}
+	
 }

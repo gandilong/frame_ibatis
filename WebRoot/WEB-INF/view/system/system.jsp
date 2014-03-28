@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>项目Bug管理系统</title>
         <%@include file="../../../include/layout.jsp" %>
         <%@include file="../../../include/easyui.jsp" %>
         <script type="text/javascript" src="${ctx}/tools/script/system/system.js"></script>
@@ -11,9 +12,7 @@
     
     <body id="system" class="easyui-layout">
          <!-- 顶部模块 -->
-         <div data-options="region:'north',border:false,minHeight:60,maxHeight:60" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/headerbg.jpg') repeat-x;padding:10px">
-                   <%@include file="../../../include/header.jsp"%>    
-         </div>
+         <div data-options="region:'north',border:false,fit:false,minHeight:60,maxHeight:60,href:'header'" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px"></div>
          
          <!-- 左边菜单 -->
 	     <div id="west" data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'系统管理'" style="width:200px;padding:0px;">
@@ -51,7 +50,7 @@
 	     
 	     
 	     <!-- 中心内容 -->
-	     <div id="center" data-options="region:'center',title:'数据',href:'index',iconCls:'icon-th'" style="overflow:auto"></div>
+	     <div id="center" data-options="region:'center',title:'数据',iconCls:'icon-th'" style="overflow:auto"></div>
     </body>
     
     

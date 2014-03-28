@@ -33,8 +33,11 @@
             </trim>
        </select>
        
-       <insert id="toInsert" parameterType="ActionValues">
+       <insert id="toInsert" parameterType="ActionValues" keyProperty="id">
            insert into sys_user_info(id,user_name,login_name,login_pass,create_time,email,used) values(0,#{userName},#{loginName},#{loginPass},#{createTime},#{email},#{used})
+           <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id" >  
+              SELECT LAST_INSERT_ID()  
+           </selectKey>  
        </insert>
        
        <update id="toUpdate" parameterType="ActionValues">

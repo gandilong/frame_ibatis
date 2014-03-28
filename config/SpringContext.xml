@@ -47,8 +47,9 @@
         </tx:attributes>
     </tx:advice>
 	<!--事务管理        定义结束-->
-	<import resource="SpringContext_Hibernate.xml"/>
-	<import resource="SpringContext_Shiro.xml"/>
 	
+	
+	<import resource="SpringContext_MyBatis.xml"/>
+	<import resource="SpringContext_Shiro.xml"/>
 	
 </beans>

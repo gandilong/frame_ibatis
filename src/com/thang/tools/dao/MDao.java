@@ -26,8 +26,8 @@ public class MDao extends SqlSessionDaoSupport {
 	
 	/**
 	 * 查询一条记录，并把key去掉下划线
-	 * @param namespace
-	 * @param values
+	 * @param namespace sql标识
+	 * @param values ActionValues
 	 * @return
 	 */
 	public ResultValues get(String namespace,ActionValues values){
@@ -38,12 +38,28 @@ public class MDao extends SqlSessionDaoSupport {
 		return d;
 	}
 	
+	/**
+	 * 
+	 * @param namespace sql标识
+	 * @param values ActionValues
+	 * @return
+	 */
 	public List<ResultValues> list(String namespace,ActionValues values){
 		List<ResultValues> list=getSqlSession().selectList(namespace, values);
 		for(ResultValues d:list){
 			d.formatKey();
 		}
 		return list;
+	}
+	
+	/**
+	 * 
+	 * @param namespace sql标识
+	 * @param values ActionValues
+	 * @return
+	 */
+	public <T>List<T> listObj(String namespace,ActionValues values){
+		return getSqlSession().selectList(namespace, values);
 	}
 	
 }

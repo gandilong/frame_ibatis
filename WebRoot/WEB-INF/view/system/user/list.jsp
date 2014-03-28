@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-  
+<%@include file="../../../../include/taglibs.jsp" %>
       <table id="grid"></table>
       
       <div id="tb" style="padding:5px;height:auto">
@@ -11,7 +11,7 @@
 		<div>
 			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
 			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
-			启用: 
+			启用:
 			<select class="easyui-combobox" id="used" name="used" panelHeight="auto" style="width:50px">
 				<option value="1">是</option>
 				<option value="0">否</option>
@@ -19,7 +19,60 @@
 			<a href="javascript:void(0)" id="query" class="easyui-linkbutton" iconCls="icon-search">查&nbsp;&nbsp;询</a>
 		</div>
 	  </div>
-      
+	  
+	
+	  <div id="cmenus" class="easyui-menu" style="width:120px;">
+	     <shiro:hasRole name="admin">
+             <div data-options="iconCls:'icon-off'"><span id="powerOff">启用</span></div>
+             <div data-options="iconCls:'icon-star-empty'">
+                <span>添加角色</span>
+                <div id="roles" style="width:150px;">
+                     <c:set var="print" value="0"></c:set>
+                     <c:forEach items="${values.roles}"  var="role">
+                         <c:forEach items="${values.user_roles}" var="urole_name">
+                              <c:if test='${urole_name eq role.name}'>
+                                  <div data-options="iconCls:'icon-ok-sign'" id="${role.id}"  onclick="updateRole('${role.id}','delete')">${role.title}</div>
+                                  <c:set var="print" value="1"></c:set>            
+                              </c:if>
+                         </c:forEach>
+                         
+                          <c:if test='${print eq "0"}'>
+                              <div id="${role.id}" onclick="updateRole('${role.id}','insert')">${role.title}</div>
+                         </c:if>
+                         <c:if test='${print ne "0"}'>
+                             <c:set var="print" value="0"></c:set>
+                         </c:if>
+                         
+                     </c:forEach>
+                </div>
+             </div>
+             <div data-options="iconCls:'icon-leaf'">
+                 <span>添加资源</span>
+                 <div id="resources" style="width:150px;">
+                     <c:set var="print" value="0"></c:set>
+                     <c:forEach items="${values.resources}"  var="res">
+                         <c:forEach items="${values.user_resources}" var="ures_name">
+                              <c:if test='${ures_name eq res.name}'>
+                                  <div data-options="iconCls:'icon-ok-sign'" id="${res.id}" onclick="updateResource('${res.id}','delete')">${res.title}</div>
+                                  <c:set var="print" value="1"></c:set>         
+                              </c:if>
+                         </c:forEach>
+                         <c:if test='${print eq "0"}'>
+                              <div id="${res.id}" onclick="updateResource('${res.id}','insert')">${res.title}</div>
+                         </c:if>
+                         <c:if test='${print ne "0"}'>
+                             <c:set var="print" value="0"></c:set>
+                         </c:if>
+                     </c:forEach>
+                 </div>
+             </div>
+             <div class="menu-sep"></div>
+             <div id="resetPassword" data-options="iconCls:'icon-plus-sign'">重置密码</div>
+             <div class="menu-sep"></div>
+             <div id="delete" data-options="iconCls:'icon-trash'">删除</div>
+          </shiro:hasRole>
+    </div>
+    
 <script type="text/javascript">
 $(function(){
 		
@@ -47,10 +100,39 @@ $(function(){
 			              {field:'userName',title:'用户名',width:120,sortable:false},
 			              {field:'loginName',title:'登陆账号',width:120,sortable:true},
 			              {field:'email',title:'邮箱',width:180,sortable:true},
-			              {field:'used',title:'启用',width:90,sortable:true,formatter:function(value,row,index){if(0==value){return '否';}else{return '是';}}},
+			              {field:'used',title:'状态',width:90,sortable:true,formatter:function(value,row,index){if(0==value){return '停用';}else{return '启用';}}},
 			              {field:'createTime',title:'创建时间',width:160,sortable:true}
 			              ]],
-			    toolbar:'#tb'
+			    toolbar:'#tb',
+			    onRowContextMenu:function(e,rowIndex, rowData){
+			                        e.preventDefault();
+			                        $('#grid').datagrid("selectRow",rowIndex);
+			                       
+			                        if(1==rowData.used){
+			                            $('#powerOff').text('停用');
+			                            
+			                        }else{
+			                            $('#powerOff').text('启用');
+			                        }
+			                        $('#powerOff').click(function(){
+			                               used(rowData);
+			                        });
+			                        
+			                        
+			                        $('#delete').click(function(){
+			                              toDelete(rowData);
+			                        });//右键删除 添加点击事件
+			                        
+			                        $('#resetPassword').click(function(){
+			                               resetPassword(rowData);
+			                        });//右键重置密码 添加点击事件
+			                        
+			                        $('#cmenus').menu('show', {
+                                       left:e.pageX,
+                                       top:e.pageY
+                                    });
+                                    
+			                     }//onRowContextMenu fun end
 			});
 			
 			
@@ -119,8 +201,15 @@ $(function(){
 		
 		
 		//删除一条记录
-		function toDelete(){
+		function toDelete(p_row){
 		    var row=$('#grid').datagrid('getSelected');
+		    if(null!=p_row&&p_row){
+		         row=p_row;
+		    }
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
 		    $.ajax({
                type: "POST",
                url: "system/user/formDelete",
@@ -130,5 +219,73 @@ $(function(){
                }
            });
 		}
+		
+		//重置密码
+		function resetPassword(row){
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
+		        $.ajax({
+                  type: "POST",
+                  url: "system/user/resetPassword",
+                  data: "id="+row.id,
+                  success: function(msg){
+                     $('#grid').datagrid('reload');
+                  }
+               });
+		    
+		}
+		
+		function used(row){
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
+		
+		    $.ajax({
+               type: "POST",
+               url: "system/user/used",
+               data: "id="+row.id+"&used="+row.used,
+               success: function(msg){
+                   $('#grid').datagrid('reload');
+               }
+           });
+		}
+		
+		function updateRole(roleId,opt){
+		    var row=$('#grid').datagrid('getSelected');
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
+		    
+		       $.ajax({
+                   type: "POST",
+                   url: "system/user/updateRole",
+                   data: "uid="+row.id+"&rid="+roleId+"&opt="+opt,
+                   success: function(msg){
+                       $('#grid').datagrid('reload');
+                   }
+               });
+		}
+		
+		function updateResource(resId,opt){
+		      var row=$('#grid').datagrid('getSelected');
+		    if(null==row||!row){
+		        layer.alert('请选择记录！', 8,'提示');
+		        return false;
+		    }
+		    
+		       $.ajax({
+                   type: "POST",
+                   url: "system/user/updateResource",
+                   data: "uid="+row.id+"&resid="+resId+"&opt="+opt,
+                   success: function(msg){
+                       $('#grid').datagrid('reload');
+                   }
+               });
+		}
+		
 		
       </script>

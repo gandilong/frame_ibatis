@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.thang.entity.system.Role;
 import com.thang.tools.dao.BaseDao;
 import com.thang.tools.model.ActionValues;
+import com.thang.tools.model.ResultValues;
 
 @Service
 public class RoleManager extends BaseDao{
@@ -17,8 +17,8 @@ public class RoleManager extends BaseDao{
 	 * @param values
 	 * @return
 	 */
-	public List<Role> query(ActionValues values){
-		return getSqlSession().selectList("system.role.query", values);
+	public List<ResultValues> query(ActionValues values){
+		return list("system.role.query", values);
 	}
 	
 	public void toInsert(ActionValues values){

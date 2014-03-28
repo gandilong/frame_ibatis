@@ -21,6 +21,11 @@ public class IndexAction extends Action{
 		return "index";
 	}
 	
+	@RequestMapping("/header")
+	public String header(){
+		return "header";
+	}
+	
     @RequestMapping("/main")
     public String main(){
         return "main";

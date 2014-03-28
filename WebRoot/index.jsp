@@ -4,6 +4,7 @@
 <html>
 <head>
   <%@include file="include/layout.jsp"%>
+   <title>项目Bug管理系统</title>
       <style type="text/css">
       body {
         padding-top: 20px;
@@ -51,17 +52,17 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="web/system/user/login">登陆</a></li>
-          <li><a href="javascript:void(0)">框架介绍</a></li>
-          <li><a href="javascript:void(0)">联系</a></li>
+          <li><a href="about.jsp#outline">软件介绍</a></li>
+          <li><a href="about.jsp#contact">联系</a></li>
         </ul>
-        <h3 class="muted">myframe</h3>
+        <h3 class="muted">myProject</h3>
       </div>
 
       <hr>
 
       <div class="jumbotron">
-        <h1>经典Web框架!</h1>
-        <p class="lead">该框架采用最新的企业级框架Spring,Mybatis和Apache的Shiro，它们的组合将为我们书写无限辉煌的历史！</p>
+        <h1>项目管理工具PT</h1>
+        <p class="lead">该软件采用最新的企业级框架Spring,Mybatis和Apache的Shiro，相信它会给我们带来好运！</p>
         <a class="btn btn-large btn-success" href="web/main">开始使用</a>
          
       </div>

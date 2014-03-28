@@ -22,7 +22,7 @@ public class ActionValues extends HashMap<String,Object>{
     
     private static final long serialVersionUID=1L;
     
-    private boolean page=true;
+    private boolean page=false;//默认不分页
     
     public ActionValues(){
     	super();
@@ -70,6 +70,11 @@ public class ActionValues extends HashMap<String,Object>{
 		}
 	}
     
+    public void add(String key,Object obj){
+    	this.put(key, obj);
+    }
+    
+    @Deprecated
     public void addValues(Object obj){
     	 String[] fieldNames=ModelUtils.getFields(obj.getClass());
          try{

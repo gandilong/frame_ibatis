@@ -8,7 +8,8 @@
                           操作：<sub><input type="text" id="action" name="action" style="height:14px;width:180px"/></sub>
 			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
 			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
-			<a href="javascript:void(0)" id="query" class="easyui-linkbutton" iconCls="icon-search">查&nbsp;&nbsp;询</a>
+			<a href="javascript:void(0)" id="query" class="btn" iconCls="icon-search">查&nbsp;&nbsp;询</a>
+			<a href="javascript:void(0)" id="clearLog" class="btn btn-danger" iconCls="icon-search">清空日志</a>
 		</div>
 	  </div>
       
@@ -65,6 +66,10 @@ $(function(){
 		    $('#query').click(function(){
 		             query();
 		    });
+		    
+		    $('#clearLog').click(function(){
+		          clearLog();
+		    });
 			
 });
 		
@@ -87,6 +92,20 @@ $(function(){
 		    }
 		    
 		    $('#grid').datagrid('load',params);
+		}
+		
+		function clearLog(){
+		   layer.confirm('确定要清空所有记录吗？',function(){
+		       $.ajax({
+                  type: "POST",
+                  url: "system/slog/clear",
+                  success: function(msg){
+                      layer.alert('清除成功！', 1,'提示');
+                      query();
+                  }
+               });
+		   });
+		   
 		}
 						
       </script>

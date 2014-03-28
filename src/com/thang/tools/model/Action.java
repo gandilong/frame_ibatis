@@ -113,8 +113,8 @@ public class Action {
      * @return
      */
     public ActionValues getValues(boolean page) {
-    	if(!page){
-    	    values.offPage();
+    	if(page){
+    	    values.openPage();
     	}
 		return values;
 	}

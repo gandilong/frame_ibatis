@@ -19,7 +19,7 @@ public class WebInterceptor implements HandlerInterceptor{
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object obj, Exception exce)
 			throws Exception {
-		System.out.println("\n请求路径："+request.getRequestURI());
+		System.out.println("\n执行请求路径："+request.getRequestURI());
 		System.out.println("执行时间消耗:"+(System.currentTimeMillis()-startTime)+" 毫秒");
 	}
 
