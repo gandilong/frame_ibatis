@@ -12,16 +12,6 @@ public class SystemAction extends Action{
 
 	
 	/**
-	 * 系统管理的索引页面
-	 * @return
-	 */
-	@RequestMapping
-	public String system(){
-		return "system/system";
-	}
-	
-	
-	/**
 	 * 系统介绍
 	 * @return
 	 */

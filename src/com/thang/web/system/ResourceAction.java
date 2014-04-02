@@ -36,12 +36,37 @@ public class ResourceAction extends Action{
 		return "system/resource/form";
 	}
 	
+	/**
+	 * 查询资源
+	 */
 	@RequestMapping("listData")
 	public void listData(){
 		ActionValues values=getValues();
 		List<Resource> resources=resourceManager.query(values);
 		printJSON(resources);
 	}
+	
+	/**
+	 * 查询指定用户的资源
+	 */
+	@RequestMapping("listUserResources")
+	public void listUserResources(){
+		ActionValues values=getValues();//必须包含uid
+		List<String> user_resources=resourceManager.listObj("getResourceNameByUser", values);
+		printJSON(user_resources);
+	}
+	
+	/**
+	 * 查询指定用户的资源
+	 */
+	@RequestMapping("listRoleResources")
+	public void listRoleResources(){
+		ActionValues values=getValues();//必须包含rid
+		List<String> user_resources=resourceManager.listObj("getResourceNameByRole", values);
+		printJSON(user_resources);
+	}
+	
+	
 	
 	/**
 	 * 新增或修改数据

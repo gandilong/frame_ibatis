@@ -2,6 +2,7 @@ package com.thang.service.system;
 
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,7 @@ public class UserManager extends BaseDao{
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED)
 	public void toInsert(ActionValues values){
 		values.put("createTime", DateUtils.getSystime());
+		values.put("loginPass", DigestUtils.md5Hex(values.getStr("loginPass")));
 		getSqlSession().insert("system.user.toInsert", values);
 	}
 	

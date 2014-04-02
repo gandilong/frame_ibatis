@@ -42,7 +42,7 @@
 				/web/system/user/login = authc
 				/web/system/user/logout = logout
 				/tools/** = anon
-				/web/system/** = roles[admin]
+				/web/system/** = perms[system]
 				/web/client/** =anon
 				/web/index=anon
 				/web/** = user

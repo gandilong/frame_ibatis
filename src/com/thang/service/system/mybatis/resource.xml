@@ -31,6 +31,12 @@
             )
        </select>
        
+       <select id="getResourceNameByRole" parameterType="long" resultType="string">
+            select name from sys_resource_info where id in (
+                select resource from sys_role_resource_info where role=#{rid} 
+            )
+       </select>
+       
        <insert id="toInsert" parameterType="ActionValues">
            insert into sys_resource_info(id,name,title) values(0,#{name},#{title})
        </insert>

@@ -19,53 +19,23 @@
 			<a href="javascript:void(0)" id="query" class="easyui-linkbutton" iconCls="icon-search">查&nbsp;&nbsp;询</a>
 		</div>
 	  </div>
-	  
-	
+
 	  <div id="cmenus" class="easyui-menu" style="width:120px;">
 	     <shiro:hasRole name="admin">
              <div data-options="iconCls:'icon-off'"><span id="powerOff">启用</span></div>
+              
              <div data-options="iconCls:'icon-star-empty'">
                 <span>添加角色</span>
                 <div id="roles" style="width:150px;">
-                     <c:set var="print" value="0"></c:set>
-                     <c:forEach items="${values.roles}"  var="role">
-                         <c:forEach items="${values.user_roles}" var="urole_name">
-                              <c:if test='${urole_name eq role.name}'>
-                                  <div data-options="iconCls:'icon-ok-sign'" id="${role.id}"  onclick="updateRole('${role.id}','delete')">${role.title}</div>
-                                  <c:set var="print" value="1"></c:set>            
-                              </c:if>
-                         </c:forEach>
-                         
-                          <c:if test='${print eq "0"}'>
-                              <div id="${role.id}" onclick="updateRole('${role.id}','insert')">${role.title}</div>
-                         </c:if>
-                         <c:if test='${print ne "0"}'>
-                             <c:set var="print" value="0"></c:set>
-                         </c:if>
-                         
-                     </c:forEach>
                 </div>
              </div>
+             <%-- 
              <div data-options="iconCls:'icon-leaf'">
                  <span>添加资源</span>
                  <div id="resources" style="width:150px;">
-                     <c:set var="print" value="0"></c:set>
-                     <c:forEach items="${values.resources}"  var="res">
-                         <c:forEach items="${values.user_resources}" var="ures_name">
-                              <c:if test='${ures_name eq res.name}'>
-                                  <div data-options="iconCls:'icon-ok-sign'" id="${res.id}" onclick="updateResource('${res.id}','delete')">${res.title}</div>
-                                  <c:set var="print" value="1"></c:set>         
-                              </c:if>
-                         </c:forEach>
-                         <c:if test='${print eq "0"}'>
-                              <div id="${res.id}" onclick="updateResource('${res.id}','insert')">${res.title}</div>
-                         </c:if>
-                         <c:if test='${print ne "0"}'>
-                             <c:set var="print" value="0"></c:set>
-                         </c:if>
-                     </c:forEach>
                  </div>
              </div>
+             --%>
              <div class="menu-sep"></div>
              <div id="resetPassword" data-options="iconCls:'icon-plus-sign'">重置密码</div>
              <div class="menu-sep"></div>
@@ -75,6 +45,9 @@
     
 <script type="text/javascript">
 $(function(){
+		
+		var roles=eval('${values.roles}');//所有角色
+		var resources=eval('${values.resources}');//所有资源
 		
 		    //初始化数据列表
 		$('#grid').datagrid({
@@ -106,11 +79,126 @@ $(function(){
 			    toolbar:'#tb',
 			    onRowContextMenu:function(e,rowIndex, rowData){
 			                        e.preventDefault();
+			                        
+			                        var user_roles;
+			                        var user_resource;
+			                        
+			                        //得到该用户的角色
+			                        $.ajax({
+									   type: "POST",
+									   url: "system/role/listUserRoles",
+									   data: "uid="+rowData.id,
+									   dataType:'script',
+									   success: function(msg){
+									        user_roles=eval(msg);
+									        var same=0;
+									        var item = $('#cmenus').menu('findItem', '添加角色');  // find 'roles' item
+									        
+									        
+									        
+									        for(var i in roles){
+									        
+									            var t=$('#cmenus').menu('findItem',roles[i].title);
+									                    
+									            if(t){
+									                 $('#cmenus').menu('removeItem',t.target);
+									             }
+									        
+									        
+									            for(var k in user_roles){
+									                if(user_roles[k]==roles[i].name){
+									                    same=1;
+									                    
+									                    $('#cmenus').menu('appendItem', {
+									                        id:roles[i].id,
+															parent:item.target,  // the parent item element
+															text:roles[i].title,
+															iconCls:'icon-ok-sign',
+															onclick: function(){
+															    updateRole(this.id,rowData.id,'delete');
+															}
+														});
+														
+									                }
+									            }
+									            
+									            if(0==same){
+									            
+									                  $('#cmenus').menu('appendItem', {
+									                        id:roles[i].id,
+															parent:item.target,  // the parent item element
+															text:roles[i].title,
+															onclick: function(){
+															    updateRole(this.id,rowData.id,'insert');
+															}
+													  });
+									                 
+									            }else{
+									               same=0;
+									            }
+									            
+									        }
+									   
+									        //得到该用户的资源
+									        /*
+									      	$.ajax({
+											   type: "POST",
+											   url: "system/resource/listUserResources",
+											   data: "uid="+rowData.id,
+											   dataType:'script',
+											   success: function(msg){
+											        user_resource=eval(msg);
+											        var samed=0;
+											        var item = $('#cmenus').menu('findItem', '添加资源');  // find 'roles' item
+											        
+											        for(var i in resources){
+											        
+											            var t=$('#cmenus').menu('findItem',resources[i].title);
+									                    
+											            if(t){
+											                 $('#cmenus').menu('removeItem',t.target);
+											             }
+											        
+											            for(var k in user_resource){
+											                if(user_resource[k]==resources[i].name){
+											                    samed=1;
+											                    $('#cmenus').menu('appendItem', {
+											                        id:resources[i].id,
+																	parent:item.target,  // the parent item element
+																	text:resources[i].title,
+																	iconCls:'icon-ok-sign',
+																	onclick: function(){
+																	    updateRole(this.id,rowData.id,'delete');
+																	}
+																});
+											                }
+											            }
+											            
+											            if(0==samed){
+											                $('#cmenus').menu('appendItem', {
+																	parent:item.target,  // the parent item element
+																	text:resources[i].title,
+																	//iconCls:'icon-ok-sign',
+																	onclick: function(){
+																	    updateRole(resources[i].id,rowData.id,'insert');
+																	}
+																});
+											            }else{
+											               samed=0;
+											            }
+											        }
+													       
+											   }//two success
+											});		*/			   
+										}//one success
+									});
+			                        
+			                        
+			                        
 			                        $('#grid').datagrid("selectRow",rowIndex);
 			                       
 			                        if(1==rowData.used){
 			                            $('#powerOff').text('停用');
-			                            
 			                        }else{
 			                            $('#powerOff').text('启用');
 			                        }
@@ -126,6 +214,7 @@ $(function(){
 			                        $('#resetPassword').click(function(){
 			                               resetPassword(rowData);
 			                        });//右键重置密码 添加点击事件
+			                        
 			                        
 			                        $('#cmenus').menu('show', {
                                        left:e.pageX,
@@ -253,34 +342,25 @@ $(function(){
            });
 		}
 		
-		function updateRole(roleId,opt){
-		    var row=$('#grid').datagrid('getSelected');
-		    if(null==row||!row){
-		        layer.alert('请选择记录！', 8,'提示');
-		        return false;
-		    }
+		function updateRole(roleId,uid,opt){
 		    
 		       $.ajax({
                    type: "POST",
                    url: "system/user/updateRole",
-                   data: "uid="+row.id+"&rid="+roleId+"&opt="+opt,
+                   data: "uid="+uid+"&rid="+roleId+"&opt="+opt,
                    success: function(msg){
                        $('#grid').datagrid('reload');
                    }
                });
 		}
 		
-		function updateResource(resId,opt){
-		      var row=$('#grid').datagrid('getSelected');
-		    if(null==row||!row){
-		        layer.alert('请选择记录！', 8,'提示');
-		        return false;
-		    }
+		//无用
+		function updateResource(resId,uid,opt){
 		    
 		       $.ajax({
                    type: "POST",
                    url: "system/user/updateResource",
-                   data: "uid="+row.id+"&resid="+resId+"&opt="+opt,
+                   data: "uid="+uid+"&resid="+resId+"&opt="+opt,
                    success: function(msg){
                        $('#grid').datagrid('reload');
                    }

@@ -11,8 +11,8 @@
     
     <body class="easyui-layout">
           <%--style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px" --%>
-         <div data-options="region:'north',border:false,fit:false,minHeight:60,maxHeight:60,href:'header'" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px"></div>
-	     <div data-options="region:'west',split:true,minWidth:150,maxWidth:250,title:'West'" style="width:200px;padding:10px;">
+         <div data-options="region:'north',border:false,fit:false,minHeight:60,maxHeight:60,href:'header?model=main'" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px"></div>
+	     <div data-options="region:'west',split:true,minWidth:200,maxWidth:200,title:'菜单'" style="width:200px;padding:10px;">
 	         
 	     </div>
 	     <div data-options="region:'east',split:true,minWidth:150,maxWidth:250,collapsed:true,title:'设置'" style="width:200px;padding:10px;">

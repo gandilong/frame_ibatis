@@ -17,7 +17,7 @@ import com.thang.service.system.UserManager;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
 import com.thang.tools.model.ResultValues;
-import com.thang.tools.util.SystemUtils;
+import com.thang.tools.util.JsonUtils;
 
 @Controller
 @RequestMapping("system/user")
@@ -87,15 +87,18 @@ public class UserAction extends Action{
 		List<ResultValues> resources=resourceManager.list("system.resource.query", values);
 		
 		//得到用户拥有的角色数据
+		/*
 		values.put("uid", SystemUtils.getUser().getId());
 		List<String> user_roles=roleManager.listObj("getRoleNameByUser", values);
 		List<String> user_resources=roleManager.listObj("getResourceNameByUser", values);
 		
-		values.add("roles", roles);
-		values.add("resources", resources);
-		
 		values.add("user_roles", user_roles);
 		values.add("user_resources", user_resources);
+		*/
+		values.add("roles", JsonUtils.toJsonStr(roles));
+		values.add("resources", JsonUtils.toJsonStr(resources));
+		
+		
 		return "system/user/list";
 	}
 	
@@ -141,7 +144,9 @@ public class UserAction extends Action{
 	 */
 	@RequestMapping("formDelete")
 	public void formDelete(){
-		userManager.toDelete(getValues(false));
+		ActionValues values=getValues(false);
+		userManager.update("delete from sys_user_info where id=:id",values);
+		userManager.update("delete from sys_user_role_info where user=:id",values);
 		print(0);
 	}
 	

@@ -5,6 +5,15 @@
 <html lang="en">
   <head>
        <%@include file="../../include/layout.jsp"%>
+       
+       <script type="text/javascript">
+        
+           $(function(){
+           
+           });
+        
+       </script>
+       
   </head>
   
   <body>

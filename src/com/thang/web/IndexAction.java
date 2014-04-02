@@ -31,4 +31,18 @@ public class IndexAction extends Action{
         return "main";
     }
     
+    /**
+	 * 系统管理的索引页面
+	 * @return
+	 */
+	@RequestMapping("/system")
+	public String system(){
+		return "system/system";
+	}
+    
+    @RequestMapping("/project")
+    public String project(){
+        return "project/project";
+    }
+    
 }

@@ -5,20 +5,27 @@
       <div id="tb" style="padding:5px;height:auto">
 		<div style="margin-bottom:5px">
 			<a href="javascript:void(0)" id="toInsert" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
-			<%-- 
-			<a href="javascript:void(0)" id="toEdit" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
-			<a href="javascript:void(0)" id="toBack" class="easyui-linkbutton" iconCls="icon-undo" plain="true">退回</a>
-			--%>
 			<a href="javascript:void(0)" id="toSave" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存</a>
 			<a href="javascript:void(0)" id="toDelete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		</div>
 	  </div>
+	  
+	  <div id="rmenus" class="easyui-menu" style="width:120px;">
+             <div data-options="iconCls:'icon-leaf'">
+                 <span>添加资源</span>
+                 <div id="resources" style="width:150px;"></div>
+             </div>
+             <div class="menu-sep"></div>
+             <div id="delete" data-options="iconCls:'icon-trash'">删除</div>
+    </div>
      
 <script type="text/javascript">
      
      var editIndex= undefined;
      
 $(function(){
+           var resources=eval('${values.resources}');//所有资源
+           
 			$('#grid').datagrid({
 			    title:'角色列表',
 			    iconCls:'icon-star-empty',
@@ -81,8 +88,74 @@ $(function(){
                           
                        }
                    });
-			    }
-			    
+			    },
+			   onRowContextMenu:function(e,rowIndex, rowData){ 
+			         e.preventDefault();
+			                        
+			         
+			          //得到该用户的资源
+									    $.ajax({
+											   type: "POST",
+											   url: "system/resource/listRoleResources",
+											   data: "rid="+rowData.id,
+											   dataType:'script',
+											   success: function(msg){
+											        role_resource=eval(msg);
+											        var samed=0;
+											        var item = $('#rmenus').menu('findItem', '添加资源');  // find 'roles' item
+											        for(var i in resources){
+											        
+											            var t=$('#rmenus').menu('findItem',resources[i].title);
+									                    
+											            if(t){
+											                 $('#rmenus').menu('removeItem',t.target);
+											             }
+											        
+											            for(var k in role_resource){
+											                if(role_resource[k]==resources[i].name){
+											                    samed=1;
+											                    $('#rmenus').menu('appendItem', {
+																	id:resources[i].id,
+																	parent:item.target,  // the parent item element
+																	text:resources[i].title,
+																	iconCls:'icon-ok-sign',
+																	onclick: function(){
+																	    updateRole(this.id,rowData.id,'delete');
+																	}
+																});
+											                }
+											            }
+											            
+											            if(0==samed){
+											                $('#rmenus').menu('appendItem', {
+											                        id:resources[i].id,
+																	parent:item.target,  // the parent item element
+																	text:resources[i].title,
+																	onclick: function(){
+																	    updateRole(this.id,rowData.id,'insert');
+																	}
+																});
+											            }else{
+											               samed=0;
+											            }
+											            
+											        }
+													       
+													       
+													        $('#delete').click(function(){
+									                              toDelete(rowData);
+									                        });//右键删除 添加点击事件
+									                        
+									                        $('#rmenus').menu('show', {
+						                                       left:e.pageX,
+						                                       top:e.pageY
+						                                    });
+													       $('#grid').datagrid("selectRow",rowIndex);
+											   }//two success
+											});				
+			         
+			   
+			   }//menu end
 			});//grid end
 			
 			
@@ -187,5 +260,17 @@ $(function(){
              }
 			 editIndex = undefined;
          }
+         
+         function updateRole(resId,rid,opt){
+		    
+		       $.ajax({
+                   type: "POST",
+                   url: "system/role/updateRole",
+                   data: "resId="+resId+"&rid="+rid+"&opt="+opt,
+                   success: function(msg){
+                       $('#grid').datagrid('reload');
+                   }
+               });
+		}
 
       </script>
