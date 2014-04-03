@@ -62,7 +62,7 @@
 		            <div class="controls">
 		                <button type="submit" class="btn btn-primary">保存</button>
 		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <button class="btn" onclick="window.hisory.back(1);">返回</button>
+		                <button class="btn" onclick="back();">返回</button>
 		            </div>
 		        </div>
 		    </fieldset>
@@ -73,6 +73,11 @@
 
 <script type="text/javascript">
 <!--
+
+     function back(){
+          $('#system').layout('panel','center').panel('refresh','system/user/list');
+     }
+
      $(function() {
        $("#fm").validate({
            rules:{

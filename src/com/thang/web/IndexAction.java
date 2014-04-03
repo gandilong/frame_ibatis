@@ -21,11 +21,19 @@ public class IndexAction extends Action{
 		return "index";
 	}
 	
+	/**
+	 * 头部页面
+	 * @return
+	 */
 	@RequestMapping("/header")
 	public String header(){
 		return "header";
 	}
 	
+	/**
+	 * 系统主页面
+	 * @return
+	 */
     @RequestMapping("/main")
     public String main(){
         return "main";
@@ -40,9 +48,17 @@ public class IndexAction extends Action{
 		return "system/system";
 	}
     
-    @RequestMapping("/project")
+	/**
+	 * 项目应用管理模块的索引页面
+	 * @return
+	 */
+    @RequestMapping("/application")
     public String project(){
-        return "project/project";
+        return "application/application";
     }
     
+    @RequestMapping("/users")
+    public String users(){
+    	return "common/users";
+    }
 }

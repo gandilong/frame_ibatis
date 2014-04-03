@@ -1,4 +1,4 @@
-package com.thang.entity.project;
+package com.thang.entity.application;
 
 /**
  * 项目
@@ -11,6 +11,7 @@ public class Project {
 	private String title;//项目名称
 	private String code;//项目代号
 	private int person;//项目经理
+	private int status;
 	private String devPerson;//参与项目的开发人员，有逗号分隔
 	private String testPerson;//参与项目的测试人员，有逗号分隔
 	private String createTime;//项目启动时间
@@ -40,6 +41,12 @@ public class Project {
 	}
 	public void setPerson(int person) {
 		this.person = person;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public String getDevPerson() {
 		return devPerson;

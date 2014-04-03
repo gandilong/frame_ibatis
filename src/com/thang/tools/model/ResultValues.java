@@ -5,8 +5,10 @@
 package com.thang.tools.model;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -45,6 +47,22 @@ public class ResultValues extends HashMap<String,Object>{
     		return Long.parseLong(String.valueOf(get(key)));
     	}
     	return -1;
+    }
+    
+    public <T>T getBean(Class<T> cls){
+    	T t=null;
+    	try {
+			t=cls.newInstance();
+			BeanUtils.copyProperties(t, this);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+        
+    	return t;
     }
     
     public boolean isNotEmpty(String key){

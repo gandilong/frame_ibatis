@@ -132,7 +132,7 @@ public class PaginationInterceptor implements Interceptor {
         int fromRow=(pageNow==1?0:pageNow-1)*pageSize;
         pageSql.append(sql);  
         pageSql.append(" order by ");
-        pageSql.append(values.getStr("orderby")==null?"id":values.getStr("orderby"));
+        pageSql.append(values.getStr("orderby")==null?"id":StrUtils.addUnderline(values.getStr("orderby")));
         pageSql.append("  ");
         pageSql.append(values.getStr("order")==null?"desc":values.getStr("order"));
         pageSql.append(" limit " + fromRow + "," +(values.getInt("pageSize")==-1?30:values.getInt("pageSize") ));  
@@ -147,7 +147,7 @@ public class PaginationInterceptor implements Interceptor {
         int endrow=pageNow*pageSize;  
         pageSql.append("select * from ( select temp.*, rownum row_id from ( ");  
         pageSql.append(sql);
-        pageSql.append(" order by "+values.getStr("orderby")==null?"id":values.getStr("orderby")+" "+values.getStr("order")==null?"desc":values.getStr("order"));
+        pageSql.append(" order by "+values.getStr("orderby")==null?"id":StrUtils.addUnderline(values.getStr("orderby"))+" "+values.getStr("order")==null?"desc":values.getStr("order"));
         pageSql.append(" ) temp where rownum <= ").append(endrow);  
         pageSql.append(") where row_id > ").append(fromRow);  
         return pageSql;  

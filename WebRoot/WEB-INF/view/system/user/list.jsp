@@ -292,9 +292,6 @@ $(function(){
 		//删除一条记录
 		function toDelete(p_row){
 		    var row=$('#grid').datagrid('getSelected');
-		    if(null!=p_row&&p_row){
-		         row=p_row;
-		    }
 		    if(null==row||!row){
 		        layer.alert('请选择记录！', 8,'提示');
 		        return false;

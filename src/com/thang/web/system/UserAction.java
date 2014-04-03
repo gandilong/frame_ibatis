@@ -86,15 +86,6 @@ public class UserAction extends Action{
 		//得到所有资源数据
 		List<ResultValues> resources=resourceManager.list("system.resource.query", values);
 		
-		//得到用户拥有的角色数据
-		/*
-		values.put("uid", SystemUtils.getUser().getId());
-		List<String> user_roles=roleManager.listObj("getRoleNameByUser", values);
-		List<String> user_resources=roleManager.listObj("getResourceNameByUser", values);
-		
-		values.add("user_roles", user_roles);
-		values.add("user_resources", user_resources);
-		*/
 		values.add("roles", JsonUtils.toJsonStr(roles));
 		values.add("resources", JsonUtils.toJsonStr(resources));
 		

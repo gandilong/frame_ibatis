@@ -49,7 +49,7 @@ public class LogInterceptor implements HandlerInterceptor{
 			values.put("operator", "id="+user.getId()+";loginName="+user.getLoginName()+";userName="+user.getUserName());
 			values.put("action", uri);
 			values.put("time",DateUtils.getSystime());
-			slogManager.insert("insert into sys_slog_info(id,operator,action,time)values(0,:operator,:action,:time) ", values);
+			//slogManager.insert("insert into sys_slog_info(id,operator,action,time)values(0,:operator,:action,:time) ", values);
 		}
 		
 		return true;

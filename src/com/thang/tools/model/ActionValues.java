@@ -56,8 +56,10 @@ public class ActionValues extends HashMap<String,Object>{
 			}
 			if(request.getParameterValues(name).length>1){
 				put(name, request.getParameterValues(name));
-			}else{
-				put(name, request.getParameter(name));	
+			}else{//不加，空对象和空字符串
+				if(null!=request.getParameter(name)&&!"".equals(request.getParameter(name).trim())){
+					put(name, request.getParameter(name));	
+				}
 			}
 		}
 		
@@ -66,7 +68,9 @@ public class ActionValues extends HashMap<String,Object>{
 			if(name.startsWith("org.springframework")||name.equals("characterEncodingFilter.FILTERED")||name.equals("shiroFilter.FILTERED")||name.equals("roles.FILTERED")){//过滤spring参数
 				continue;
 			}
-			put(name,request.getAttribute(name));
+			if(null!=request.getAttribute(name)&&!"".equals(String.valueOf(request.getAttribute(name)).trim())){
+				put(name,request.getAttribute(name));	
+			}
 		}
 	}
     

@@ -40,6 +40,9 @@
         <mapper resource="/com/thang/service/system/mybatis/role.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/resource.xml"></mapper>
         <mapper resource="/com/thang/service/system/mybatis/slog.xml"></mapper>
+        
+        <mapper resource="/com/thang/service/application/mybatis/project.xml"></mapper>
+        <mapper resource="/com/thang/service/application/mybatis/dept.xml"></mapper>
     </mappers>
     
 </configuration>

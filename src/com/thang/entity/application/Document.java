@@ -1,4 +1,4 @@
-package com.thang.entity.project;
+package com.thang.entity.application;
 
 /**
  * 项目文档
@@ -8,9 +8,9 @@ package com.thang.entity.project;
 public class Document {
 
 	private int id;  
-	private int project;
-	private String title;
-	private String path;
+	private int project;//绑定项目id
+	private String title;//标题
+	private String path;//存放位置
 	
 	public int getId() {
 		return id;

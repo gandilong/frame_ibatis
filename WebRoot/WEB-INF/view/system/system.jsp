@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>项目Bug管理系统</title>
+        <title>内部管理系统</title>
         <%@include file="../../../include/layout.jsp" %>
         <%@include file="../../../include/easyui.jsp" %>
         <script type="text/javascript" src="${ctx}/tools/script/system/system.js"></script>
@@ -21,6 +21,10 @@
 	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
 	                     <shiro:hasPermission name="system_syslog">
 	                        <li class="btn btn-block" id="slogManager"  href="system/slog/list">系统日志<label class="icon-chevron-right"></label></li>
+	                     </shiro:hasPermission>
+	                     
+	                     <shiro:hasPermission name="system_dict">
+	                         <li class="btn btn-block" id="dictManager"  href="system/dict/list">字典管理<label class="icon-chevron-right"></label></li>
 	                     </shiro:hasPermission>
 	                     
 	                     <shiro:hasPermission name="system_user">
@@ -59,7 +63,7 @@
 	     
 	     
 	     <!-- 中心内容 -->
-	     <div id="center" data-options="region:'center',title:'数据',iconCls:'icon-th'" style="overflow:auto"></div>
+	     <div id="center" data-options="region:'center',title:'数据',iconCls:'icon-th',href:'system/slog/list'" style="overflow:auto"></div>
     </body>
     
     

@@ -1,4 +1,4 @@
-package com.thang.entity.project;
+package com.thang.entity.application;
 
 public class BugItem {
 
