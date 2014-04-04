@@ -90,6 +90,22 @@ public class Action {
 		}
 	}
     
+    /**
+	 * 以Json格式输出参数
+	 * @param obj
+	 */
+	protected void printObjectAsList(Object obj){
+		PrintWriter out=null;
+		try{
+			out=response.getWriter();
+			out.print("["+JsonUtils.toJsonStr(obj)+"]");
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			out.close();
+		}
+	}
+    
     public HttpServletRequest getRequest() {
 		return request;
 	}

@@ -8,14 +8,18 @@ package com.thang.entity.application;
 public class Person {
 
 	private int id;
-	private String name;//姓名
+	private String title;//姓名
+	private String code;//员工号
 	private String loginName;//系统账号
 	private int sex;
 	private String birthday;//出生日期
+	private String phone;
 	private String email;//公司邮箱
 	private String address;
 	private int dept;//部门
-	private int type;//人员类型，如开发人员，测试人员等
+	private int status;//状态：0离职，1在职，2出差，3请假
+	private String image;//照片
+	private String document;//档案地址
 	private String comeTime;//入职时间
 	private String awayTime;//离职时间
 	private String opt;//备注
@@ -26,11 +30,17 @@ public class Person {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getLoginName() {
 		return loginName;
@@ -50,6 +60,12 @@ public class Person {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -68,11 +84,23 @@ public class Person {
 	public void setDept(int dept) {
 		this.dept = dept;
 	}
-	public int getType() {
-		return type;
+	public String getImage() {
+		return image;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getDocument() {
+		return document;
+	}
+	public void setDocument(String document) {
+		this.document = document;
 	}
 	public String getComeTime() {
 		return comeTime;

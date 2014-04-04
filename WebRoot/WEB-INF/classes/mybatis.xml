@@ -43,6 +43,7 @@
         
         <mapper resource="/com/thang/service/application/mybatis/project.xml"></mapper>
         <mapper resource="/com/thang/service/application/mybatis/dept.xml"></mapper>
+        <mapper resource="/com/thang/service/application/mybatis/person.xml"></mapper>
     </mappers>
     
 </configuration>

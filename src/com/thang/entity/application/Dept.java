@@ -9,9 +9,12 @@ public class Dept {
 
 	private int id;
 	private String title;
+	private String code;//部门编号
+	private String phone;
 	private int person;//部门主管
 	private int operson;//部门副主管
 	private int parent;//上一部门
+	private String opt;
 	
 	public int getId() {
 		return id;
@@ -24,6 +27,18 @@ public class Dept {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public int getPerson() {
 		return person;
@@ -42,6 +57,12 @@ public class Dept {
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public String getOpt() {
+		return opt;
+	}
+	public void setOpt(String opt) {
+		this.opt = opt;
 	}
 	
 }

@@ -3,7 +3,7 @@
 <mapper namespace="application.dept">
        
        <select id="query" parameterType="ActionValues" resultType="ResultValues">
-            select id,title,person,operson,parent from t_dept_info
+            select id,title,code,phone,opt,person,(select t.title from t_person_info t where t.id=person) person_name, operson,(select tt.title from t_person_info tt where tt.id=operson) operson_name,parent from t_dept_info
             <trim prefix="where" prefixOverrides="and|or">
                 <if test="null!=id">
                     id=${id}
@@ -11,11 +11,20 @@
                 <if test="null!=title">
                     and title like '%${title}%'
                 </if>
+                <if test="null!=code">
+                    and code=#{code}
+                </if>
                 <if test="null!=person">
                     and person=#{person}
                 </if>
                 <if test="null!=operson">
                     and operson=#{operson}
+                </if>
+                <if test="null!=phone">
+                    and phone=#{phone}
+                </if>
+                <if test="null!=opt">
+                    and opt like '%${opt}%'
                 </if>
                 <if test="null!=parent">
                     and parent=#{parent}

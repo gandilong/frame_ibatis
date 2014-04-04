@@ -11,7 +11,23 @@ import com.thang.tools.model.ResultValues;
 @Service
 public class DeptManager extends BaseDao{
 
-	public List<ResultValues> query(ActionValues values){
+	/**
+	 * 查询一级部门，即公司
+	 * @param values
+	 * @return
+	 */
+	public ResultValues queryTop(){
+		ActionValues values=new ActionValues();
+		values.put("parent",0);
+		return get("application.dept.query", values);
+	}
+	
+	/**
+	 * 查询二级部门
+	 * @param values
+	 * @return
+	 */
+	public List<ResultValues> querySub(ActionValues values){
 		return list("application.dept.query", values);
 	}
 	

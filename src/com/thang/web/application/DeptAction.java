@@ -1,6 +1,5 @@
 package com.thang.web.application;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thang.service.application.DeptManager;
+import com.thang.service.application.PersonManager;
 import com.thang.tools.model.Action;
 import com.thang.tools.model.ActionValues;
 import com.thang.tools.model.ResultValues;
-import com.thang.tools.model.Tree;
 
 @Controller
 @RequestMapping("application/dept")
@@ -19,6 +18,9 @@ public class DeptAction extends Action{
 
 	@Autowired
 	private DeptManager deptManager;
+	
+	@Autowired
+	private PersonManager personManager;
 	
 	@RequestMapping("list")
 	public String list(){
@@ -28,16 +30,26 @@ public class DeptAction extends Action{
 	@RequestMapping("tree")
 	public void tree(){
 		ActionValues values=getValues();
+		ResultValues result=deptManager.queryTop();
 		
-		List<ResultValues> results=deptManager.query(values);
+		values.put("parent", result.getInt("id"));
+		List<ResultValues> subResult=deptManager.querySub(values);
 		
-		List<Tree> trees=new ArrayList<Tree>();
-		Tree tree=null;
-		for(ResultValues result:results){
-			tree=new Tree(result.getInt("id"),result.getStr("title"));
-			trees.add(tree);
+		
+		List<ResultValues> persons=null;
+		for(ResultValues rv:subResult){
+			persons=personManager.queryResult("select title from t_person_info where dept=:id", rv);
+			rv.put("children", persons);
 		}
-		print(trees);
+		
+		result.put("children", subResult);
+		
+		printObjectAsList(result);
+	}
+	
+	@RequestMapping("form")
+	public String form(){
+		return "application/dept/form";
 	}
 	
 }

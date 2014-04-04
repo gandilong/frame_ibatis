@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>内部管理系统</title>
+        <title>公司内部管理系统</title>
         <%@include file="../../include/layout.jsp" %>
         <%@include file="../../include/easyui.jsp" %>
     </head> 

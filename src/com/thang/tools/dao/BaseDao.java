@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -82,7 +83,7 @@ public class BaseDao extends MDao{
      */
 	@Deprecated
 	public void insert(Object obj){
-		ActionValues values=new ActionValues(obj);
+		Map<String,Object> values=new ActionValues(obj);
 		insert(obj.getClass(),values);
 	}
 	
@@ -92,7 +93,7 @@ public class BaseDao extends MDao{
      * @param values
      */
 	@Deprecated
-	public void insert(Class<?> cls,ActionValues values){
+	public void insert(Class<?> cls,Map<String,Object> values){
 		nameParameterJdbcTemplate.update(SQLGener.insertSQL(cls), values);
 	}
 	
@@ -101,7 +102,7 @@ public class BaseDao extends MDao{
 	 * @param cls
 	 * @param values
 	 */
-	public void insert(String sql,ActionValues values){
+	public void insert(String sql,Map<String,Object> values){
 		nameParameterJdbcTemplate.update(sql, values);
 	}
 	
@@ -130,7 +131,7 @@ public class BaseDao extends MDao{
      * @param sql
      * @param values
      */
-    public void delete(String sql,ActionValues values){
+    public void delete(String sql,Map<String,Object> values){
     	nameParameterJdbcTemplate.update(sql, values);
     }
     
@@ -139,14 +140,14 @@ public class BaseDao extends MDao{
      * @param sql
      * @param values
      */
-    public void update(String sql,ActionValues values){
+    public void update(String sql,Map<String,Object> values){
     	nameParameterJdbcTemplate.update(sql, values);
     }
     
     /**
      * 查询一条记录，如果是多条，则返回第一条。
      */
-    public ResultValues getResult(String sql,ActionValues values){
+    public ResultValues getResult(String sql,Map<String,Object> values){
     	List<ResultValues> result=queryResult(sql,values);
     	if(null!=result&&result.size()>0){
     		return result.get(0);
@@ -160,8 +161,9 @@ public class BaseDao extends MDao{
      * @param values
      * @return
      */
-    public List<ResultValues> queryResult(String sql,ActionValues values){
-    	nameParameterJdbcTemplate.query(sql, values, new RowMapper<ResultValues>(){
+    public List<ResultValues> queryResult(String sql,Map<String,Object> values){
+    	List<ResultValues> result=null;
+    	result=nameParameterJdbcTemplate.query(sql, values, new RowMapper<ResultValues>(){
 			@Override
 			public ResultValues mapRow(ResultSet result, int index) throws SQLException {
 				ResultSetMetaData meta=result.getMetaData();
@@ -174,7 +176,7 @@ public class BaseDao extends MDao{
 			}
     		
     	});
-    	return null;
+    	return result;
     }
     
     

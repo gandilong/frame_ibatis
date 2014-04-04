@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>内部管理系统</title>
+        <title>公司内部管理系统</title>
         <%@include file="../../../include/layout.jsp" %>
         <%@include file="../../../include/easyui.jsp" %>
         <script type="text/javascript" src="${ctx}/tools/script/system/system.js"></script>
         
     </head> 
     
-    <body id="project" class="easyui-layout">
+    <body id="application" class="easyui-layout">
          <!-- 顶部模块 -->
          <div data-options="region:'north',border:false,fit:false,minHeight:60,maxHeight:60,href:'header?model=${values.model}'" style="height:60px;overflow-y:hidden;background:url('${ctx}/tools/easyui/themes/header_bg_highlight.png') repeat-x;padding:10px"></div>
          
@@ -39,31 +39,18 @@
 	                <div title="人事管理" data-options="iconCls:'icon-plugin'" style="overflow:auto;">
 	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
 	                       <shiro:hasPermission name="system_syslog">
-	                            <li class="btn btn-block" id="deptManager"  href="application/dept/tree">部门管理<label class="icon-chevron-right"></label></li>
-	                            
-	                            <ul id="tt" class="easyui-tree" data-options="
-														url: 'application/dept/tree',
-														method: 'get',
-														animate: true,
-														onContextMenu: function(e,node){
-															e.preventDefault();
-															//$(this).tree('select',node.target);
-															//$('#mm').menu('show',{
-																//left: e.pageX,
-																//top: e.pageY
-															//});
-														}
-													"></ul>
+	                            <li class="btn btn-block" id="deptManager"  href="application/dept/list">部门管理<label class="icon-chevron-right"></label></li>
 	                       </shiro:hasPermission>
-	                    </ul>
-	                    <ul class="nav nav-list" style="font-size:14px;color:black;padding:5px;margin:5px">
-	                        <shiro:hasPermission name="system_user">
-	                            <li class="btn btn-block" id="vacationManager"  href="project/task/list?status=1">请假管理<label class="icon-chevron-right"></label></li>
-	                        </shiro:hasPermission>
+	                       <shiro:hasPermission name="system_syslog">
+	                            <li class="btn btn-block" id="deptManager"  href="application/person/list">员工管理<label class="icon-chevron-right"></label></li>
+	                       </shiro:hasPermission>
+	                       <shiro:hasPermission name="system_user">
+	                            <li class="btn btn-block" id="vacationManager"  href="project/vacation/list?status=1">请假管理<label class="icon-chevron-right"></label></li>
+	                       </shiro:hasPermission>
 	                     
-	                        <shiro:hasPermission name="system_user">
+	                       <shiro:hasPermission name="system_user">
 	                            <li class="btn btn-block" id="travelManager"  href="project/bug/list?status=1">出差管理<label class="icon-chevron-right"></label></li>
-	                        </shiro:hasPermission>
+	                       </shiro:hasPermission>
 	                    </ul>
 	                </div>
 	             </c:if>
@@ -75,7 +62,7 @@
 	     
 	     <!-- 底部区域 -->
 	     <div data-options="region:'south',border:false,minHeight:10,maxHeight:30" style="height:30px;background:#A9FACD;padding:5px;">
-	                      天航软件开发者:gandilong
+	                      天航软件开发者邮箱：gandilong@yeah.net，QQ:2790318173
 	     </div>
 	     
 	     
