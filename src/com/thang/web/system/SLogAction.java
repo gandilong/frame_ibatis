@@ -25,7 +25,7 @@ public class SLogAction extends Action{
 	
 	@RequestMapping("listData")
 	public void listData(){
-		ActionValues values=getValues();
+		ActionValues values=getValues(true);
 		List<ResultValues> slogs=slogManager.query(values);
 		values.put("rows", slogs);
 		printJSON(values);

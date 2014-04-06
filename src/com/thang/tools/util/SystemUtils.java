@@ -11,7 +11,7 @@ public class SystemUtils {
 	public static ShiroUser getUser(){
 		Subject sub=SecurityUtils.getSubject();
 		if(null==sub||null==sub.getPrincipal()){
-			return new ShiroUser(0,"匿名","anonymous");
+			return null;
 		}
 		return (ShiroUser)sub.getPrincipal();
 	}

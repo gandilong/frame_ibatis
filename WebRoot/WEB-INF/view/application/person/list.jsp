@@ -38,8 +38,8 @@ $(function(){
 		
 		//初始化数据列表
 		$('#grid').datagrid({
-			    title:'项目列表',
-			    iconCls:'icon-globe',
+			    title:'员工列表',
+			    iconCls:'icon-user',
 			    fit:true,
 			    view:detailview,
 			    striped:true,
@@ -76,8 +76,7 @@ $(function(){
 					    content+='<td width="200"><img src="${ctx}/girl.jpg"/></td>';
 					    content+='<td>出生日期：'+row.birthday+'</td>';
 					    content+='<td>账号：'+row.loginName+'</td>';
-					    content+='<td>邮箱：'+row.email+'</td>';
-					    content+='<td>住址：'+row.address+'</td>';
+					    content+='<td>邮箱：'+row.email+'<br/>住址：'+row.address+'</td>';
 					    content+='<td><a href="'+row.document+'">个人档案</a></td>';
 					    content+='<td>入职日期：'+row.comeDate+'<br/>离职日期：'+row.awayDate+'</td>';
 					    content+='</tr>';
@@ -164,7 +163,7 @@ $(function(){
 		
 		//新增方法
 		function toInsert(){
-		    $('#project').layout('panel','center').panel('refresh','application/project/form');
+		    $('#application').layout('panel','center').panel('refresh','application/person/form');
 		}
 		
 		//修改方法

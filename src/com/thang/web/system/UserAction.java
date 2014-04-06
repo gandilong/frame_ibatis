@@ -5,6 +5,13 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +36,7 @@ public class UserAction extends Action{
 	private RoleManager roleManager;
 	@Autowired
 	private ResourceManager resourceManager;
+	
 	/**
 	 * 跳转到登陆页面
 	 * @return
@@ -46,10 +54,27 @@ public class UserAction extends Action{
 	public String loginForm(){
 		
 		if(!SecurityUtils.getSubject().isAuthenticated()){
-			getValues(false).put("error", "3");
-			return "login";	
+			 ActionValues values=getValues(false);
+			 AuthenticationToken token = new UsernamePasswordToken(values.getStr("username"),values.getStr("password"));
+			 Subject currentUser = SecurityUtils.getSubject();
+			
+			 try {
+				 	currentUser.login(token);
+				 	return "redirect:/main";
+			 } catch (UnknownAccountException uae) {
+				 	values.add("error", 3);
+			 } catch (IncorrectCredentialsException ice) {
+				 	values.add("error", 1);
+		     } catch (LockedAccountException lae) {
+		    	    values.add("error",2);
+		     } catch (AuthenticationException ae) {
+		    	    values.add("error", 3);
+			 }
+			 return "login";	
+		}else{
+		    return "redirect:/main";
 		}
-		return "redirect:/main";
+		
 	}
 	
 	/**
@@ -60,7 +85,7 @@ public class UserAction extends Action{
 	@RequestMapping("exist")
 	public String exist(){
 		ActionValues values=getValues(false);
-		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){
+		if(values.isNotEmpty("id")&&!"0".equals(values.getStr("id"))){//假如id不为空就不用验证
 			return "true";
 		}else{
 		   ResultValues user=userManager.get(values);

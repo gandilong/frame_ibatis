@@ -4,8 +4,8 @@
       
       <div id="tb" style="padding:5px;height:auto">
 		<div>
-		       用户：<sub><input type="text" id="operator" name="operator" style="height:14px;width:90px" /></sub>
-                          操作：<sub><input type="text" id="action" name="action" style="height:14px;width:180px"/></sub>
+		       用户：<sub><input type="text" id="operator" name="operator" style="height:12px;width:90px;font-size:12px" /></sub>
+                          操作：<sub><input type="text" id="action" name="action" style="height:12px;width:180px;font-size:12px"/></sub>
 			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
 			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
 			<a href="javascript:void(0)" id="query" class="btn" iconCls="icon-search">查&nbsp;&nbsp;询</a>
@@ -37,9 +37,9 @@ $(function(){
 			    rownumbers:true,
 			    columns:[[
 			              {field:'id',title:'编号',width:80,hidden:true},
-			              {field:'operator',title:'用户',width:120,sortable:false},
-			              {field:'action',title:'操作',width:450,sortable:false},
-			              {field:'time',title:'时间',width:160,sortable:true}
+			              {field:'operator',title:'用户',width:300,sortable:false},
+			              {field:'action',title:'操作',width:480,sortable:false},
+			              {field:'time',title:'时间',width:130,sortable:true}
 			              ]],
 			    toolbar:'#tb'
 			});

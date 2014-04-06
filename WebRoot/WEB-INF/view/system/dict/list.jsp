@@ -3,13 +3,18 @@
       <table id="grid"></table>
       
       <div id="tb" style="padding:5px;height:auto">
+          <div style="margin-bottom:5px">
+			<a href="javascript:void(0)" id="toInsert" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+			<a href="javascript:void(0)" id="toUpdate" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+			<a href="javascript:void(0)" id="toDelete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+			&nbsp;&nbsp;&nbsp;
+			<a href="javascript:void(0)" id="toInto" class="easyui-linkbutton" iconCls="icon-back" value="0" plain="true">下一级</a>
+			<a href="javascript:void(0)" id="toBack" class="easyui-linkbutton" iconCls="icon-undo" plain="true">上一级</a>
+		 </div>
 		<div>
-		       用户：<sub><input type="text" id="operator" name="operator" style="height:14px;width:90px" /></sub>
-                          操作：<sub><input type="text" id="action" name="action" style="height:14px;width:180px"/></sub>
-			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
-			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
+		       名称：<sub><input type="text" id="title" name="title" style="height:12px;width:120px;font-size:12px" /></sub>
+                          标识：<sub><input type="text" id="name" name="name" style="height:12px;width:120px;font-size:12px"/></sub>
 			<a href="javascript:void(0)" id="query" class="btn" iconCls="icon-search">查&nbsp;&nbsp;询</a>
-			<a href="javascript:void(0)" id="clearLog" class="btn btn-danger" iconCls="icon-search">清空日志</a>
 		</div>
 	  </div>
       
@@ -18,7 +23,7 @@ $(function(){
 		
 		    //初始化数据列表
 		$('#grid').datagrid({
-			    title:'日志列表',
+			    title:'字典列表',
 			    iconCls:'icon-camera',
 			    fit:true,
 			    striped:true,
@@ -32,14 +37,15 @@ $(function(){
 			    pageList:[15,30,50],
 			    queryParams:{pageNow:1,pageSize:30},
 			    idField:'id',
-			    url:'system/slog/listData',
+			    url:'system/dict/data',
 			    pagination:true,
 			    rownumbers:true,
 			    columns:[[
 			              {field:'id',title:'编号',width:80,hidden:true},
-			              {field:'operator',title:'用户',width:120,sortable:false},
-			              {field:'action',title:'操作',width:450,sortable:false},
-			              {field:'time',title:'时间',width:160,sortable:true}
+			              {field:'title',title:'名称',width:120,sortable:false},
+			              {field:'name',title:'标识',width:100,sortable:false},
+			              {field:'code',title:'代码',width:90,sortable:true},
+			              {field:'opt',title:'备注',width:250,sortable:false}
 			              ]],
 			    toolbar:'#tb'
 			});
@@ -64,49 +70,113 @@ $(function(){
 		    
 		    
 		    $('#query').click(function(){
-		             query();
+		           query();
 		    });
 		    
-		    $('#clearLog').click(function(){
-		          clearLog();
+		    $('#toInsert').click(function(){
+		        var height=null;
+		        if('0'!=$('#toInto').attr('value')){
+		              height='510px';
+		 	    }else{
+		              height='400px';
+			     }
+			       $.layer({
+			            type : 1,
+			            title:'字典信息',
+			            offset : ['50%', ''],
+			            page : {
+			                url :'system/dict/form?parent='+$('#toInto').attr('value')
+			            },	
+			            area : ['600px',height]
+			        });
+			     
 		    });
-			
+		    
+		    $('#toUpdate').click(function(){
+		      
+		          var row=$('#grid').datagrid('getSelected');
+				  if(null==row||!row){
+				        layer.alert('请选择记录！', 8,'提示');
+				        return false;
+				   }
+		      
+		           if('0'!=$('#toInto').attr('value')){
+		                height='510px';
+			 	    }else{
+			            height='400px';
+				    }
+		      
+		           $.layer({
+			            type:1,
+			            title:'字典信息',
+			            offset : ['50%', ''],
+			            page : {
+			                url :'system/dict/form?id='+row.id
+			            },	
+			            area : ['600px',height]
+			        });
+		    });
+		    
+		    
+		    $('#toDelete').click(function(){
+		      
+		          var row=$('#grid').datagrid('getSelected');
+				  if(null==row||!row){
+				        layer.alert('请选择记录！', 8,'提示');
+				        return false;
+				   }
+		      
+		            $.ajax({
+		               type: "POST",
+		               url: "system/dict/formDelete",
+		               data: "id="+row.id,
+		               success: function(msg){
+		                   $('#grid').datagrid('reload');
+		               }
+		           });
+		    });
+		    
+		    $('#toInto').click(function(){
+		        
+		        var row=$('#grid').datagrid('getSelected');
+				  if(null==row||!row){
+				        layer.alert('请选择记录！', 8,'提示');
+				        return false;
+				   }
+		        
+		        if('0'!=$('#toInto').attr('value')){
+		              layer.alert('己经是最后一级了！', 8,'提示');
+		 	          return;
+		 	     }else{
+		            $('#toInto').attr('value',row.id);
+			        $('#grid').datagrid('load',{parent:row.id});
+		        }
+		    });
+		    
+		 	$('#toBack').click(function(){
+		 	      if('0'==$('#toInto').attr('value')){
+		 	          return;
+		 	      }else{
+		 	          $('#toInto').attr('value',0);
+		 	          $('#grid').datagrid('load',{parent:0});
+		 	      
+		 	      }
+		 	});		
 });
 		
 		//查询方法
 		function query(){
 		    var params={};
-		    if(''!=$('#startTime').datebox('getValue')){
-		        params.startTime=$('#startTime').datebox('getValue');
-		    }
-		    if(''!=$('#endTime').datebox('getValue')){
-		       params.endTime=$('#endTime').datebox('getValue');
+		    
+		    if(''!=$.trim($('#title').val())){
+		        params.title=$('#title').val();
 		    }
 		    
-		    if(''!=$('#operator').val()){
-		        params.operator=$('#operator').val();
-		    }
-		    
-		    if(''!=$('#action').val()){
-		        params.action=$('#action').val();
+		    if(''!=$.trim($('#name').val())){
+		        params.name=$('#name').val();
 		    }
 		    
 		    $('#grid').datagrid('load',params);
 		}
 		
-		function clearLog(){
-		   layer.confirm('确定要清空所有记录吗？',function(){
-		       $.ajax({
-                  type: "POST",
-                  url: "system/slog/clear",
-                  success: function(msg){
-                      //layer.alert('清除成功！', 1,'提示');
-                      layer.msg('清除成功！');
-                      query();
-                  }
-               });
-		   });
-		   
-		}
-						
       </script>

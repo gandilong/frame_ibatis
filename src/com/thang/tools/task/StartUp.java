@@ -1,4 +1,4 @@
-package com.thang.tools.model;
+package com.thang.tools.task;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

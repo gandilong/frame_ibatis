@@ -4,7 +4,7 @@
         <div class="span12">    
            <form id="fm" class="form-horizontal" action="system/user/formSave" method="post">
                <fieldset>
-                   <legend class="text-info" style="font-size:16px;font-weight: bolder">项目表单</legend>
+                   <legend class="text-info" style="font-size:16px;font-weight: bolder">员工表单</legend>
                    <input type="hidden" id="id" name="id" value="${values.id}">
 		           <div class="control-group">
 		               <div class="controls">

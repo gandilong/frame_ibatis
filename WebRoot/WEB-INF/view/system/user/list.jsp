@@ -9,8 +9,10 @@
 			<a href="javascript:void(0)" id="toDelete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		</div>
 		<div>
-			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
-			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px">
+		     账号：<sub><input type="text" id="loginName" name="loginName" style="height:12px;width:90px;font-size:12px" /></sub>
+                          邮箱：<sub><input type="text" id="email" name="email" style="height:12px;width:180px;font-size:12px"/></sub>
+			日期: <input class="easyui-datebox" id="startTime" name="startTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px"/>
+			到: <input class="easyui-datebox" id="endTime" name="endTime" data-options="formatter:dateFormatter,parser:dateParser" style="width:120px"/>
 			启用:
 			<select class="easyui-combobox" id="used" name="used" panelHeight="auto" style="width:50px">
 				<option value="1">是</option>
@@ -268,6 +270,14 @@ $(function(){
 		       params.endTime=$('#endTime').datebox('getValue');
 		    }
 		    
+		    if(''!=$.trim($('#loginName').val())){
+		        params.loginName=$('#loginName').val();
+		    }
+		    
+		     if(''!=$.trim($('#email').val())){
+		        params.email=$('#email').val();
+		    }
+		    
 		    params.used=$('#used').combobox('getValue');
 		    
 		    $('#grid').datagrid('load',params);
@@ -290,7 +300,7 @@ $(function(){
 		
 		
 		//删除一条记录
-		function toDelete(p_row){
+		function toDelete(){
 		    var row=$('#grid').datagrid('getSelected');
 		    if(null==row||!row){
 		        layer.alert('请选择记录！', 8,'提示');
