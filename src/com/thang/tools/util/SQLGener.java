@@ -17,9 +17,9 @@ public class SQLGener {
 		sber.append(" insert into ");
 		sber.append(cls.getAnnotation(Table.class).value());
 		sber.append("(");
-		sber.append(StrUtils.join(ModelUtils.getColumns(cls),","));
+		sber.append(StrUtils.join(ModelUtils.getColumnNames(cls),","));
 		sber.append(")values(");
-		sber.append(":"+StrUtils.join(ModelUtils.getColumns(cls),",:"));
+		sber.append(":"+StrUtils.join(ModelUtils.getColumnNames(cls),",:"));
 		sber.append(")");
 		return sber.toString();
 	}

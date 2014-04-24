@@ -1,5 +1,8 @@
 package com.thang.entity.system;
 
+import com.thang.tools.mate.Table;
+
+@Table("sys_user_info")
 public class User {
 
 	private int id;
@@ -9,7 +12,7 @@ public class User {
 	
 	private int used;
 	private String email;
-	private String create_time;
+	private String createTime;
 	
 	
 	public int getId() {
@@ -48,10 +51,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCreate_time() {
-		return create_time;
+	public String getCreateTime() {
+		return createTime;
 	}
-	public void setCreate_time(String create_time) {
-		this.create_time = create_time;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
+	
 }

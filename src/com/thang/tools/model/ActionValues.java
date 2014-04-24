@@ -29,7 +29,7 @@ public class ActionValues extends HashMap<String,Object>{
     }
     
     public ActionValues(Object obj){
-        String[] fieldNames=ModelUtils.getFields(obj.getClass());
+        String[] fieldNames=ModelUtils.getFieldNames(obj.getClass());
         try{
             for(String fieldName:fieldNames){
         	    this.put(fieldName,BeanUtils.getProperty(obj, fieldName)==null?"":BeanUtils.getProperty(obj, fieldName));
@@ -80,7 +80,7 @@ public class ActionValues extends HashMap<String,Object>{
     
     @Deprecated
     public void addValues(Object obj){
-    	 String[] fieldNames=ModelUtils.getFields(obj.getClass());
+    	 String[] fieldNames=ModelUtils.getFieldNames(obj.getClass());
          try{
              for(String fieldName:fieldNames){
             	 if(null!=BeanUtils.getProperty(obj, fieldName)&&!"".equals(BeanUtils.getProperty(obj, fieldName).trim())){
