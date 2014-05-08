@@ -95,11 +95,11 @@ public class PaginationInterceptor implements Interceptor {
 	    	 if((paramObj instanceof Integer)||(paramObj instanceof Long)||(paramObj instanceof String)||(paramObj instanceof Boolean)){
 	    		 System.out.print(p.getProperty()+":"+paramObj);	 
 	    	 }else{
-	    		 //if("loginPass".equals(p.getProperty())){
-	    			 //System.out.println(p.getProperty()+":******");
-	    		 //}else{
+	    		 if("loginPass".equals(p.getProperty())){
+	    			 System.out.println(p.getProperty()+":******");
+	    		 }else{
 	    			 System.out.print(p.getProperty()+":"+BeanUtils.getProperty(paramObj, p.getProperty())+"  ");
-	    		 //}
+	    		 }
 	    	     
 	    	 }
 	     }

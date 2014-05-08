@@ -3120,3 +3120,5 @@ java.lang.NoSuchMethodError: org.quartz.Scheduler.unscheduleJob(Ljava/lang/Strin
 2014-05-08 12:15:36,703-[TS] DEBUG http-8080-4 org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
 2014-05-08 12:15:36,703-[TS] DEBUG http-8080-4 org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [insert into sys_slog_info(id,operator,action,time)values(0,?,?,?) ]
 2014-05-08 12:15:36,796-[TS] DEBUG http-8080-4 org.springframework.jdbc.core.JdbcTemplate - SQL update affected 1 rows
+2014-05-08 13:14:12,859-[TS] INFO Thread-44 org.apache.shiro.session.mgt.AbstractValidatingSessionManager - Validating all active sessions...
+2014-05-08 13:14:12,921-[TS] INFO Thread-44 org.apache.shiro.session.mgt.AbstractValidatingSessionManager - Finished session validation.  [3] sessions were stopped.
