@@ -47,7 +47,7 @@ public class DBRealm extends JdbcRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		ResultValues user=null;
+		ResultValues user=null; 
 		try{
 			token.setPassword(DigestUtils.md5Hex(token.getPassword()==null?"":String.valueOf(token.getPassword())).toCharArray());
 		    user=userManager.login(token.getUsername(),String.valueOf(token.getPassword()));
@@ -66,11 +66,31 @@ public class DBRealm extends JdbcRealm{
 	
 	
 	@Override
-	public void clearCache(PrincipalCollection principals) {
-		super.clearCache(principals);
-	}
-	
-	
-	
+    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+        super.clearCachedAuthorizationInfo(principals);
+    }
+
+    @Override
+    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+        super.clearCachedAuthenticationInfo(principals);
+    }
+
+    @Override
+    public void clearCache(PrincipalCollection principals) {
+        super.clearCache(principals);
+    }
+
+    public void clearAllCachedAuthorizationInfo() {
+        getAuthorizationCache().clear();
+    }
+
+    public void clearAllCachedAuthenticationInfo() {
+        getAuthenticationCache().clear();
+    }
+
+    public void clearAllCache() {
+        clearAllCachedAuthenticationInfo();
+        clearAllCachedAuthorizationInfo();
+    }
 
 }

@@ -5,7 +5,7 @@
  
  <target name="init" description="初始化ant打包环境">
      <property name="basedir" value="."></property>
-     <property name="name" value="frame_ibatis"></property>
+     <property name="name" value="mframe"></property>
      <property name="packages" value="com.thang.*"></property>
      <property name="build.classes" value="${basedir}/WEB-INF/classes"/>
      <path id="classpath">
